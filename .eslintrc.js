@@ -1,5 +1,5 @@
 module.exports = {
-  extends: "eslint-config-standard",
+  extends: "fullstack",
   root: true,
   parser: "babel-eslint",
   parserOptions: {
@@ -11,12 +11,13 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    "semi": [1, "always"],
     "space-before-function-paren": ["error", "never"],
     "prefer-const": "warn",
     "comma-dangle": ["error", "only-multiline"],
     "space-infix-ops": "off",      // Until eslint #7489 lands
     "new-cap": "off",
-    "no-unused-vars": ["error", { "varsIgnorePattern": "^_" }],    
+    "no-unused-vars": ["error", { "varsIgnorePattern": "^_" }],
     "no-return-assign": "off",
     "no-unused-expressions": "off",
     "one-var": "off",
