@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // Require our models. Running each module registers the model into sequelize
 // so any other part of the application could call sequelize.model('User')
@@ -19,12 +19,12 @@ const app = require('APP')
       Favorite: require('./favorite'),
       // ---------- Add new models here ----------
     }
-    , {mapValues} = require('lodash')
+    , {mapValues} = require('lodash');
 
 module.exports = db => {
   // Create actual model classes by calling each meta model with the
   // database.
-  const models = mapValues(metaModels, defineModel => defineModel(db))
+  const models = mapValues(metaModels, defineModel => defineModel(db));
 
   /*
   At this point, all our models have been created. We just need to
@@ -44,15 +44,15 @@ module.exports = db => {
   */
   Object.keys(metaModels)
     .forEach(name => {
-      const {associations} = metaModels[name]
+      const {associations} = metaModels[name];
       if (typeof associations === 'function') {
-        debug('associating model %s', name)
+        debug('associating model %s', name);
         // Metamodel::associations(self: Model, others: {[name: String]: Model}) -> ()
         //
         // Associate self with others.
-        associations.call(metaModels[name], models[name], models)
+        associations.call(metaModels[name], models[name], models);
       }
-    })
+    });
 
-  return models
-}
+  return models;
+};
