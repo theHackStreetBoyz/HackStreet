@@ -1,5 +1,5 @@
 module.exports = {
-  extends: "fullstack",
+  extends: "eslint-config-standard",
   root: true,
   parser: "babel-eslint",
   parserOptions: {
