@@ -8,6 +8,10 @@ to go.
 
 If you don't have it, I'll complain and tell you how to install it.
 
+## I need to have the Fullstack Linter installed!
+
+npm install -g eslint eslint-config-fullstack eslint-plugin-react
+
 ## 1. Make me into something!
 
 We recommend that you **clone**, not fork, this repo – unless your intention is
