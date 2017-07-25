@@ -17,6 +17,8 @@ import Artists from './Artists'
 import Albums from './Albums'
 import Songs from './Songs'
 import Navbar from './Navbar'
+import Cart from './Cart'
+import Footer from './Footer'
 
 
 export default class Main extends Component {
@@ -31,11 +33,13 @@ export default class Main extends Component {
                     <Navbar className="navbar-nav"/>
                 </div>
                 <Switch>
+                    <Route path='/cart' component={Cart} /> 
                     <Route path='/artists' component={Artists} />
                     <Route path='/albums' component={Albums} />
                     <Route path='/songs' component={Songs} />
                     <Route path='/' component={Home} />
                 </Switch>
+                {/*<Footer />*/}
             </div>
         )
     }
