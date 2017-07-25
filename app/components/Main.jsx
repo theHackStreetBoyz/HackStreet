@@ -13,6 +13,9 @@ import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
 import Home from './Home'
+import Artists from './Artists'
+import Albums from './Albums'
+import Songs from './Songs'
 
 
 export default class Main extends Component {
@@ -24,6 +27,9 @@ export default class Main extends Component {
        return (
            <div>
                <Switch>
+                   <Route path='/artists' component={Artists} />
+                   <Route path='/albums' component={Albums} />
+                   <Route path='/songs' component={Songs} />
                    <Route path='/' component={Home} />
                </Switch>
            </div>
