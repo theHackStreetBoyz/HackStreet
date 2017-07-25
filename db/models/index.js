@@ -18,6 +18,13 @@ const app = require('APP')
       Thing: require('./thing'),
       Favorite: require('./favorite'),
       // ---------- Add new models here ----------
+      Album: require('./album'),
+      Artist: require('./artist'),
+      Song: require('./song'),
+      Cart: require('./cart'),
+      Purchase: require('./purchase'),
+      SongReview: require('./songReview'),
+      AlbumReview: require('./albumReview')
     }
     , {mapValues} = require('lodash')
 
@@ -50,6 +57,7 @@ module.exports = db => {
         // Metamodel::associations(self: Model, others: {[name: String]: Model}) -> ()
         //
         // Associate self with others.
+        // console.log(name, associations)
         associations.call(metaModels[name], models[name], models)
       }
     })
