@@ -12,9 +12,10 @@ import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
+import Home from './Home'
 
 
-export default class Home extends Component {
+export default class Main extends Component {
     constructor(props){
         super(props);
     }
@@ -22,7 +23,9 @@ export default class Home extends Component {
     render (){
        return (
            <div>
-               <h1>This is homepage</h1>
+               <Switch>
+                   <Route path='/' component={Home} />
+               </Switch>
            </div>
        )
    }
