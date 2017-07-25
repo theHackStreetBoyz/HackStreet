@@ -58,6 +58,20 @@ module.exports = db => db.define('song', {
     toJSON: function() { // overriding toJSON to prevent url from leaking to client
       // see https://github.com/sequelize/sequelize/issues/1462
       return _.omit(this.get(), ['url'])
+    },
+    getStars() {
+      return db.models('albumReviews').findAll({
+        where: {
+          albumId: this.id
+        }
+      })
+      .then(reviews => {
+        let totalStars = 0
+        reviews.forEach(review => {
+          totalStars += review.stars
+        })
+        return (totalStars / reviews.length).toFixed(1)
+      })
     }
   }
 })

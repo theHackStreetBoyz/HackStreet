@@ -51,6 +51,20 @@ module.exports = db => db.define('album', {
     toJSON: function() {
       // Return a shallow clone so toJSON method of the nested models can be called recursively.
       return Object.assign({}, this.get())
+    },
+    getStars() {
+      return db.models('songReviews').findAll({
+        where: {
+          songId: this.id
+        }
+      })
+      .then(reviews => {
+        let totalStars = 0
+        reviews.forEach(review => {
+          totalStars += review.stars
+        })
+        return (totalStars / reviews.length).toFixed(1)
+      })
     }
   }
 
