@@ -41,6 +41,9 @@ module.exports = db => db.define('users', {
           userId: this.id
         }
       })
+    },
+    getSongs() {
+      //
     }
   }
 })
