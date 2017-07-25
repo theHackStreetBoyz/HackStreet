@@ -1,10 +1,8 @@
 'use strict'
 
-const db = require('../db')
-const DataTypes = db.Sequelize
-const unique = require('./plugins/unique-through')
+const DataTypes = require('sequelize')
 
-module.exports = db.define('album', {
+module.exports = db => db.define('album', {
 
   name: {
     type: DataTypes.STRING(1e4), // eslint-disable-line new-cap
@@ -13,9 +11,9 @@ module.exports = db.define('album', {
       this.setDataValue('name', val.trim())
     }
   },
-  artists: unique('artists').through('songs'),
   price: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    allowNull: false
   },
   imageUrl: {
     type: DataTypes.VIRTUAL,
@@ -24,7 +22,17 @@ module.exports = db.define('album', {
     }
   }
 }, {
-
+  getterMethods: {
+    price: function() {
+      const dollarAmt = this.getDataValue('price') / 100
+      return dollarAmt.toFixed(2)
+    }
+  },
+  setterMethods: {
+    price: function(dollars) {
+      this.setDataValue('price', dollars * 100)
+    }
+  },
   scopes: {
     songIds: () => ({ // function form lets us use to-be-defined models
       include: [{
@@ -47,3 +55,9 @@ module.exports = db.define('album', {
   }
 
 })
+
+module.exports.associations = (Album, {User, Song, Artist, AlbumReview}) => {
+  Album.belongsTo(Artist)
+  Album.hasMany(Song)
+  Album.hasMany(AlbumReview)
+}

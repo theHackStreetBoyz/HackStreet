@@ -1,24 +1,27 @@
-'use strict';
+'use strict'
 
-const _ = require('lodash');
+const _ = require('lodash')
 
-const db = require('../db');
-const DataTypes = db.Sequelize;
+const DataTypes = require('sequelize')
 
-module.exports = db.define('song', {
+module.exports = db => db.define('song', {
   name: {
     type: DataTypes.STRING(1e4), // eslint-disable-line new-cap
     allowNull: false,
-    set: function (val) {
-      this.setDataValue('name', val.trim());
+    set: function(val) {
+      this.setDataValue('name', val.trim())
     }
   },
   genre: {
     type: DataTypes.STRING
   },
+  price: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
   audioUrl: {
     type: DataTypes.VIRTUAL,
-    get: function () {
+    get: function() {
       return `/api/songs/${this.id}/audio`
     }
   },
@@ -28,6 +31,17 @@ module.exports = db.define('song', {
     allowNull: false
   },
 }, {
+  getterMethods: {
+    price: function() {
+      const dollarAmt = this.getDataValue('price') / 100
+      return dollarAmt.toFixed(2)
+    }
+  },
+  setterMethods: {
+    price: function(dollars) {
+      this.setDataValue('price', dollars * 100)
+    }
+  },
   defaultScope: {
     attributes: {
       include: ['albumId'], // excluded by default, need for `song.getAlbum()`
@@ -41,9 +55,15 @@ module.exports = db.define('song', {
     })
   },
   instanceMethods: {
-    toJSON: function () { // overriding toJSON to prevent url from leaking to client
+    toJSON: function() { // overriding toJSON to prevent url from leaking to client
       // see https://github.com/sequelize/sequelize/issues/1462
-      return _.omit(this.get(), ['url']);
+      return _.omit(this.get(), ['url'])
     }
   }
-});
+})
+
+module.exports.associations = (Song, {Artist, Album, SongReview}) => {
+  Song.belongsTo(Artist)
+  Song.belongsTo(Album)
+  Song.hasMany(SongReview)
+}

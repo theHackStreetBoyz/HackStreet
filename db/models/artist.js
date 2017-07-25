@@ -1,9 +1,8 @@
 'use strict'
 
-const db = require('../db')
-const DataTypes = db.Sequelize
+const DataTypes = require('sequelize')
 
-module.exports = db.define('artist', {
+module.exports = db => db.define('artist', {
 
   name: {
     type: DataTypes.STRING(1e4), // eslint-disable-line new-cap
@@ -34,3 +33,8 @@ module.exports = db.define('artist', {
   }
 
 })
+
+module.exports.associations = (Artist, {User, Song, Album}) => {
+  Artist.hasMany(Album)
+  Artist.hasMany(Song)
+}
