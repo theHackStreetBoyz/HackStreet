@@ -13,19 +13,17 @@ import {Provider, connect} from 'react-redux'
 
 import Cart from './Cart'
 
-class Songs extends Component {
+class SingleSong extends Component {
 
   render() {
-
+    let song = this.props.song // where is this.props.song coming from?
     return (
       <div>
-        <h3>Songs</h3>
-        <div className="list-songs">
+        <h3></h3>
         
-          </div>
       </div>
     );
   }
 }
 
-export default Songs;
+export default SingleSong;
