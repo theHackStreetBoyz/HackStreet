@@ -15,6 +15,9 @@ module.exports = db => db.define('song', {
   genre: {
     type: DataTypes.STRING
   },
+  length: {
+    type: DataTypes.INTEGER
+  },
   price: {
     type: DataTypes.INTEGER,
     allowNull: false
@@ -76,10 +79,11 @@ module.exports = db => db.define('song', {
   }
 })
 
-module.exports.associations = (Song, {Artist, Album, SongReview, Cart, Purchase}) => {
+module.exports.associations = (Song, {User, Artist, Album, SongReview, Cart, Purchase}) => {
   Song.belongsTo(Artist)
+  Song.belongsToMany(User, {through: 'userSong'})
   Song.belongsTo(Album)
-  // Song.belongsToMany(Cart, {through: 'cartSong'})
+  Song.belongsToMany(Cart, {through: 'cartSong'})
   Song.belongsToMany(Purchase, {through: 'purchaseSong'})
   Song.hasMany(SongReview)
 }
