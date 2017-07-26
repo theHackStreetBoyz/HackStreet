@@ -10,6 +10,7 @@ import 'babel-polyfill'
 import React, { Component } from 'react'
 import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
+import store, { getSongs } from '../store'
 
 class Songs extends Component {
 
@@ -56,7 +57,11 @@ class Songs extends Component {
 }
 
 const mapStateToProps = function(state){
-
+  return {
+    songs: state.songs
+  }
 }
 
-export default Songs;
+const albumsContainer = connect( mapStateToProps, null )(Songs);
+
+export default albumsContainer;
