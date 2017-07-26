@@ -12,6 +12,12 @@ module.exports = db => db.define('song', {
       this.setDataValue('name', val.trim())
     }
   },
+  artist: {
+    type: DataTypes.STRING
+  },
+  album: {
+    type: DataTypes.STRING
+  },
   genre: {
     type: DataTypes.STRING
   },
@@ -47,7 +53,7 @@ module.exports = db => db.define('song', {
   },
   defaultScope: {
     attributes: {
-      include: ['albumId'], // excluded by default, need for `song.getAlbum()`
+      // include: ['albumId'], // excluded by default, need for `song.getAlbum()`
     },
   },
   scopes: {
@@ -63,9 +69,9 @@ module.exports = db => db.define('song', {
       return _.omit(this.get(), ['url'])
     },
     getStars() {
-      return db.models('albumReviews').findAll({
+      return db.models('songReviews').findAll({
         where: {
-          albumId: this.id
+          songId: this.id
         }
       })
       .then(reviews => {
@@ -79,10 +85,10 @@ module.exports = db => db.define('song', {
   }
 })
 
-module.exports.associations = (Song, {User, Artist, Album, SongReview, Cart, Purchase}) => {
-  Song.belongsTo(Artist)
+module.exports.associations = (Song, {User, Artist, SongReview, Cart, Purchase}) => {
+  // Song.belongsTo(Artist)
   Song.belongsToMany(User, {through: 'userSong'})
-  Song.belongsTo(Album)
+  // Song.belongsTo(Album)
   Song.belongsToMany(Cart, {through: 'cartSong'})
   Song.belongsToMany(Purchase, {through: 'purchaseSong'})
   Song.hasMany(SongReview)
