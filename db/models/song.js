@@ -82,7 +82,7 @@ module.exports = db => db.define('song', {
 
 module.exports.associations = (Song, {User, Artist, Album, SongReview, Cart, Purchase}) => {
   Song.belongsTo(Artist)
-  Song.belongsToMany(User, {through: 'userSong'})
+  // Song.belongsToMany(User, {through: 'userSong'})
   Song.belongsTo(Album)
   Song.belongsToMany(Cart, {through: 'cartSong'})
   Song.belongsToMany(Purchase, {through: 'purchaseSong'})

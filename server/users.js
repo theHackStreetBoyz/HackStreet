@@ -2,6 +2,8 @@
 
 const db = require('APP/db')
 const User = db.model('users')
+const Cart = db.model('cart')
+const Purchase = db.model('purchase')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
@@ -13,19 +15,67 @@ module.exports = require('express').Router()
     // If you want to only let admins list all the users, then you'll
     // have to add a role column to the users table to support
     // the concept of admin users.
-    // forbidden('listing users is not allowed'),
+  // forbidden('listing users is not allowed'),
     (req, res, next) =>
       User.findAll()
         .then(users => res.json(users))
         .catch(next))
-  .post('/',
-    (req, res, next) =>
-      User.create(req.body)
-      .then(user => res.status(201).json(user))
-      .catch(next))
   .get('/:id',
-    mustBeLoggedIn,
+    //mustBeLoggedIn,
     (req, res, next) =>
       User.findById(req.params.id)
       .then(user => res.json(user))
       .catch(next))
+  .get('/:id/cart',
+    //mustBeLoggedIn,
+    (req, res, next) =>
+    Cart.findOne({
+      where: {
+        user_id: req.params.id
+      }
+    })
+    .then(cart => cart.getSongs())
+    .then(songs => res.json(songs))
+    .catch(next)
+  )
+   .get('/:id/songs',
+    (req, res, next) =>
+    User.findById(req.params.id)
+    .then(user => user.getSongs())
+    //.then(user => res.json(user))
+    .then(userSongs => res.json(userSongs))
+    .catch(next)
+  )
+  .post('/:id/cart',
+    (req, res, next) =>
+    Cart.findOne({
+      where: {
+        user_id: req.params.id
+      }
+    })
+    .then(cart => cart.addSong(req.body.song_id))
+    .then(updatedCart => res.json(updatedCart))
+    .catch(next)
+  )
+
+
+
+  .post('/:id/purchase',
+    //mustBeLoggedIn,
+    (req, res, next) => {
+    Cart.findOne({
+      where: {
+        user_id: req.params.id
+      }
+    })
+    .then(cart => Purchase.newPurchaseFromCart(cart, req.params.id))
+    .then(purchase => res.json(purchase))
+    .catch(next)
+    })
+
+  .post('/',
+    (req, res, next) =>
+      User.create(req.body)
+      .then(user => res.status(201).json(user))
+      .catch(next)
+    )
