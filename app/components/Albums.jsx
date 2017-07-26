@@ -10,20 +10,52 @@ import 'babel-polyfill'
 import React, { Component } from 'react'
 import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
+import store, { getAllAlbums } from '../store'
 
 class Albums extends Component {
 
+componentDidMount(){
+  store.dispatch(getAlbums);
+
+}
+
   render() {
+
+    const albums = this.props;
+
+    console.log("albums", albums);
 
     return (
       <div>
         <h3>Albums</h3>
         <div className="list-albums">
+        {
+            albums.map(album => (
+            <div className="col-xs-4" key={ album.id }>
 
-          </div>
+
+                <div className="caption">
+                  <h5>
+                    <span>{ album.name }</span>
+                  </h5>
+                  <small>{ album.songs.length } songs</small>
+                </div>
+
+            </div>
+          ))
+        }
+        </div>
       </div>
     );
   }
 }
 
-export default Albums;
+const mapStateToProps = function (state) {
+  return {
+    albums: state.albums
+  }
+}
+
+const albumsContainer = connect( mapStateToProps, null )(Albums);
+
+export default albumsContainer;
