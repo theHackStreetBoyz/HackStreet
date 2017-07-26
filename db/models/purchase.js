@@ -19,11 +19,18 @@ module.exports = db => db.define('purchase', {
         }
       })
     }
+  },
+  classMethods: {
+    newPurchaseFromCart(cart, user) {
+      return db.models('purchase').create(cart)
+      .then(newCart => {
+        newCart.setUser(user)
+        return newCart
+      })
+    }
   }
 })
 
 module.exports.associations = (Purchase, {Song, Album, User}) => {
   Purchase.belongsTo(User)
-  // Purchase.hasMany(Song)
-  // Purchase.hasMany(Album)
 }
