@@ -44,7 +44,8 @@ module.exports = db => db.define('song', {
   },
   defaultScope: {
     attributes: {
-      include: ['albumId'], // excluded by default, need for `song.getAlbum()`
+      include: ['album_id'], // excluded by default, need for `song.getAlbum()`
+      //changed this from albumId to album_id, was causing issues in my get routes
     },
   },
   scopes: {
