@@ -19,6 +19,7 @@ import Songs from './Songs'
 import Navbar from './Navbar'
 import Cart from './Cart'
 import Footer from './Footer'
+import Login from './Login'
 
 
 export default class Main extends Component {
@@ -33,6 +34,7 @@ export default class Main extends Component {
                     <Navbar className="navbar-nav"/>
                 </div>
                 <Switch>
+                    <Route path='/login' component={Login} /> 
                     <Route path='/cart' component={Cart} /> 
                     <Route path='/artists' component={Artists} />
                     <Route path='/albums' component={Albums} />

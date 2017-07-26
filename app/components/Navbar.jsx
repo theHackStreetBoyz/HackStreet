@@ -31,7 +31,9 @@ const Navbar = () => {
         <h4 className="menu-item active nav-item nav-link">
           <Link to="/cart">Cart</Link>
         </h4>
-        <button>Login</button>
+        <button>
+          <Link to="/login">Login</Link>
+        </button>
       </section>
     </navbar>
   );
