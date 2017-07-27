@@ -22,9 +22,6 @@ componentDidMount(){
   render() {
 
     const albums = this.props;
-
-    console.log("albums", albums);
-
     return (
       <div>
         <h3>Albums</h3>
