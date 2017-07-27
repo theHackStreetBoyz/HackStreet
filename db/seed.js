@@ -8,6 +8,8 @@ const db = require('APP/db'),
     Song,
     Artist,
     SongReview,
+    Cart,
+    CartSong,
     Promise
   } = db,
   {
@@ -15,16 +17,16 @@ const db = require('APP/db'),
   } = require('lodash')
 
 function seedEverything() {
+  console.log('CartSong:', CartSong)
   const seeded = {
     users: users(),
     things: things(),
     songs: songs(),
-    // album: album(),
-    // artist: artist()
   }
   // When you switch the order of these, for some reason favorites stops running...
   seeded.favorites = favorites(seeded)
   seeded.reviews = reviews(seeded)
+  seeded.carts = carts(seeded)
   // console.log('HERE', seeded)
 
   return Promise.props(seeded)
@@ -356,6 +358,36 @@ const songs = seed(Song, {
     artist: 'Karen and her Herps'
   },
 })
+const carts = seed(CartSong,
+  ({
+    users,
+    songs
+  }) => ({
+    'godCart1': {
+      cart_id: users.god.cart_id,
+      song_id: songs.songFour.id
+    },
+    'godCart2': {
+      cart_id: users.god.cart_id,
+      song_id: songs.songFive.id
+    },
+    'godCart3': {
+      cart_id: users.god.cart_id,
+      song_id: songs.songOne.id
+    },
+    'barackCart1': {
+      cart_id: users.barack.cart_id,
+      song_id: songs.songSeven.id
+    },
+    'barackCart2': {
+      cart_id: users.barack.cart_id,
+      song_id: songs.songTwo.id
+    },
+    'barackCart3': {
+      cart_id: users.barack.cart_id,
+      song_id: songs.songThree.id
+    },
+  }))
 
 const reviews = seed(SongReview,
   ({
@@ -444,5 +476,6 @@ module.exports = Object.assign(seed, {
   things,
   songs,
   favorites,
-  reviews
+  reviews,
+  carts
 })
