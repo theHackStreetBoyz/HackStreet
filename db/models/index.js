@@ -18,13 +18,14 @@ const app = require('APP')
       Thing: require('./thing'),
       Favorite: require('./favorite'),
       // ---------- Add new models here ----------
-      Album: require('./album'),
-      Artist: require('./artist'),
+      // Album: require('./album'),
+      // Artist: require('./artist'),
       Song: require('./song'),
       Cart: require('./cart'),
       Purchase: require('./purchase'),
       SongReview: require('./songReview'),
-      AlbumReview: require('./albumReview')
+      //AlbumReview: require('./albumReview'),
+      //AlbumArtistSeed: require('./albumArtistSeed')
     }
     , {mapValues} = require('lodash')
 

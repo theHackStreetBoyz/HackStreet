@@ -71,7 +71,7 @@ module.exports = db => db.define('album', {
 })
 
 module.exports.associations = (Album, {User, Song, Artist, AlbumReview}) => {
-  Album.belongsTo(Artist)
+  // Album.belongsTo(Artist)
   Album.hasMany(Song)
   Album.hasMany(AlbumReview)
 }

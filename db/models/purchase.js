@@ -31,6 +31,6 @@ module.exports = db => db.define('purchase', {
   }
 })
 
-module.exports.associations = (Purchase, {Song, Album, User}) => {
+module.exports.associations = (Purchase, {Song, User}) => {
   Purchase.belongsTo(User)
 }
