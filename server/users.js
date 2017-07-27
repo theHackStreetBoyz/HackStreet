@@ -54,6 +54,17 @@ module.exports = require('express').Router()
       .catch(next)
   )
 
+  .get('/:id/purchases',
+    (req, res, next) =>
+      Purchase.findAll({
+        where: {
+          user_id: req.params.id
+        }
+      })
+      .then(purchases => res.json(purchases))
+      .catch(next)
+  )
+
   .post('/:id/cart', 
     (req, res, next) =>
       User.findById(req.params.id)
@@ -85,7 +96,6 @@ module.exports = require('express').Router()
         }
       })
       .then(cart => Cart.newPurchase(cart, req.params.id))
-      //.then(purchase => {console.log("hello", purchase), res.json(purchase)})
       .then(purchase => res.json(purchase))
       .catch(next)
     }
@@ -116,20 +126,20 @@ module.exports = require('express').Router()
   
   .delete('/:id/cart',
     (req, res, next) =>
-      Cart.findOne({
-        where: {
-          user_id: req.params.id
-        }
-      })
-      .then(cart => cart.removeSong(req.body.song_id))
-      .then(updatedCart => res.json(updatedCart))
-      .catch(next)
+    Cart.findOne({
+      where: {
+        user_id: req.params.id
+      }
+    })
+    .then(cart => cart.removeSong(req.body.song_id))
+    .then(updatedCart => res.json(updatedCart))
+    .catch(next)
   )
 
   .delete('/:id', 
     (req, res, next) =>
-      User.findById(req.params.id)
-      .then(user => user.destroy())
-      .then(() => res.json("User Deleted"))
-      .catch(next)
+    User.findById(req.params.id)
+    .then(user => user.destroy())
+    .then(() => res.json("User Deleted"))
+    .catch(next)
   )
