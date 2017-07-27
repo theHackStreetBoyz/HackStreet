@@ -12,6 +12,16 @@ module.exports = db => db.define('song', {
       this.setDataValue('name', val.trim())
     }
   },
+  artist: {
+    type: DataTypes.STRING
+  },
+  album: {
+    type: DataTypes.STRING
+  },
+  availible: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
+  },
   genre: {
     type: DataTypes.STRING
   },
@@ -45,12 +55,6 @@ module.exports = db => db.define('song', {
       this.setDataValue('price', dollars * 100)
     }
   },
-  defaultScope: {
-    attributes: {
-      include: ['album_id'], // excluded by default, need for `song.getAlbum()`
-      //changed this from albumId to album_id, was causing issues in my get routes
-    },
-  },
   scopes: {
     populated: () => ({ // function form lets us use to-be-defined models
       include: [{
@@ -64,9 +68,9 @@ module.exports = db => db.define('song', {
       return _.omit(this.get(), ['url'])
     },
     getStars() {
-      return db.models('albumReviews').findAll({
+      return db.models('songReviews').findAll({
         where: {
-          albumId: this.id
+          songId: this.id
         }
       })
       .then(reviews => {
@@ -80,10 +84,10 @@ module.exports = db => db.define('song', {
   }
 })
 
-module.exports.associations = (Song, {User, Artist, Album, SongReview, Cart, Purchase}) => {
-  Song.belongsTo(Artist)
-  // Song.belongsToMany(User, {through: 'userSong'})
-  Song.belongsTo(Album)
+
+
+module.exports.associations = (Song, {User, Artist, SongReview, Cart, Purchase}) => {
+  Song.belongsToMany(User, {through: 'userSong'})
   Song.belongsToMany(Cart, {through: 'cartSong'})
   Song.belongsToMany(Purchase, {through: 'purchaseSong'})
   Song.hasMany(SongReview)
