@@ -4,6 +4,8 @@ const db = require('APP/db')
 const User = db.model('users')
 const Cart = db.model('cart')
 const Purchase = db.model('purchase')
+const Song = db.model('song')
+const SongReviews = db.model('songReview')
 
 const {mustBeLoggedIn, forbidden} = require('./auth.filters')
 
@@ -58,8 +60,6 @@ module.exports = require('express').Router()
     .catch(next)
   )
 
-
-
   .post('/:id/purchase',
     //mustBeLoggedIn,
     (req, res, next) => {
@@ -71,7 +71,29 @@ module.exports = require('express').Router()
     .then(cart => Purchase.newPurchaseFromCart(cart, req.params.id))
     .then(purchase => res.json(purchase))
     .catch(next)
-    })
+    }
+  )
+
+  .post('/:id/songReview',
+    (req, res, next) => {
+      // SongReviews.findOne({
+      //   where: {
+      //     song_id: req.params.id
+      //   }
+      // })
+      //.then(review => res.json(review))
+      //.catch(next)
+      SongReviews.create({
+          id: req.params.id,
+          stars: req.body.stars,
+          text: req.body.text,
+          user_id: req.params.user_id,
+          song_id: req.params.song_id
+      })
+      .then(newReview => res.json(newReview))
+      .catch(next)
+    }
+  )
 
   .post('/',
     (req, res, next) =>
