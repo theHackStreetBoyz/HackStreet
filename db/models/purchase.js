@@ -11,19 +11,20 @@ module.exports = db => db.define('purchase', {
     defaultValue: []
   }
 }, {
-  getterMethods: {
-    songs: function() {
-      db.models('song').findAll({
-        where: {
-          id: 0
-        }
+  classMethods: {
+    newPurchaseFromCart(cart, userId) {
+      return db.model('purchase').create(cart)
+      .then(newCart => {
+        Promise.all([
+          newCart.setUser(userId),
+          newCart.getSongs().then(songs => newCart.setSongs(songs))
+        ])
+        return newCart
       })
     }
   }
 })
 
-module.exports.associations = (Purchase, {Song, Album, User}) => {
+module.exports.associations = (Purchase, {Song, User}) => {
   Purchase.belongsTo(User)
-  // Purchase.hasMany(Song)
-  // Purchase.hasMany(Album)
 }
