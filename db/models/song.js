@@ -18,6 +18,10 @@ module.exports = db => db.define('song', {
   album: {
     type: DataTypes.STRING
   },
+  availible: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
+  },
   genre: {
     type: DataTypes.STRING
   },

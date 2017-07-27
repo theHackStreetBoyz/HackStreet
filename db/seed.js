@@ -7,6 +7,7 @@ const db = require('APP/db'),
     Favorite,
     Song,
     Artist,
+    SongReview,
     Promise
   } = db,
   {
@@ -21,25 +22,13 @@ function seedEverything() {
     // album: album(),
     // artist: artist()
   }
-
+  // When you switch the order of these, for some reason favorites stops running...
   seeded.favorites = favorites(seeded)
-  // seeded.AlbumArtistSeed = AlbumArtistSeed(seeded)
+  seeded.reviews = reviews(seeded)
+  // console.log('HERE', seeded)
 
   return Promise.props(seeded)
 }
-
-const users = seed(User, {
-  god: {
-    email: 'god@example.com',
-    name: 'So many names',
-    password: '1234',
-  },
-  barack: {
-    name: 'Barack Obama',
-    email: 'barack@example.gov',
-    password: '1234'
-  },
-})
 
 const things = seed(Thing, {
   surfing: {
@@ -153,7 +142,7 @@ function seed(Model, rows) {
         )
       ))
       .then(seeded => {
-        console.log(seeded)
+        // console.log(seeded)
         console.log(`Seeded ${Object.keys(seeded).length} ${Model.name} OK`)
         return seeded
       }).catch(error => {
@@ -222,7 +211,7 @@ function seed(Model, rows) {
 //   }))
 
 const songs = seed(Song, {
-  1: {
+  songOne: {
     name: 'Darryns Anthem',
     genre: 'Rock',
     length: 180,
@@ -231,7 +220,7 @@ const songs = seed(Song, {
     album: "Darryn's Greatest Hits",
     artist: "The Deadly Darryn's"
   },
-  2: {
+  songTwo: {
     name: 'Maxs Anthem',
     genre: 'Jazz',
     length: 190,
@@ -240,7 +229,7 @@ const songs = seed(Song, {
     album: "Max's Greatest Hits",
     artist: "The Miraculous Max's"
   },
-  3: {
+  songThree: {
     name: 'Dans Anthem',
     genre: 'Punk',
     length: 200,
@@ -249,20 +238,211 @@ const songs = seed(Song, {
     album: "Dan's Greatest Hits",
     artist: 'Manganesey Dan'
   },
-  4: {
-    name: 'Alvins Anthem',
+  songFour: {
+    name: 'Karens Anthem',
     genre: 'DEATH METAL MOTHER F*****R',
     length: 210,
     price: 0.99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Alvin's Greatest Hits",
     artist: 'Alvin and his Chipmunks'
-  }
+  },
+  songFive: {
+    name: 'Darryns Least Favorite Songs',
+    genre: 'Rock',
+    length: 180,
+    price: 0.99,
+    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
+    album: "Darryn's Greatest Hits",
+    artist: "The Deadly Darryn's"
+  },
+  songSix: {
+    name: 'Maxs Least Favorite Songs',
+    genre: 'Jazz',
+    length: 190,
+    price: 0.99,
+    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
+    album: "Max's Greatest Hits",
+    artist: "The Miraculous Max's"
+  },
+  songSeven: {
+    name: 'Dans Least Favorite Songs',
+    genre: 'Punk',
+    length: 200,
+    price: 0.99,
+    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
+    album: "Dan's Greatest Hits",
+    artist: 'Manganesey Dan'
+  },
+  songEight: {
+    name: 'Alvins Least Favorite Songs',
+    genre: 'DEATH METAL MOTHER F*****R',
+    length: 210,
+    price: 0.99,
+    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
+    album: "Alvin's Greatest Hits",
+    artist: 'Alvin and his Chipmunks'
+  },
+  9: {
+    name: 'Kates Anthem',
+    genre: 'Rock',
+    length: 180,
+    price: 0.99,
+    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
+    album: "Kate's Greatest Hits",
+    artist: "The Go Fly a Kate's"
+  },
+  10: {
+    name: 'Omris Anthem',
+    genre: 'Jazz',
+    length: 190,
+    price: 0.99,
+    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
+    album: "Omri's Greatest Hits",
+    artist: "The Optimistic Omri's"
+  },
+  11: {
+    name: 'Cassios Anthem',
+    genre: 'Punk',
+    length: 200,
+    price: 0.99,
+    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
+    album: "Cassio's Greatest Hits",
+    artist: 'Eh Nois'
+  },
+  12: {
+    name: 'Alvins Anthem',
+    genre: 'DEATH METAL MOTHER F*****R',
+    length: 210,
+    price: 0.99,
+    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
+    album: "Karen's Greatest Hits",
+    artist: 'Karen and her Herps'
+  },
+  13: {
+    name: 'Kates Least Favorite Songs',
+    genre: 'Rock',
+    length: 180,
+    price: 0.99,
+    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
+    album: "Kate's Greatest Hits",
+    artist: "The Go Fly a Kate's"
+  },
+  14: {
+    name: 'Omris Least Favorite Songs',
+    genre: 'Jazz',
+    length: 190,
+    price: 0.99,
+    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
+    album: "Omri's Greatest Hits",
+    artist: "The Optimistic Omri's"
+  },
+  15: {
+    name: 'Cassios Least Favorite Songs',
+    genre: 'Punk',
+    length: 200,
+    price: 0.99,
+    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
+    album: "Cassio's Greatest Hits",
+    artist: 'Eh Nois'
+  },
+  16: {
+    name: 'Karens Least Favorite Songs',
+    genre: 'DEATH METAL MOTHER F*****R',
+    length: 210,
+    price: 0.99,
+    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
+    album: "Karen's Greatest Hits",
+    artist: 'Karen and her Herps'
+  },
+})
 
+const reviews = seed(SongReview,
+  ({
+    songs,
+    users
+  }) => ({
+    'godReviewOne': {
+      stars: 3,
+      text: "This has got to be the best song I've ever heard!",
+      song_id: songs.songOne.id,
+      user_id: users.god.id
+    },
+    'godReviewTwo': {
+      stars: 3,
+      text: 'Honestly? eh...',
+      song_id: songs.songTwo.id,
+      user_id: users.god.id
+    },
+    'godReviewThree': {
+      stars: 3,
+      text: 'This song was equal parts insightful and utter nonsense',
+      song_id: songs.songThree.id,
+      user_id: users.god.id
+    },
+    'godReviewFour': {
+      stars: 3,
+      text: 'This song is the musical equivalent of an above ground swimming pool',
+      song_id: songs.songFour.id,
+      user_id: users.god.id
+    },
+    'barackReviewOne': {
+      stars: 3,
+      text: "This has got to be the best song I've ever heard!",
+      song_id: songs.songFive.id,
+      user_id: users.barack.id
+    },
+    'barackReviewTwo': {
+      stars: 3,
+      text: 'Honestly? eh...',
+      song_id: songs.songSix.id,
+      user_id: users.barack.id
+    },
+    'barackReviewThree': {
+      stars: 3,
+      text: 'This song was equal parts insightful and utter nonsense',
+      song_id: songs.songSeven.id,
+      user_id: users.barack.id
+    },
+    'barackReviewFour': {
+      stars: 3,
+      text: 'This song is the musical equivalent of an above ground swimming pool',
+      song_id: songs.songEight.id,
+      user_id: users.barack.id
+    },
+  }))
+
+const users = seed(User, {
+  god: {
+    email: 'god@example.com',
+    name: 'So many names',
+    password: '1234',
+  },
+  barack: {
+    name: 'Barack Obama',
+    email: 'barack@example.gov',
+    password: '1234'
+  },
+  stan: {
+    name: 'Stan Getz',
+    email: 'Stan@letsGetziton.com',
+    passoword: 'secure345'
+  },
+  ken: {
+    name: 'Ken Ramos',
+    email: 'ken@letsGetziton.com',
+    passoword: 'secure345'
+  },
+  alez: {
+    name: 'Alex Gates',
+    email: 'alez@letsGetziton.com',
+    passoword: 'secure345'
+  },
 })
 module.exports = Object.assign(seed, {
   users,
   things,
   songs,
-  favorites
+  favorites,
+  reviews
 })
