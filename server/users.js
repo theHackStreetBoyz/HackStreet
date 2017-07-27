@@ -48,7 +48,19 @@ module.exports = require('express').Router()
     .then(userSongs => res.json(userSongs))
     .catch(next)
   )
-  .post('/:id/cart',
+
+  .post('/:id/cart', 
+    (req, res, next) =>
+    User.findById(req.params.id)
+    .then(user => Cart.create({
+      user_id: req.params.id
+    })
+    )
+    .then(newCart => res.json(newCart))
+    .catch(next)
+  )
+
+  .post('/:id/cart/newSong',
     (req, res, next) =>
     Cart.findOne({
       where: {
