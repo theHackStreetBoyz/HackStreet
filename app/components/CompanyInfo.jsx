@@ -18,7 +18,7 @@ const CompanyInfo = (props) => {
         <h3>Company Info</h3>
         <div className="company-info">
 
-        Hack Street Boyz music was founded in 2017 by Max, Alvin, Daniel.
+        Hack Street Boyz music was founded in 2017 by Max, Alvin, Daniel, and Darryn.
 
 
         </div>
