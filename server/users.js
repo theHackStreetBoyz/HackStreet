@@ -25,9 +25,11 @@ module.exports = require('express').Router()
   .get('/:id',
     //mustBeLoggedIn,
     (req, res, next) =>
-      User.findById(req.params.id)
-      .then(user => res.json(user))
-      .catch(next))
+    User.findById(req.params.id)
+    .then(user => res.json(user))
+    .catch(next)
+  )
+
   .get('/:id/cart',
     //mustBeLoggedIn,
     (req, res, next) =>
@@ -40,6 +42,7 @@ module.exports = require('express').Router()
     .then(songs => res.json(songs))
     .catch(next)
   )
+
    .get('/:id/songs',
     (req, res, next) =>
     User.findById(req.params.id)

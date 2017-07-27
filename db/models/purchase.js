@@ -12,17 +12,17 @@ module.exports = db => db.define('purchase', {
   }
 }, {
   classMethods: {
-    newPurchaseFromCart(cart, userId) {
-      return db.model('purchase').create(cart)
-      .then(newCart => {
-        Promise.all([
-          newCart.setUser(userId),
-          newCart.getSongs().then(songs => newCart.setSongs(songs))
-        ])
-        return newCart
-      })
-    }
-  }
+   newPurchaseFromCart(cart, userId) {
+     return db.model('purchase').create(cart)
+     .then(newCart => {
+       return Promise.all([
+         newCart.setUser(userId),
+         newCart.getSongs().then(songs => newCart.setSongs(songs))
+       ])
+       return newCart
+     })
+   }
+ }
 })
 
 module.exports.associations = (Purchase, {Song, User}) => {
