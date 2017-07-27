@@ -2,12 +2,14 @@ const DataTypes = require('sequelize')
 
 module.exports = db => db.define('cart', {}, {
   classMethods: {
-    newPurchase: function(userId) {
-      return db.model('purchase').create(this)
-        .then(newPurchase => Promise.all([
-          newPurchase.getSongs().then(songs => newPurchase.setSongs(songs)),
-          newPurchase.setUser(userId)
-        ]))
+    newPurchase: function(cart, userId) {
+      return db.model('purchase').create(cart)
+        .then(purchase => {
+          return Promise.all([
+            purchase.getSongs().then(songs => purchase.setSongs(songs)),
+            purchase.setUser(userId)
+          ])
+        })
     }
   }
 })

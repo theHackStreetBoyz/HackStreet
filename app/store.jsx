@@ -6,6 +6,8 @@ import thunkMiddleware from 'redux-thunk'
 
 import {whoami} from './reducers/auth'
 
+
+
 const store = createStore(
   rootReducer,
   composeWithDevTools(
