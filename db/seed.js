@@ -215,7 +215,7 @@ const songs = seed(Song, {
     name: 'Darryns Anthem',
     genre: 'Rock',
     length: 180,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Darryn's Greatest Hits",
     artist: "The Deadly Darryn's"
@@ -224,7 +224,7 @@ const songs = seed(Song, {
     name: 'Maxs Anthem',
     genre: 'Jazz',
     length: 190,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Max's Greatest Hits",
     artist: "The Miraculous Max's"
@@ -233,7 +233,7 @@ const songs = seed(Song, {
     name: 'Dans Anthem',
     genre: 'Punk',
     length: 200,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Dan's Greatest Hits",
     artist: 'Manganesey Dan'
@@ -242,7 +242,7 @@ const songs = seed(Song, {
     name: 'Karens Anthem',
     genre: 'DEATH METAL MOTHER F*****R',
     length: 210,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Alvin's Greatest Hits",
     artist: 'Alvin and his Chipmunks'
@@ -251,7 +251,7 @@ const songs = seed(Song, {
     name: 'Darryns Least Favorite Songs',
     genre: 'Rock',
     length: 180,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Darryn's Greatest Hits",
     artist: "The Deadly Darryn's"
@@ -260,7 +260,7 @@ const songs = seed(Song, {
     name: 'Maxs Least Favorite Songs',
     genre: 'Jazz',
     length: 190,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Max's Greatest Hits",
     artist: "The Miraculous Max's"
@@ -269,7 +269,7 @@ const songs = seed(Song, {
     name: 'Dans Least Favorite Songs',
     genre: 'Punk',
     length: 200,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Dan's Greatest Hits",
     artist: 'Manganesey Dan'
@@ -278,7 +278,7 @@ const songs = seed(Song, {
     name: 'Alvins Least Favorite Songs',
     genre: 'DEATH METAL MOTHER F*****R',
     length: 210,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Alvin's Greatest Hits",
     artist: 'Alvin and his Chipmunks'
@@ -287,7 +287,7 @@ const songs = seed(Song, {
     name: 'Kates Anthem',
     genre: 'Rock',
     length: 180,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Kate's Greatest Hits",
     artist: "The Go Fly a Kate's"
@@ -296,7 +296,7 @@ const songs = seed(Song, {
     name: 'Omris Anthem',
     genre: 'Jazz',
     length: 190,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Omri's Greatest Hits",
     artist: "The Optimistic Omri's"
@@ -305,7 +305,7 @@ const songs = seed(Song, {
     name: 'Cassios Anthem',
     genre: 'Punk',
     length: 200,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Cassio's Greatest Hits",
     artist: 'Eh Nois'
@@ -314,7 +314,7 @@ const songs = seed(Song, {
     name: 'Alvins Anthem',
     genre: 'DEATH METAL MOTHER F*****R',
     length: 210,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Karen's Greatest Hits",
     artist: 'Karen and her Herps'
@@ -323,7 +323,7 @@ const songs = seed(Song, {
     name: 'Kates Least Favorite Songs',
     genre: 'Rock',
     length: 180,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Kate's Greatest Hits",
     artist: "The Go Fly a Kate's"
@@ -332,7 +332,7 @@ const songs = seed(Song, {
     name: 'Omris Least Favorite Songs',
     genre: 'Jazz',
     length: 190,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Omri's Greatest Hits",
     artist: "The Optimistic Omri's"
@@ -341,7 +341,7 @@ const songs = seed(Song, {
     name: 'Cassios Least Favorite Songs',
     genre: 'Punk',
     length: 200,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Cassio's Greatest Hits",
     artist: 'Eh Nois'
@@ -350,7 +350,7 @@ const songs = seed(Song, {
     name: 'Karens Least Favorite Songs',
     genre: 'DEATH METAL MOTHER F*****R',
     length: 210,
-    price: 0.99,
+    price: 99,
     url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
     album: "Karen's Greatest Hits",
     artist: 'Karen and her Herps'
