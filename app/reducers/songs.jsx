@@ -7,13 +7,20 @@ const reducer = (state=null, action) => {
   switch (action.type) {
   case GET_SONGS:
     newState.songs = action.songs
+    break
+  case GET_SONG:
+    newState.songs = [...newState.songs, action.song]
+    break
+  default:
+    return state
   }
-  return state
+  return newState
 }
 
 
 //action type
 const GET_SONGS = 'GET_SONGS'
+const GET_SONG = 'GET_SONG'
 
 
 //action creator
@@ -21,7 +28,9 @@ export const getSongs = songs => ({
   type: GET_SONGS, songs
 })
 
-
+export const getSong = song => ({
+  type: GET_SONG, song
+})
 
 //thunks
 export const fetchSongs = () =>
