@@ -20,69 +20,74 @@ module.exports = require('express').Router()
   // forbidden('listing users is not allowed'),
     (req, res, next) =>
       User.findAll()
-        .then(users => res.json(users))
-        .catch(next))
+      .then(users => res.json(users))
+      .catch(next)
+  )
+    
   .get('/:id',
     //mustBeLoggedIn,
-    (req, res, next) =>
+      (req, res, next) =>
       User.findById(req.params.id)
       .then(user => res.json(user))
-      .catch(next))
+      .catch(next)
+  )
+
   .get('/:id/cart',
     //mustBeLoggedIn,
     (req, res, next) =>
-    Cart.findOne({
-      where: {
-        user_id: req.params.id
-      }
-    })
-    .then(cart => cart.getSongs())
-    .then(songs => res.json(songs))
-    .catch(next)
+      Cart.findOne({
+        where: {
+          user_id: req.params.id
+        }
+      })
+      .then(cart => cart.getSongs())
+      .then(songs => res.json(songs))
+      .catch(next)
   )
+
    .get('/:id/songs',
     (req, res, next) =>
-    User.findById(req.params.id)
-    .then(user => user.getSongs())
-    //.then(user => res.json(user))
-    .then(userSongs => res.json(userSongs))
-    .catch(next)
+      User.findById(req.params.id)
+      .then(user => user.getSongs())
+      //.then(user => res.json(user))
+      .then(userSongs => res.json(userSongs))
+      .catch(next)
   )
 
   .post('/:id/cart', 
     (req, res, next) =>
-    User.findById(req.params.id)
-    .then(user => Cart.create({
-      user_id: req.params.id
-    })
-    )
-    .then(newCart => res.json(newCart))
-    .catch(next)
+      User.findById(req.params.id)
+      .then(user => Cart.create({
+        user_id: req.params.id
+      }))
+      .then(newCart => res.json(newCart))
+      .catch(next)
   )
 
   .post('/:id/cart/newSong',
     (req, res, next) =>
-    Cart.findOne({
-      where: {
-        user_id: req.params.id
-      }
-    })
-    .then(cart => cart.addSong(req.body.song_id))
-    .then(updatedCart => res.json(updatedCart))
-    .catch(next)
+      Cart.findOne({
+        where: {
+          user_id: req.params.id
+        }
+      })
+      .then(cart => cart.addSong(req.body.song_id))
+      .then(updatedCart => res.json(updatedCart))
+      .catch(next)
   )
 
   .post('/:id/purchase',
     //mustBeLoggedIn,
     (req, res, next) => {
-    Cart.findOne({
-      where: {
-        user_id: req.params.id
-      }
-    })
-    .then(cart => Purchase.newPurchaseFromCart(cart, req.params.id))
-    .then(purchase => res.json(purchase))
-    .catch(next)
+      Cart.findOne({
+        where: {
+          user_id: req.params.id
+        }
+      })
+      .then(cart => Cart.newPurchase(cart, req.params.id))
+      //.then(purchase => {console.log("hello", purchase), res.json(purchase)})
+      .then(purchase => res.json(purchase))
+      .catch(next)
     }
   )
 
@@ -100,3 +105,31 @@ module.exports = require('express').Router()
       .then(user => res.status(201).json(user))
       .catch(next)
     )
+  
+  .put('/:id',
+    (req, res, next) =>
+      User.findById(req.params.id)
+      .then(user => user.update(req.body))
+      .then(updatedUser => res.json(updatedUser))
+      .catch(next)
+  )
+  
+  .delete('/:id/cart',
+    (req, res, next) =>
+      Cart.findOne({
+        where: {
+          user_id: req.params.id
+        }
+      })
+      .then(cart => cart.removeSong(req.body.song_id))
+      .then(updatedCart => res.json(updatedCart))
+      .catch(next)
+  )
+
+  .delete('/:id', 
+    (req, res, next) =>
+      User.findById(req.params.id)
+      .then(user => user.destroy())
+      .then(() => res.json("User Deleted"))
+      .catch(next)
+  )
