@@ -10,6 +10,8 @@ const db = require('APP/db'),
     SongReview,
     Cart,
     CartSong,
+    PurchaseSong,
+    UserSong,
     Promise
   } = db,
   {
@@ -27,7 +29,8 @@ function seedEverything() {
   seeded.favorites = favorites(seeded)
   seeded.reviews = reviews(seeded)
   seeded.carts = carts(seeded)
-  // console.log('HERE', seeded)
+  seeded.userSongs = userSongs(seeded)
+  // seeded.purchases = purchases(seeded)
 
   return Promise.props(seeded)
 }
@@ -358,6 +361,68 @@ const songs = seed(Song, {
     artist: 'Karen and her Herps'
   },
 })
+
+// const purchases = seed(PurchaseSong,
+//   ({
+//     users,
+//     songs
+//   }) => ({
+//     'godpurchase1': {
+//       purchase_id: 1,
+//       song_id: songs.songFour.id
+//     },
+//     'godpurchase2': {
+//       purchase_id: 1,
+//       song_id: songs.songFive.id
+//     },
+//     'godpurchase3': {
+//       purchase_id: 1,
+//       song_id: songs.songOne.id
+//     },
+//     'barackpurchase1': {
+//       purchase_id: 2,
+//       song_id: songs.songSeven.id
+//     },
+//     'barackpurchase2': {
+//       purchase_id: 2,
+//       song_id: songs.songTwo.id
+//     },
+//     'barackpurchase3': {
+//       purchase_id: 2,
+//       song_id: songs.songThree.id
+//     },
+//   }))
+const userSongs = seed(UserSong,
+  ({
+    users,
+    songs
+  }) => ({
+    'goduser1': {
+      user_id: users.god.id,
+      song_id: songs.songFour.id
+    },
+    'goduser2': {
+      user_id: users.god.id,
+      song_id: songs.songFive.id
+    },
+    'goduser3': {
+      user_id: users.god.id,
+      song_id: songs.songOne.id
+    },
+    'barackuser1': {
+      user_id: users.barack.id,
+      song_id: songs.songSeven.id
+    },
+    'barackuser2': {
+      user_id: users.barack.id,
+      song_id: songs.songTwo.id
+    },
+    'barackuser3': {
+      user_id: users.barack.id,
+      song_id: songs.songThree.id
+    },
+  }))
+
 const carts = seed(CartSong,
   ({
     users,
@@ -477,5 +542,7 @@ module.exports = Object.assign(seed, {
   songs,
   favorites,
   reviews,
-  carts
+  carts,
+  userSongs
+  // purchases
 })

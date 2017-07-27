@@ -24,7 +24,9 @@ const app = require('APP')
       Cart: require('./cart'),
       Purchase: require('./purchase'),
       SongReview: require('./songReview'),
-      CartSong: require('./cartSong')
+      CartSong: require('./cartSong'),
+      PurchaseSong: require('./purchaseSong'),
+      UserSong: require('./userSong')
       // AlbumReview: require('./albumReview'),
       // AlbumArtistSeed: require('./albumArtistSeed')
     }
