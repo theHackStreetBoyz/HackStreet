@@ -17,25 +17,53 @@ import {BrowserRouter as Router, Switch, Route, Redirect, Link} from 'react-rout
 const Navbar = () => {
 
   return (
-    <navbar>
-      <section>
-        <h4 className="menu-item active nav-item nav-link">
-          <Link to="/albums">Albums</Link>
-        </h4>
-        <h4 className="menu-item active nav-item nav-link">
-          <Link to="/artists">Artists</Link>
-        </h4>
-        <h4 className="menu-item active nav-item nav-link">
-          <Link to="/songs">Songs</Link>
-        </h4>
-        <h4 className="menu-item active nav-item nav-link">
-          <Link to="/cart">Cart</Link>
-        </h4>
-        <button>
-          <Link to="/login">Login</Link>
-        </button>
-      </section>
-    </navbar>
+    <div>
+    <nav className="navbar navbar-toggleable-md navbar-light bg-faded">
+    <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
+    </button>
+
+    <div className="collapse navbar-collapse">
+    <ul className="navbar-nav mr-auto">
+      <li className="nav-item">
+        <a className="nav-link">
+          <Link to="/">
+          HackStreet Store
+          </Link>
+        </a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link">
+          <Link to="/artists">
+          Artists
+          </Link>
+        </a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link">
+          <Link to="/songs">
+          Songs
+          </Link>
+        </a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link">
+          <Link to="/cart">
+          Cart
+          </Link>
+        </a>
+      </li>
+      <li className="nav-item">
+        <a className="nav-link">
+          <Link to="/login">
+          Login
+          </Link>
+        </a>
+      </li>
+    </ul>
+    </div>
+    </nav>
+    </div>
   );
 };
 
