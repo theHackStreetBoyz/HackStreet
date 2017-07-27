@@ -18,6 +18,7 @@ module.exports = require('express').Router()
         .then(song => res.json(song))
         .catch(next)
     )
+    // OB/TZL: could consider /api/reviews (allowing for query string search)
     .get('/:id/reviews',
     (req, res, next) =>
         SongReviews.findAll({

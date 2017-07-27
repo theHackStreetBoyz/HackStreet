@@ -45,10 +45,10 @@ module.exports = db => db.define('users', {
   }
 })
 
-
 module.exports.associations = (User, {OAuth, Thing, Favorite, Cart, Purchase, SongReview}) => {
   User.hasOne(OAuth)
   User.belongsToMany(Thing, {as: 'favorites', through: Favorite})
+  // OB/TZL: Song undefined
   User.belongsToMany(Song , {through: "userSong"})
   User.hasOne(Cart)
   User.hasMany(Purchase)

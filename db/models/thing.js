@@ -1,5 +1,7 @@
 'use strict'
 
+// OB/TZL: bury undead code
+
 const {STRING} = require('sequelize')
 
 module.exports = db => db.define('things', {

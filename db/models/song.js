@@ -4,8 +4,10 @@ const _ = require('lodash')
 
 const DataTypes = require('sequelize')
 
+// OB/TZL: consider validations for later
 module.exports = db => db.define('song', {
   name: {
+    // OB/TZL: might go with STRING
     type: DataTypes.STRING(1e4), // eslint-disable-line new-cap
     allowNull: false,
     set: function(val) {
@@ -29,6 +31,7 @@ module.exports = db => db.define('song', {
     type: DataTypes.INTEGER
   },
   price: {
+    // OB/TZL: integer in cents, good! (DECIMAL type can do that, too)
     type: DataTypes.INTEGER,
     allowNull: false
   },

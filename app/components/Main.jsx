@@ -23,6 +23,7 @@ import Login from './Login'
 
 
 export default class Main extends Component {
+    // OB/TZL: unnecessary constructor
     constructor(props) {
         super(props);
     }

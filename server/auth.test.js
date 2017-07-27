@@ -50,7 +50,7 @@ describe('/api/auth', () => {
       // supertest agents persist cookies
       const agent = request.agent(app)
 
-      beforeEach('log in', () => agent
+      beforeEach('log in', () => agent // OB/TZL: place to reference for "logging in" for tests
         .post('/api/auth/login/local')
         .send(alice))
 

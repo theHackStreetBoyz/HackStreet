@@ -48,11 +48,12 @@ module.exports = require('express').Router()
     .then(userSongs => res.json(userSongs))
     .catch(next)
   )
+  // OB/TZL: could consider specific api routes for cart, i.e. POST /api/cart
   .post('/:id/cart',
     (req, res, next) =>
     Cart.findOne({
       where: {
-        user_id: req.params.id
+        user_id: req.params.id // OB/TZL: use req.user.id
       }
     })
     .then(cart => cart.addSong(req.body.song_id))
@@ -60,30 +61,31 @@ module.exports = require('express').Router()
     .catch(next)
   )
 
+  // OB/TZL: could consider POST /api/purchase
   .post('/:id/purchase',
     //mustBeLoggedIn,
     (req, res, next) => {
     Cart.findOne({
       where: {
-        user_id: req.params.id
+        user_id: req.params.id // OB/TZL: req.user.id
       }
     })
-    .then(cart => Purchase.newPurchaseFromCart(cart, req.params.id))
+    .then(cart => Purchase.newPurchaseFromCart(cart, req.params.id)) // OB/TZL: consider instance method for cart instead
     .then(purchase => res.json(purchase))
     .catch(next)
     }
   )
-
+  // OB/TZL: could consider POST /api/songReview
   .post('/:id/songReview',
     (req, res, next) => {
-      SongReviews.create(req.body)
+      SongReviews.create(req.body) // OB/TZL: can default req.body.user_id to req.user.id (if you want)
       .then(newReview => res.json(newReview))
       .catch(next)
     }
   )
 
   .post('/',
-    (req, res, next) =>
+    (req, res, next) => 
       User.create(req.body)
       .then(user => res.status(201).json(user))
       .catch(next)

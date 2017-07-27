@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+// OB/TZL: watch out for code styling / consistency
 
 //reducer
 const reducer = (state=null, action) => {
