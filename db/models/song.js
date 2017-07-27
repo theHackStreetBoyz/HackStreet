@@ -55,20 +55,13 @@ module.exports = db => db.define('song', {
       this.setDataValue('price', dollars * 100)
     }
   },
-  scopes: {
-    populated: () => ({ // function form lets us use to-be-defined models
-      include: [{
-        model: db.model('artist')
-      }]
-    })
-  },
   instanceMethods: {
     toJSON: function() { // overriding toJSON to prevent url from leaking to client
       // see https://github.com/sequelize/sequelize/issues/1462
       return _.omit(this.get(), ['url'])
     },
     getStars() {
-      return db.models('songReviews').findAll({
+      return db.model('songReviews').findAll({
         where: {
           songId: this.id
         }

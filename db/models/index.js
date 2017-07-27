@@ -24,8 +24,9 @@ const app = require('APP')
       Cart: require('./cart'),
       Purchase: require('./purchase'),
       SongReview: require('./songReview'),
-      //AlbumReview: require('./albumReview'),
-      //AlbumArtistSeed: require('./albumArtistSeed')
+      CartSong: require('./cartSong')
+      // AlbumReview: require('./albumReview'),
+      // AlbumArtistSeed: require('./albumArtistSeed')
     }
     , {mapValues} = require('lodash')
 
