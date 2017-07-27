@@ -15,7 +15,10 @@ module.exports = db => db.define('purchase', {
     newPurchaseFromCart(cart, userId) {
       return db.model('purchase').create(cart)
       .then(newCart => {
-        newCart.setUser(userId)
+        Promise.all([
+          newCart.setUser(userId),
+          newCart.getSongs().then(songs => newCart.setSongs(songs))
+        ])
         return newCart
       })
     }
