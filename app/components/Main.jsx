@@ -20,6 +20,7 @@ import Navbar from './Navbar'
 import Cart from './Cart'
 import Footer from './Footer'
 import Login from './Login'
+import SingleSong from './SingleSong'
 
 
 export default class Main extends Component {
@@ -34,8 +35,9 @@ export default class Main extends Component {
                     <Navbar className="navbar-nav"/>
                 </div>
                 <Switch>
-                    <Route path='/login' component={Login} /> 
-                    <Route path='/cart' component={Cart} /> 
+                    <Route path="/songs/:songId" render={({ match }) => (<SingleSong {...this.props} songId={match.params.songId} />) } />
+                    <Route path='/login' component={Login} />
+                    <Route path='/cart' component={Cart} />
                     <Route path='/artists' component={Artists} />
                     <Route path='/albums' component={Albums} />
                     <Route path='/songs' component={Songs} />
