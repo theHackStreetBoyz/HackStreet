@@ -1,18 +1,23 @@
 const DataTypes = require('sequelize')
 
-module.exports = db => db.define('cart', {
-  // songs: {
-  //   type: DataTypes.ARRAY(DataTypes.INTEGER),
-  //   defaultValue: []
-  // },
-  // albums: {
-  //   type: DataTypes.ARRAY(DataTypes.INTEGER),
-  //   defaultValue: []
-  // }
+module.exports = db => db.define('cart', {}, {
+  classMethods: {
+    newPurchase: function(user) {
+      return db.model('purchase').create(this)
+        .then(newPurchase => Promise.all([
+          newPurchase.getSongs().then(songs => newPurchase.setSongs(songs)),
+          newPurchase.setUser(user)
+        ]))
+    }
+  }
 })
 
-module.exports.associations = (Cart, {Song, User}) => {
+module.exports.associations = (Cart, {
+  Song,
+  User
+}) => {
   Cart.belongsTo(User)
-  Cart.belongsToMany(Song, {through: 'cartSong'})
-  // Cart.belongsToMany(Album, {through: 'cartAlbum'})
+  Cart.belongsToMany(Song, {
+    through: 'cartSong'
+  })
 }

@@ -8,23 +8,20 @@
 import 'babel-polyfill'
 
 import React, { Component } from 'react'
-import {render} from 'react-dom'
-import {Provider, connect} from 'react-redux'
+import { render } from 'react-dom'
+import { Provider, connect } from 'react-redux'
 
 class Artists extends Component {
-
   render() {
-
     return (
       <div>
         <h3>Artists</h3>
         <div className="list-artists">
 
-          </div>
+        </div>
       </div>
-    );
+    )
   }
 }
 
-export default Artists;
-
+export default Artists
