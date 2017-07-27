@@ -76,20 +76,7 @@ module.exports = require('express').Router()
 
   .post('/:id/songReview',
     (req, res, next) => {
-      // SongReviews.findOne({
-      //   where: {
-      //     song_id: req.params.id
-      //   }
-      // })
-      //.then(review => res.json(review))
-      //.catch(next)
-      SongReviews.create({
-          id: req.params.id,
-          stars: req.body.stars,
-          text: req.body.text,
-          user_id: req.params.user_id,
-          song_id: req.params.song_id
-      })
+      SongReviews.create(req.body)
       .then(newReview => res.json(newReview))
       .catch(next)
     }
