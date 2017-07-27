@@ -55,11 +55,6 @@ module.exports = db => db.define('song', {
       this.setDataValue('price', dollars * 100)
     }
   },
-  defaultScope: {
-    attributes: {
-      // include: ['albumId'], // excluded by default, need for `song.getAlbum()`
-    },
-  },
   scopes: {
     populated: () => ({ // function form lets us use to-be-defined models
       include: [{
