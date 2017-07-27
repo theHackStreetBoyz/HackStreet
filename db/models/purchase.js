@@ -11,20 +11,11 @@ module.exports = db => db.define('purchase', {
     defaultValue: []
   }
 }, {
-  getterMethods: {
-    songs: function() {
-      db.models('song').findAll({
-        where: {
-          id: 0
-        }
-      })
-    }
-  },
   classMethods: {
-    newPurchaseFromCart(cart, user) {
-      return db.models('purchase').create(cart)
+    newPurchaseFromCart(cart, userId) {
+      return db.model('purchase').create(cart)
       .then(newCart => {
-        newCart.setUser(user)
+        newCart.setUser(userId)
         return newCart
       })
     }
