@@ -39,4 +39,12 @@ export const fetchSongs = () =>
         dispatch(getSongs(songs))
       })
 
+export const fetchSingleSong = (id) =>
+    dispatch =>
+      axios.get(`api/songs/${id}`)
+        .then((res) => res.data)
+        .then((song) => {
+          dispatch(getSong(song))
+        })
+
 export default reducer

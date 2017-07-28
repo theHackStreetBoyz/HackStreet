@@ -19,7 +19,7 @@ import Cart from './Cart'
 import Footer from './Footer'
 import Login from './Login'
 import SingleUser from './SingleUser'
-// import SingleSong from './SingleSong'
+import SingleSong from './SingleSong'
 import CompanyInfo from './CompanyInfo'
 import Support from './Support'
 
@@ -49,7 +49,7 @@ export default class Main extends Component {
                     <Route path='/login' component={Login} />
                     <Route path='/cart' component={Cart} />
                     <Route path='/songs' component={Songs} />
-                    
+                    <Route path='/singlesong' component={SingleSong} />
                     <Route path='/companyinfo' component={CompanyInfo} />
                     <Route path='/support' component={Support} />
                     <Route path='/' component={Home} />
