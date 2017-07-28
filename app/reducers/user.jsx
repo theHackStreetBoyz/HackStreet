@@ -2,23 +2,23 @@ import axios from 'axios'
 
 
 //reducer
-const reducer = (state=null, action) => {
-  const newState = Object.assign({}, state)
+const reducer = (state={}, action) => {
+  let newState = {}
   switch (action.type) {
   case GET_USER:
-    newState.user = action.user
+    newState = action.user
     break
   case GET_USER_SONGS:
-    newState.user.songs = action.songs
+    newState.songs = action.songs
     break
   case GET_USER_CART:
-    newState.user.cart = action.cart
+    newState.cart = action.cart
     break
   case ADDING_PURCHASE:
-    newState.user.purchase = [...newState.purchase, action.purchase]
+    newState.purchase = [...newState.purchase, action.purchase]
     break
   case ADDING_TO_CART:
-    newState.user.cart.song = [...newState.user.cart.song, action.song]
+    newState.cart.song = [...newState.cart.song, action.song]
   // case GET_USER_PURCHASES:
   //   newState.user.purchases = action.purchases
   //   break

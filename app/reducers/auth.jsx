@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import {fetchUser} from './user'
+
 const reducer = (state={}, action) => {
   let newState = {}
   switch (action.type) {
@@ -36,6 +38,7 @@ export const whoami = () =>
     axios.get('/api/auth/whoami')
       .then(response => {
         const user = response.data
+        dispatch(fetchUser(user.id))
         dispatch(authenticated(user))
       })
       .catch(failed => dispatch(authenticated(null)))
