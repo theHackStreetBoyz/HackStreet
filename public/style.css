@@ -2,4 +2,8 @@ li {
       list-style-type: none;
 }
 
+footer.footer {
+    margin-top: 50%;
+    background-color: lightgray;
+}
 
