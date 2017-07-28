@@ -66,21 +66,25 @@ export const fetchUser = (id) =>
   dispatch =>
     axios.get(`/api/users/${id}`)
       .then((user) => dispatch(getUser(user.data)))
+      .catch(() => console.log('error'))
 
 export const fetchUserSongs = (id) =>
   dispatch =>
     axios.get(`/api/users/${id}/songs`)
       .then((songs) => dispatch(getUserSongs(songs.data)))
+      .catch(() => console.log('error'))
 
 export const fetchCart = (id) =>
   dispatch =>
     axios.get(`/api/${id}/carts`)
       .then((cart) => dispatch(getUserCart(cart.data)))
+      .catch(() => console.log('error'))
 
 export const fetchPurchases = (id) =>
   dispatch =>
     axios.get(`/api/${id}/purchases`)
       .then((purchases) => dispatch(getUserPurchases(purchases.data)))
+      .catch(() => console.log('error'))
 
 
 //use this when cart is purchased, be careful of the 3 params passed in
@@ -93,11 +97,13 @@ export const creatingPurchase = (id, purchase, history) =>
         history.push('/')
         // history.push(`/purchase/${purchased.data.id}`)
       })
+      .catch(() => console.log('error'))
 
 export const updatingUser = (id, content) =>
   dispatch =>
     axios.put(`/api/user/${id}`, content)
       .then(modifiedUser => dispatch(getUser(modifiedUser)))
+      .catch(() => console.log('error'))
 
 
 export default reducer

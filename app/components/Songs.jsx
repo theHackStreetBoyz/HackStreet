@@ -12,67 +12,17 @@ import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
-const fakeSongs = [
-    {
-    id: 1,
-    name: 'Darryns Anthem',
-    genre: 'Rock',
-    length: 180,
-    price: 0.99,
-    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
-    album: "Darryn's Greatest Hits",
-    artist: "The Deadly Darryn's"
-  },
-  {
-    id: 2,
-    name: 'Maxs Anthem',
-    genre: 'Jazz',
-    length: 190,
-    price: 0.99,
-    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
-    album: "Max's Greatest Hits",
-    artist: "The Miraculous Max's"
-  },
-  {
-    id: 3,
-    name: 'Dans Anthem',
-    genre: 'Punk',
-    length: 200,
-    price: 0.99,
-    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
-    album: "Dan's Greatest Hits",
-    artist: 'Manganesey Dan'
-  },
-  {
-    id: 4,
-    name: 'Karens Anthem',
-    genre: 'DEATH METAL MOTHER F*****R',
-    length: 210,
-    price: 0.99,
-    url: 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3',
-    album: "Alvin's Greatest Hits",
-    artist: 'Alvin and his Chipmunks'
-  }
-]
-
-export default class Songs extends Component {
-  constructor(){
-    super();
-    this.state = {
-      songs: fakeSongs
-    }
-  }
-
+class Songs extends Component {
   render() {
-      let songs = this.state.songs;
-
+    const songs = this.props.songs
+    console.log(songs)
     return (
       <div>
         <h3>Songs</h3>
         <div>
           <ul className="list-group">
-
-            {Array.isArray(songs) && songs.map( (song) => {
+          {
+            songs.map((song) => {
               return (
                 <div key={songs.id}>
                 <li className="list-group-item">
@@ -82,8 +32,8 @@ export default class Songs extends Component {
                 </li>
                 </div>
               )
-            })}
-
+            })
+            }
          </ul>
         </div>
       </div>
@@ -93,15 +43,15 @@ export default class Songs extends Component {
 
 // Un-comment out when store is ready to connect:
 
-// const mapStateToProps = function (state) {
-//   return {
-//     songs: state.songs
-//   };
-// };
+const mapStateToProps = function(state) {
+  return {
+    songs: state.songs.songs
+  };
+};
 
-// const songsListContainer = connect( mapStateToProps, null )(Songs);
+const songsListContainer = connect(mapStateToProps, null)(Songs);
 
-// export default songsListContainer;
+export default songsListContainer;
 
 
 

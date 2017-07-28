@@ -1,5 +1,7 @@
 import axios from 'axios'
-
+//action type
+const GET_SONGS = 'GET_SONGS'
+const GET_SONG = 'GET_SONG'
 
 //reducer
 const reducer = (state=null, action) => {
@@ -17,12 +19,6 @@ const reducer = (state=null, action) => {
   return newState
 }
 
-
-//action type
-const GET_SONGS = 'GET_SONGS'
-const GET_SONG = 'GET_SONG'
-
-
 //action creator
 export const getSongs = songs => ({
   type: GET_SONGS, songs
@@ -36,6 +32,9 @@ export const getSong = song => ({
 export const fetchSongs = () =>
   dispatch =>
     axios.get('/api/songs')
-      .then((songs) => dispatch(getSongs(songs)))
+      .then((res) => res.data)
+      .then((songs) => {
+        dispatch(getSongs(songs))
+      })
 
 export default reducer
