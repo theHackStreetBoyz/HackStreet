@@ -23,9 +23,9 @@ module.exports = require('express').Router()
       .then(users => res.json(users))
       .catch(next)
   )
-    
+
   .get('/:id',
-    //mustBeLoggedIn,
+    mustBeLoggedIn,
       (req, res, next) =>
       User.findById(req.params.id)
       .then(user => res.json(user))
@@ -33,7 +33,7 @@ module.exports = require('express').Router()
   )
 
   .get('/:id/cart',
-    //mustBeLoggedIn,
+    mustBeLoggedIn,
     (req, res, next) =>
       Cart.findOne({
         where: {
@@ -64,7 +64,7 @@ module.exports = require('express').Router()
       .catch(next)
   )
 
-  .post('/:id/cart', 
+  .post('/:id/cart',
     (req, res, next) =>
       User.findById(req.params.id)
       .then(user => Cart.create({
@@ -87,7 +87,7 @@ module.exports = require('express').Router()
   )
 
   .post('/:id/purchase',
-    //mustBeLoggedIn,
+    // mustBeLoggedIn,
     (req, res, next) => {
       Cart.findOne({
         where: {
@@ -114,7 +114,7 @@ module.exports = require('express').Router()
       .then(user => res.status(201).json(user))
       .catch(next)
     )
-  
+
   .put('/:id',
     (req, res, next) =>
       User.findById(req.params.id)
@@ -122,7 +122,7 @@ module.exports = require('express').Router()
       .then(updatedUser => res.json(updatedUser))
       .catch(next)
   )
-  
+
   .delete('/:id/cart',
     (req, res, next) =>
     Cart.findOne({
@@ -135,10 +135,10 @@ module.exports = require('express').Router()
     .catch(next)
   )
 
-  .delete('/:id', 
+  .delete('/:id',
     (req, res, next) =>
     User.findById(req.params.id)
     .then(user => user.destroy())
-    .then(() => res.json("User Deleted"))
+    .then(() => res.json('User Deleted'))
     .catch(next)
   )
