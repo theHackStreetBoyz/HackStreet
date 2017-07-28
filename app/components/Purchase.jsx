@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
-export default class Cart extends Component {
+export default class SingleUser extends Component {
   render() {
     let totalPrice = 0
     return (
       <div>
-        <h2>Cart:</h2>
-          {this.store.props.cart.songs.map(song => {
+        <h2>{`Purchase from: ${this.store.props.purchase.date}`}</h2>
+          {this.store.props.purchase.songs.map(song => {
             totalPrice += song.price
             return (
               <div>
