@@ -21,11 +21,18 @@ import Cart from './Cart'
 import Footer from './Footer'
 import Login from './Login'
 <<<<<<< HEAD
+<<<<<<< HEAD
 import SingleSong from './SingleSong'
 =======
 import CompanyInfo from './CompanyInfo'
 import Support from './Support'
 >>>>>>> c858286128201696d9c66f64edfe4a4901b48bda
+=======
+
+import SingleSong from './SingleSong'
+import CompanyInfo from './CompanyInfo'
+import Support from './Support'
+>>>>>>> cffa6a86ef4bbce5a9c123766bd44bac97511745
 
 import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
@@ -55,11 +62,17 @@ export default class Main extends Component {
                     <Route path='/albums' component={Albums} />
                     <Route path='/songs' component={Songs} />
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <Route path='/songs/:id' component={SingleSong} />
 =======
                     <Route path='/companyinfo' component={CompanyInfo} />
                     <Route path='/support' component={Support} />
 >>>>>>> c858286128201696d9c66f64edfe4a4901b48bda
+=======
+                    <Route path='/songs/:id' component={SingleSong} />
+                    <Route path='/companyinfo' component={CompanyInfo} />
+                    <Route path='/support' component={Support} />
+>>>>>>> cffa6a86ef4bbce5a9c123766bd44bac97511745
                     <Route path='/' component={Home} />
                 </Switch>
                 <Footer/>
