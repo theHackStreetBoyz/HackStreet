@@ -15,7 +15,6 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 class Songs extends Component {
   render() {
     const songs = this.props.songs
-    console.log(songs)
     return (
       <div>
         <h3>Songs</h3>
@@ -24,12 +23,12 @@ class Songs extends Component {
           {
             songs.map((song) => {
               return (
-                <div key={songs.id}>
-                <li className="list-group-item">
-                <div> Name: { song.name } </div>
-                <div> Artist: { song.artist } </div>
-                <div> Price: { song.price } </div>
-                </li>
+                <div key={song.id}>
+                  <li className="list-group-item">
+                    <div> Name: { song.name } </div>
+                    <div> Artist: { song.artist } </div>
+                    <div> Price: { song.price } </div>
+                  </li>
                 </div>
               )
             })
