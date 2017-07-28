@@ -16,18 +16,24 @@ import Support from './Support'
 
 const Footer = (props) => {
 
-    return (
-      <div class="container">
-        <footer class="footer">
-        <span class="text-muted">
-          <NavLink to={ CompanyInfo }>
-            Company Info
-          </NavLink>
-          <NavLink to={ Support }>
+     return (
+      <div>
+        <div className="row">
+        <footer className ="footer">
+          <div className ="container">
+          <div className="col-sm-4">
+            <NavLink to="/CompanyInfo">
+            CompanyInfo
+            </NavLink>
+          </div>
+          <div className="col-sm-4">
+            <NavLink to="/Support">
             Support
           </NavLink>
-        </span>
-    </footer>
+          </div>
+          </div>
+      </footer>
+      </div>
     </div>
     )
 

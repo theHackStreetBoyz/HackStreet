@@ -28,7 +28,7 @@ class Songs extends Component {
     return (
        <div>
         <div className="container">
-        <h3>Songs</h3>
+        <h3>Single Song</h3>
         <div className='row'>
           <div className='col-md-12'>
         <table className="table table-responsive table-striped table-hover table-sm">
@@ -80,7 +80,3 @@ const mapDispatchToProps = function (dispatch) {
 const songsListContainer = connect(mapStateToProps, mapDispatchToProps)(Songs);
 
 export default songsListContainer;
-
-
-
-
