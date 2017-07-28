@@ -69,23 +69,28 @@ export default class Songs extends Component {
     return (
       <div>
         <h3>Songs</h3>
-        <div>
-          <ul className="list-group">
-
-            {Array.isArray(songs) && songs.map( (song) => {
+        <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>NAME</th>
+                <th>ARTIST</th>
+                <th>PRICE</th>
+              </tr>
+            </thead>
+            <tbody>
+            {
+              Array.isArray(songs) && songs.map( (song) => {
               return (
-                <div key={songs.id}>
-                <li className="list-group-item">
-                <div> Name: { song.name } </div>
-                <div> Artist: { song.artist } </div>
-                <div> Price: { song.price } </div>
-                </li>
-                </div>
+                  <tr key={songs.id}>
+                    <td class="col-md-6">{ song.name }</td>
+                    <td class="col-md-6">{ song.artist }</td>
+                    <td class="col-md-6">{ song.price }</td>
+                  </tr>
               )
             })}
 
-         </ul>
-        </div>
+        </tbody>
+        </table>
       </div>
     );
   }
