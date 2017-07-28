@@ -20,6 +20,7 @@ import Navbar from './Navbar'
 import Cart from './Cart'
 import Footer from './Footer'
 import Login from './Login'
+import SingleUser from './SingleUser'
 
 import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
@@ -43,6 +44,7 @@ export default class Main extends Component {
                     <Navbar className="navbar-nav"/>
                 </div>
                 <Switch>
+                    <Route path='/user' component={SingleUser} />
                     <Route path='/login' component={Login} /> 
                     <Route path='/cart' component={Cart} /> 
                     <Route path='/artists' component={Artists} />
