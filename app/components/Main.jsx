@@ -41,6 +41,7 @@ export default class Main extends Component {
 
     render() {
         return (
+            <Router>
             <div>
                 <div>
                     <Navbar className="navbar-nav"/>
@@ -58,6 +59,7 @@ export default class Main extends Component {
                 </Switch>
                 <Footer/>
             </div>
+            </Router>
         )
     }
 }
