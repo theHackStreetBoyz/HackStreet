@@ -21,10 +21,18 @@ import Cart from './Cart'
 import Footer from './Footer'
 import Login from './Login'
 
+import { fetchSongs } from '../reducers/songs'
+import store from '../store.jsx'
+
 
 export default class Main extends Component {
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount () {
+        store.dispatch(fetchSongs())
+        // store.dispatch(fetchUser())
     }
 
     render() {
