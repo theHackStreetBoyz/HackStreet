@@ -9,28 +9,34 @@ import 'babel-polyfill'
 
 import React, { Component } from 'react'
 import {render} from 'react-dom'
+import { NavLink } from 'react-router-dom';
 import {Provider, connect} from 'react-redux'
-import { NavLink } from 'react-router-dom'
 import CompanyInfo from './CompanyInfo'
 import Support from './Support'
 
-const Footer = (props) => {
+const Footer = () => {
 
     return (
-      <div class="container">
-        <footer class="footer">
-        <span class="text-muted">
-          <NavLink to={ CompanyInfo }>
-            Company Info
-          </NavLink>
-          <NavLink to={ Support }>
+      <div>
+        <div class="row">
+        <footer className ="footer">
+          <div className ="container">
+          <div class="col-sm-4">
+            <NavLink to="/CompanyInfo">
+            CompanyInfo
+            </NavLink>
+          </div>
+          <div class="col-sm-4">
+            <NavLink to="/Support">
             Support
           </NavLink>
-        </span>
-    </footer>
+          </div>
+          </div>
+      </footer>
+      </div>
     </div>
     )
-
 }
+
 
 export default Footer;
