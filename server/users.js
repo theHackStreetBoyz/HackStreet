@@ -100,14 +100,6 @@ module.exports = require('express').Router()
     }
   )
 
-  .post('/:id/songReview',
-    (req, res, next) => {
-      SongReviews.create(req.body)
-      .then(newReview => res.json(newReview))
-      .catch(next)
-    }
-  )
-
   .post('/',
     (req, res, next) =>
       User.create(req.body)
