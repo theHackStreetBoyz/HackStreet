@@ -1,14 +1,19 @@
 import axios from 'axios'
 
-const reducer = (state=null, action) => {
+const reducer = (state={}, action) => {
+  let newState = {}
   switch (action.type) {
-  case AUTHENTICATED:
-    return action.user
+    case AUTHENTICATED:
+      newState = action.user
+      break
+  default:
+    return state
   }
-  return state
+  return newState
 }
 
 const AUTHENTICATED = 'AUTHENTICATED'
+
 export const authenticated = user => ({
   type: AUTHENTICATED, user
 })
