@@ -19,7 +19,7 @@ import Cart from './Cart'
 import Footer from './Footer'
 import Login from './Login'
 import SingleUser from './SingleUser'
-// import SingleSong from './SingleSong'
+import SingleSong from './SingleSong'
 import CompanyInfo from './CompanyInfo'
 import Support from './Support'
 
@@ -38,8 +38,9 @@ export default class Main extends Component {
         // store.dispatch(fetchUser())
     }
 
-  render() {
-      return (
+    render() {
+        return (
+            <Router>
             <div>
                 <div>
                     <Navbar className="navbar-nav" />
@@ -48,13 +49,15 @@ export default class Main extends Component {
                     <Route path='/user' component={SingleUser} />
                     <Route path='/login' component={Login} />
                     <Route path='/cart' component={Cart} />
-                    <Route path='/songs' component={Songs} />        
+                    <Route path='/songs' component={Songs} />
+                    <Route path='/singlesong' component={SingleSong} />
                     <Route path='/companyinfo' component={CompanyInfo} />
                     <Route path='/support' component={Support} />
                     <Route path='/' component={Home} />
                 </Switch>
                 <Footer/>
             </div>
+            </Router>
         )
     }
 }
