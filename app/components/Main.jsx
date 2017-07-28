@@ -20,7 +20,12 @@ import Navbar from './Navbar'
 import Cart from './Cart'
 import Footer from './Footer'
 import Login from './Login'
+<<<<<<< HEAD
 import SingleSong from './SingleSong'
+=======
+import CompanyInfo from './CompanyInfo'
+import Support from './Support'
+>>>>>>> c858286128201696d9c66f64edfe4a4901b48bda
 
 import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
@@ -44,15 +49,20 @@ export default class Main extends Component {
                     <Navbar className="navbar-nav"/>
                 </div>
                 <Switch>
-                    <Route path='/login' component={Login} /> 
-                    <Route path='/cart' component={Cart} /> 
+                    <Route path='/login' component={Login} />
+                    <Route path='/cart' component={Cart} />
                     <Route path='/artists' component={Artists} />
                     <Route path='/albums' component={Albums} />
                     <Route path='/songs' component={Songs} />
+<<<<<<< HEAD
                     <Route path='/songs/:id' component={SingleSong} />
+=======
+                    <Route path='/companyinfo' component={CompanyInfo} />
+                    <Route path='/support' component={Support} />
+>>>>>>> c858286128201696d9c66f64edfe4a4901b48bda
                     <Route path='/' component={Home} />
                 </Switch>
-                {/*<Footer />*/}
+                <Footer/>
             </div>
         )
     }
