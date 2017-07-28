@@ -20,7 +20,6 @@ import Navbar from './Navbar'
 import Cart from './Cart'
 import Footer from './Footer'
 import Login from './Login'
-
 import SingleSong from './SingleSong'
 import CompanyInfo from './CompanyInfo'
 import Support from './Support'
