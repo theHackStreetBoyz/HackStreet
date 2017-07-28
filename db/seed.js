@@ -3,8 +3,6 @@
 const db = require('APP/db'),
   {
     User,
-    Thing,
-    Favorite,
     Song,
     Artist,
     SongReview,
@@ -12,6 +10,7 @@ const db = require('APP/db'),
     CartSong,
     PurchaseSong,
     UserSong,
+
     Promise
   } = db,
   {
@@ -22,66 +21,14 @@ function seedEverything() {
   console.log('CartSong:', CartSong)
   const seeded = {
     users: users(),
-    things: things(),
     songs: songs(),
   }
-  // When you switch the order of these, for some reason favorites stops running...
-  seeded.favorites = favorites(seeded)
   seeded.reviews = reviews(seeded)
   seeded.carts = carts(seeded)
   seeded.userSongs = userSongs(seeded)
-  // seeded.purchases = purchases(seeded)
 
   return Promise.props(seeded)
 }
-
-const things = seed(Thing, {
-  surfing: {
-    name: 'surfing'
-  },
-  smiting: {
-    name: 'smiting'
-  },
-  puppies: {
-    name: 'puppies'
-  },
-})
-
-const favorites = seed(Favorite,
-  // We're specifying a function here, rather than just a rows object.
-  // Using a function lets us receive the previously-seeded rows (the seed
-  // function does this wiring for us).
-  //
-  // This lets us reference previously-created rows in order to create the join
-  // rows. We can reference them by the names we used above (which is why we used
-  // Objects above, rather than just arrays).
-  ({
-    users,
-    things
-  }) => ({
-    // The easiest way to seed associations seems to be to just create rows
-    // in the join table.
-    'obama loves surfing': {
-      user_id: users.barack.id, // users.barack is an instance of the User model
-      // that we created in the user seed above.
-      // The seed function wires the promises so that it'll
-      // have been created already.
-      thing_id: things.surfing.id // Same thing for things.
-    },
-    'god is into smiting': {
-      user_id: users.god.id,
-      thing_id: things.smiting.id
-    },
-    'obama loves puppies': {
-      user_id: users.barack.id,
-      thing_id: things.puppies.id
-    },
-    'god loves puppies': {
-      user_id: users.god.id,
-      thing_id: things.puppies.id
-    },
-  })
-)
 
 if (module === require.main) {
   db.didSync
@@ -155,65 +102,6 @@ function seed(Model, rows) {
       })
   }
 }
-
-// const artist = seed(Artist, {
-//   darryn: {
-//     name: 'Darryn'
-//   },
-//   max: {
-//     name: 'Max'
-//   }
-// })
-
-// const album = seed(Album, {
-//   Dhits: {
-//     name: 'D Greatest Hits',
-//     price: 15
-//   },
-//   Mhits: {
-//     name: 'M Greatest Hits',
-//     price: 15
-//   }
-// })
-
-// const AlbumArtistSeed = seed(albumArtistSeed,
-//   // We're specifying a function here, rather than just a rows object.
-//   // Using a function lets us receive the previously-seeded rows (the seed
-//   // function does this wiring for us).
-//   //
-//   // This lets us reference previously-created rows in order to create the join
-//   // rows. We can reference them by the names we used above (which is why we used
-//   // Objects above, rather than just arrays).
-//   ({
-//     artist,
-//     album
-//   }) => ({
-//     // The easiest way to seed associations seems to be to just create rows
-//     // in the join table.
-//     'obama loves surfing': {
-//       artist_id: artist.darryn.id, // users.barack is an instance of the User model
-//       // that we created in the user seed above.
-//       // The seed function wires the promises so that it'll
-//       // have been created already.
-//       album_id: album.Dhits.id // Same thing for things.
-//     }
-//   })
-// )
-
-// const albumArtistSeed = seed(albumArtist,
-//   ({
-//     artist,
-//     album
-//   }) => ({
-//     'set darryn': {
-//       artist_id: 1,
-//       album_id: 2
-//     },
-//     2: {
-//       artist_id: artist.max.id,
-//       album_id: album.Mhits
-//     }
-//   }))
 
 const songs = seed(Song, {
   songOne: {
@@ -362,36 +250,6 @@ const songs = seed(Song, {
   },
 })
 
-// const purchases = seed(PurchaseSong,
-//   ({
-//     users,
-//     songs
-//   }) => ({
-//     'godpurchase1': {
-//       purchase_id: 1,
-//       song_id: songs.songFour.id
-//     },
-//     'godpurchase2': {
-//       purchase_id: 1,
-//       song_id: songs.songFive.id
-//     },
-//     'godpurchase3': {
-//       purchase_id: 1,
-//       song_id: songs.songOne.id
-//     },
-//     'barackpurchase1': {
-//       purchase_id: 2,
-//       song_id: songs.songSeven.id
-//     },
-//     'barackpurchase2': {
-//       purchase_id: 2,
-//       song_id: songs.songTwo.id
-//     },
-//     'barackpurchase3': {
-//       purchase_id: 2,
-//       song_id: songs.songThree.id
-//     },
-//   }))
 const userSongs = seed(UserSong,
   ({
     users,
@@ -538,11 +396,8 @@ const users = seed(User, {
 })
 module.exports = Object.assign(seed, {
   users,
-  things,
   songs,
-  favorites,
   reviews,
   carts,
   userSongs
-  // purchases
 })
