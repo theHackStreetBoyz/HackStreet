@@ -31,6 +31,24 @@ module.exports = require('express').Router()
         .catch(next)
     )
 
+    .post('/:id/review',
+        (req, res, next) => {
+            Songs.findOne({
+                where: {
+                    id: req.params.id
+                }
+            })
+            .then(song => SongReviews.create({
+                stars: req.body.stars,
+                text: req.body.text,
+                song_id: song.id
+                //user_id: req.user.id
+            }))
+            .then(newReview => res.json(newReview))
+            .catch(next)
+        }
+    )
+
     .delete('/:id/review',
     (req, res, next) =>
         SongReviews.findOne({
@@ -46,9 +64,7 @@ module.exports = require('express').Router()
     .put('/:id',
     (req, res, next) =>
         Songs.findById(req.params.id)
-        .then(song => song.update({
-            availible: req.body.availible
-        }))
+        .then(song => song.update(req.body))
         .then(updatedSong => res.json(updatedSong))
         .catch(next)
     )
