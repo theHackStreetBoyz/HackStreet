@@ -3,7 +3,15 @@ import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
+
+
 class SingleUser extends Component {
+
+componentDidMount(){
+  this.props.getUserSongs(this.props.auth.id)
+  console.log('hello')
+}
+
   render() {
       const user = this.props.auth
       console.log(this.props.auth)
@@ -30,7 +38,15 @@ const mapStateToProps = function(state) {
   };
 };
 
-const userContainer = connect(mapStateToProps, null)(SingleUser);
+const mapDispatchToProps = function (dispatch) {
+  return {
+    getUserSongs(id) {
+      dispatch(fetchUserSongs(id))
+    }
+  };
+}; 
+
+const userContainer = connect(mapStateToProps, mapDispatchToProps)(SingleUser);
 
 export default userContainer;
 
