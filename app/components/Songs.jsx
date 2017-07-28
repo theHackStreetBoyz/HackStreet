@@ -31,11 +31,13 @@ class Songs extends Component {
             {
               Array.isArray(songs) && songs.map( (song) => {
               return (
-                  <tr key={songs.id}>
+
+                  <tr key={song.id}>
                     <td class="col-md-6">{ song.name }</td>
                     <td class="col-md-6">{ song.artist }</td>
                     <td class="col-md-6">{ song.price }</td>
                   </tr>
+
               )
             })}
 
