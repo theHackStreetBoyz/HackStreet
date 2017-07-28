@@ -2,21 +2,23 @@ import axios from 'axios'
 
 
 //reducer
-const reducer = (state=null, action) => {
-  const newState = Object.assign({}, state)
+const reducer = (state={}, action) => {
+  let newState = {}
   switch (action.type) {
   case GET_USER:
-    newState.user = action.user
+    newState = action.user
     break
   case GET_USER_SONGS:
-    newState.user.songs = action.songs
+    newState.songs = action.songs
     break
   case GET_USER_CART:
-    newState.user.cart = action.cart
+    newState.cart = action.cart
     break
   case ADDING_PURCHASE:
-    newState.user.purchase = [...newState.purchase, action.purchase]
+    newState.purchase = [...newState.purchase, action.purchase]
     break
+  case ADDING_TO_CART:
+    newState.cart.song = [...newState.cart.song, action.song]
   // case GET_USER_PURCHASES:
   //   newState.user.purchases = action.purchases
   //   break
@@ -33,6 +35,7 @@ const GET_USER_SONGS = 'GET_USER_SONGS'
 const GET_USER_CART = 'GET_USER_CART'
 const GET_USER_PURCHASES = 'GET_USER_PURCHASES'
 const ADDING_PURCHASE = 'ADDING_PURCHASE'
+const ADDING_TO_CART = 'ADDING_TO_CART'
 // const UPDATE_USER = 'UPDATE_USER' can we just use get user?
 
 
@@ -55,6 +58,10 @@ export const getUserPurchases = purchases => ({
 
 export const addingPurchase = purchase => ({
   type: ADDING_PURCHASE, purchase
+})
+
+export const addingToCart = song => ({
+  type: ADDING_TO_CART, song
 })
 
 // export const updateUser = user => ({
@@ -101,9 +108,14 @@ export const creatingPurchase = (id, purchase, history) =>
 
 export const updatingUser = (id, content) =>
   dispatch =>
-    axios.put(`/api/user/${id}`, content)
+    axios.put(`/api/users/${id}`, content)
       .then(modifiedUser => dispatch(getUser(modifiedUser)))
       .catch(() => console.log('error'))
+
+// export const updatingCart = (id, song) =>
+//   dispatch =>
+//     axios.post(`/api/users/${id}/cart/newSong`, song)
+//       .then(newSong => dispatch(addingToCart(newSong)))
 
 
 export default reducer

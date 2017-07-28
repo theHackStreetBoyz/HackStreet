@@ -1,19 +1,36 @@
 import React, { Component } from 'react'
+import {render} from 'react-dom'
+import {Provider, connect} from 'react-redux'
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
-export default class SingleUser extends Component {
+class SingleUser extends Component {
   render() {
+      const user = this.props.auth
+      console.log(this.props.auth)
     return (
       <div>
         <h1>User:</h1>
         <div>
           <h3>Name:</h3>
-          <p>{this.store.currentUser.name}</p>
+          <p>{user.name}</p>
         </div>
         <div>
           <h3>Email:</h3>
-          <p>{this.store.currentUser.email}</p>
+          <p>{user.email}</p>
         </div>
       </div>
     )
   }
 }
+
+const mapStateToProps = function(state) {
+  console.log(state)
+  return {
+    auth: state.auth
+  };
+};
+
+const userContainer = connect(mapStateToProps, null)(SingleUser);
+
+export default userContainer;
+

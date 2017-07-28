@@ -13,14 +13,13 @@ import { Provider, connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import Home from './Home'
-import Artists from './Artists'
-import Albums from './Albums'
 import Songs from './Songs'
 import Navbar from './Navbar'
 import Cart from './Cart'
 import Footer from './Footer'
 import Login from './Login'
-import SingleSong from './SingleSong'
+import SingleUser from './SingleUser'
+// import SingleSong from './SingleSong'
 import CompanyInfo from './CompanyInfo'
 import Support from './Support'
 
@@ -34,7 +33,6 @@ export default class Main extends Component {
     }
 
     componentDidMount () {
-        console.log('songs')
         store.dispatch(fetchSongs())
         // store.dispatch(fetchUser())
     }
@@ -47,12 +45,11 @@ export default class Main extends Component {
                     <Navbar className="navbar-nav"/>
                 </div>
                 <Switch>
+                    <Route path='/user' component={SingleUser} />
                     <Route path='/login' component={Login} />
                     <Route path='/cart' component={Cart} />
-                    <Route path='/artists' component={Artists} />
-                    <Route path='/albums' component={Albums} />
                     <Route path='/songs' component={Songs} />
-                    <Route path='/songs/:id' component={SingleSong} />
+                    
                     <Route path='/companyinfo' component={CompanyInfo} />
                     <Route path='/support' component={Support} />
                     <Route path='/' component={Home} />
