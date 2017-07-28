@@ -39,6 +39,7 @@ class Songs extends Component {
                     <td>{ song.artist }</td>
                     <td>{ song.price }</td>
                   </tr>
+
               )
             })}
 

@@ -33,6 +33,7 @@ export default class Main extends Component {
     }
 
     componentDidMount () {
+        console.log('songs')
         store.dispatch(fetchSongs())
         // store.dispatch(fetchUser())
     }
