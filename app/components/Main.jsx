@@ -24,33 +24,32 @@ import Login from './Login'
 import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
 
-
 export default class Main extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+      super(props)
     }
 
-    componentDidMount () {
-        console.log('songs')
-        store.dispatch(fetchSongs())
+  componentDidMount() {
+      console.log('songs')
+      store.dispatch(fetchSongs())
         // store.dispatch(fetchUser())
     }
 
-    render() {
-        return (
+  render() {
+      return (
             <div>
                 <div>
-                    <Navbar className="navbar-nav"/>
+                    <Navbar className="navbar-nav" />
                 </div>
                 <Switch>
-                    <Route path='/login' component={Login} /> 
-                    <Route path='/cart' component={Cart} /> 
+                    <Route path='/login' component={Login} />
+                    <Route path='/cart' component={Cart} />
                     <Route path='/artists' component={Artists} />
                     <Route path='/albums' component={Albums} />
                     <Route path='/songs' component={Songs} />
                     <Route path='/' component={Home} />
                 </Switch>
-                {/*<Footer />*/}
+                {/* <Footer /> */}
             </div>
         )
     }

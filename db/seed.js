@@ -379,19 +379,19 @@ const users = seed(User, {
     password: '1234'
   },
   stan: {
-    name: 'Stan Getz',
     email: 'Stan@letsGetziton.com',
-    passoword: 'secure345'
+    name: 'Stan Getz',
+    password: 'secure345'
   },
   ken: {
     name: 'Ken Ramos',
     email: 'ken@letsGetziton.com',
-    passoword: 'secure345'
+    password: 'secure345'
   },
   alez: {
-    name: 'Alex Gates',
     email: 'alez@letsGetziton.com',
-    passoword: 'secure345'
+    name: 'Alex Gates',
+    password: 'secure345'
   },
 })
 module.exports = Object.assign(seed, {

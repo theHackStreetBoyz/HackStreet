@@ -25,7 +25,7 @@ module.exports = require('express').Router()
   )
 
   .get('/:id',
-    // mustBeLoggedIn,
+    mustBeLoggedIn,
       (req, res, next) =>
       User.findById(req.params.id)
       .then(user => res.json(user))
@@ -33,7 +33,7 @@ module.exports = require('express').Router()
   )
 
   .get('/:id/cart',
-    // mustBeLoggedIn,
+    mustBeLoggedIn,
     (req, res, next) =>
       Cart.findOne({
         where: {
@@ -87,7 +87,7 @@ module.exports = require('express').Router()
   )
 
   .post('/:id/purchase',
-    // mustBeLoggedIn,
+    mustBeLoggedIn,
     (req, res, next) => {
       Cart.findOne({
         where: {

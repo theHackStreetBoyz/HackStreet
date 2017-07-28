@@ -38,10 +38,11 @@ db.didSync = db.createAndSync()
 
 // sync the db, creating it if necessary
 function createAndSync(force=app.isTesting, retries=0, maxRetries=5) {
+  console.log('app.isTesting', app.isTesting)
   return db.sync({force: force})
     .then(() => debug(`Synced models to db ${url}`))
     .catch(fail => {
-      // Don't do this auto-create nonsense in prod, or
+      // Don't do this auto nonsense in prod, or
       // if we've retried too many times.
       if (app.isProduction || retries > maxRetries) {
         console.error(chalk.red(`********** database error ***********`))
