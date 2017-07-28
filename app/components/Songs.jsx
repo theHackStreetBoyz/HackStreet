@@ -12,11 +12,19 @@ import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
+import { fetchSongs } from '../reducers/songs'
+import store from '../store.jsx'
+
+
 
 class Songs extends Component {
+    componentDidMount () {
+        this.props.loadAllSongs()
+    }
+
+
   render() {
     const songs = this.props.songs
-
     return (
        <div>
         <div className="container">
@@ -33,7 +41,7 @@ class Songs extends Component {
             </thead>
             <tbody>
             {
-              songs.map( (song) => {
+              (songs && songs.map((song) => {
               return (
                   <tr key={song.id}>
                     <td>{ song.name }</td>
@@ -41,7 +49,7 @@ class Songs extends Component {
                     <td>{ song.price }</td>
                   </tr>
               )
-            })}
+            }))}
 
         </tbody>
         </table>
@@ -55,12 +63,21 @@ class Songs extends Component {
 
 
 const mapStateToProps = function(state) {
-  return {
-    songs: state.songs.songs
-  };
+    console.log(state)
+    return {
+      songs: state.songs
+    };
 };
 
-const songsListContainer = connect(mapStateToProps, null)(Songs);
+const mapDispatchToProps = function (dispatch) {
+  return {
+    loadAllSongs: () => {
+      dispatch(fetchSongs())
+    }
+  }
+}
+
+const songsListContainer = connect(mapStateToProps, mapDispatchToProps)(Songs);
 
 export default songsListContainer;
 

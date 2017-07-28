@@ -48,7 +48,7 @@ class Home extends Component {
 const mapStateToProps = function(state) {
   if(state.songs){
   return {
-    songs: state.songs.songs
+    songs: state.songs
   };
   }
 };
