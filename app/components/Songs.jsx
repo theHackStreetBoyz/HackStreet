@@ -8,50 +8,59 @@
 import 'babel-polyfill'
 
 import React, { Component } from 'react'
-import {render} from 'react-dom'
-import {Provider, connect} from 'react-redux'
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import { render } from 'react-dom'
+import { Provider, connect } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
 
 
-
 class Songs extends Component {
-    componentDidMount () {
-        this.props.loadAllSongs()
-    }
+  constructor(props) {
+    super(props)
+    this.handleBuy = this.handleBuy.bind(this)
+  }
+  componentDidMount() {
+    this.props.loadAllSongs()
+  }
+  handleBuy(evt) {
+    const songId = evt.target.value
+    console.log(evt.target.value)
+    // thunk to create new purchase from songId above
+    // somehow update song button to show that it was added to cart
+  }
 
 
   render() {
     const songs = this.props.songs
     return (
-       <div>
+      <div>
         <div className="container">
           <h3>Songs</h3>
           <div className='row'>
             <div className='col-md-12'>
               <table className="table table-responsive table-striped table-hover table-sm">
-              <thead>
-              <tr>
-                <th>NAME</th>
-                <th>ARTIST</th>
-                <th>PRICE</th>
-              </tr>
-            </thead>
-            <tbody>
-            {
-              (songs && songs.map((song) => {
-              return (
-                  <tr key={song.id}>
-                    <td>{ song.name }</td>
-                    <td>{ song.artist }</td>
-                    <td>{ song.price }</td>
-                    <td><button type="submit" className="btn btn-default">BUY</button></td>
+                <thead>
+                  <tr>
+                    <th>NAME</th>
+                    <th>ARTIST</th>
+                    <th>PRICE</th>
                   </tr>
-
-               )})}
-              </tbody>
+                </thead>
+                <tbody>
+                  {
+                    (songs && songs.map((song) => {
+                      return (
+                        <tr key={song.id}>
+                          <td>{song.name}</td>
+                          <td>{song.artist}</td>
+                          <td>{song.price}</td>
+                          <td><button value={song.id} onClick={this.handleBuy} type="submit" className="btn btn-default">BUY</button></td>
+                        </tr>
+                      )
+                    }))}
+                </tbody>
               </table>
             </div>
           </div>
@@ -62,11 +71,11 @@ class Songs extends Component {
 }
 
 
-const mapStateToProps = function(state) {
-    console.log(state)
-    return {
-      songs: state.songs
-    };
+const mapStateToProps = function (state) {
+  console.log(state)
+  return {
+    songs: state.songs
+  };
 };
 
 const mapDispatchToProps = function (dispatch) {
