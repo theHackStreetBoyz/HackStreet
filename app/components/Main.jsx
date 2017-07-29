@@ -22,42 +22,44 @@ import SingleUser from './SingleUser'
 import SingleSong from './SingleSong'
 import CompanyInfo from './CompanyInfo'
 import Support from './Support'
+import Checkout from './Checkout'
 
 import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
 
 export default class Main extends Component {
-  constructor(props) {
-      super(props)
-    }
+//   constructor(props) {
+//       super(props)
+//     }
 
   componentDidMount() {
-      console.log('songs')
-      store.dispatch(fetchSongs())
+    console.log('songs')
+    store.dispatch(fetchSongs())
 
         // store.dispatch(fetchUser())
-    }
+  }
 
-    render() {
-        return (
+  render() {
+    return (
             <Router>
-            <div>
                 <div>
-                    <Navbar className="navbar-nav" />
+                    <div>
+                        <Navbar className="navbar-nav" />
+                    </div>
+                    <Switch>
+                        <Route path='/user' component={SingleUser} />
+                        <Route path='/login' component={Login} />
+                        <Route path='/cart' component={Cart} />
+                        <Route path='/songs' component={Songs} />
+                        <Route path='/singlesong' component={SingleSong} />
+                        <Route path='/companyinfo' component={CompanyInfo} />
+                        <Route path='/support' component={Support} />
+                        <Route path='/checkout' component={Checkout} />
+                        <Route path='/' component={Home} />
+                    </Switch>
+                    <Footer />
                 </div>
-                <Switch>
-                    <Route path='/user' component={SingleUser} />
-                    <Route path='/login' component={Login} />
-                    <Route path='/cart' component={Cart} />
-                    <Route path='/songs' component={Songs} />
-                    <Route path='/singlesong' component={SingleSong} />
-                    <Route path='/companyinfo' component={CompanyInfo} />
-                    <Route path='/support' component={Support} />
-                    <Route path='/' component={Home} />
-                </Switch>
-                <Footer/>
-            </div>
             </Router>
-        )
-    }
+    )
+  }
 }

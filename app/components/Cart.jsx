@@ -26,7 +26,6 @@ export class Cart extends Component {
     )
   }
 }
-
 function mapStateToProps(state, ownProps) {
   console.log('STATE: ', state)
   return {
