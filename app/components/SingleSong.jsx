@@ -28,15 +28,15 @@ class Songs extends Component {
     return (
        <div>
         <div className="container">
-          <h3>Songs</h3>
-          <div className='row'>
-            <div className='col-md-12'>
-              <table className="table table-responsive table-striped table-hover table-sm">
-              <thead>
-              <tr>
-                <th>NAME</th>
-                <th>ARTIST</th>
-                <th>PRICE</th>
+        <h3>Single Song</h3>
+        <div className='row'>
+          <div className='col-md-12'>
+        <table className="table table-responsive table-striped table-hover table-sm">
+            <thead>
+              <tr className="row m-0">
+                <th className="d-inline-block">NAME</th>
+                <th className="d-inline-block ">ARTIST</th>
+                <th className="d-inline-block ">PRICE</th>
               </tr>
             </thead>
             <tbody>
@@ -47,14 +47,14 @@ class Songs extends Component {
                     <td>{ song.name }</td>
                     <td>{ song.artist }</td>
                     <td>{ song.price }</td>
-                    <td><button type="submit" className="btn btn-default">BUY</button></td>
                   </tr>
+              )
+            }))}
 
-               )})}
-              </tbody>
-              </table>
-            </div>
-          </div>
+        </tbody>
+        </table>
+        </div>
+        </div>
         </div>
       </div>
     );
@@ -80,7 +80,3 @@ const mapDispatchToProps = function (dispatch) {
 const songsListContainer = connect(mapStateToProps, mapDispatchToProps)(Songs);
 
 export default songsListContainer;
-
-
-
-

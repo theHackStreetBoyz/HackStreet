@@ -18,15 +18,15 @@ const Footer = (props) => {
 
      return (
       <div>
-        <div class="row">
+        <div className="row">
         <footer className ="footer">
           <div className ="container">
-          <div class="col-sm-4">
+          <div className="col-sm-4">
             <NavLink to="/CompanyInfo">
             CompanyInfo
             </NavLink>
           </div>
-          <div class="col-sm-4">
+          <div className="col-sm-4">
             <NavLink to="/Support">
             Support
           </NavLink>

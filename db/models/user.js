@@ -20,22 +20,14 @@ module.exports = db => db.define('users', {
 }, {
   indexes: [{fields: ['email'], unique: true}],
   hooks: {
-    beforeCreate: function() {
-      setEmailAndPassword
-    },
+    beforeCreate: setEmailAndPassword,
     beforeUpdate: setEmailAndPassword,
-    afterCreate: function(user) {
-      db.model('cart').create({user_id: user.id})
-      .then(cart => {
-        user.cart_id = cart.id
-        user.save()
-      })
-      // .then(cart => {
-      //   // console.log(cart)
-      //   // cart.user_id = this.id
-      //   this.cart_id = cart.id
-      // })
-    }
+    afterCreate: (user) => db.model('cart').create({user_id: user.id})
+        .then(cart => {
+          user.cart_id = cart.id
+          return user.save()
+        })
+        .catch(console.error)
   },
   defaultScope: {
     attributes: {exclude: ['password_digest']}
@@ -69,4 +61,5 @@ function setEmailAndPassword(user) {
 
   return bcrypt.hash(user.get('password'), 10)
     .then(hash => user.set('password_digest', hash))
+    .catch(console.error)
 }

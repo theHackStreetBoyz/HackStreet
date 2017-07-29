@@ -35,12 +35,12 @@ module.exports = db => db.define('song', {
   audioUrl: {
     type: DataTypes.VIRTUAL,
     get: function() {
-      return `/api/songs/${this.id}/audio`
+      return /* `/api/songs/${this.id}/audio` */ 'https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3'
     }
   },
   /* NOTE: `url` is internal to the server, and is hidden from the client. */
   url: {
-    type: DataTypes.STRING(1e4), // eslint-disable-line new-cap
+    type: DataTypes.STRING(), // eslint-disable-line new-cap
     allowNull: false
   },
 }, {
