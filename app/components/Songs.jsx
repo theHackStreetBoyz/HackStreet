@@ -13,7 +13,7 @@ import { Provider, connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import { fetchSongs } from '../reducers/songs'
-import { updatingCart } from '../reducers/auth'
+import { updatingCart } from '../reducers/cart'
 import store from '../store.jsx'
 
 class Songs extends Component {
@@ -26,8 +26,9 @@ class Songs extends Component {
   }
   handleBuy(evt) {
     const songId = evt.target.value
+    //console.log("props", this.props)
     //console.log(this.props.songs.filter(song => song.id == songId)[0])
-    this.props.updateCart(1, 2)
+    this.props.updateCart(this.props.auth.id, songId)
     // console.log(evt.target.value)
     // console.log('Hi dan')
     // this.addedSongs[songId] = true
@@ -40,6 +41,8 @@ class Songs extends Component {
 
   render() {
     const songs = this.props.songs
+    const cart = this.props.cart
+    console.log("cart", cart)
     return (
       <div>
         <div className="container">
@@ -82,10 +85,12 @@ class Songs extends Component {
 }
 
 const mapStateToProps = function(state) {
-  console.log(state)
   return {
-    songs: state.songs
+    songs: state.songs,
+    auth: state.auth,
+    cart: state.cart
   }
+
 }
 
 const mapDispatchToProps = function(dispatch) {
