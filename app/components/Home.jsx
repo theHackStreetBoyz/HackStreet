@@ -8,9 +8,9 @@
 import 'babel-polyfill'
 
 import React, { Component } from 'react'
-import {render} from 'react-dom'
-import {connect} from 'react-redux'
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import { render } from 'react-dom'
+import { connect } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 // import Recommeneded from './Recommended'
 
@@ -22,37 +22,36 @@ class Home extends Component {
         <h3>HomePage</h3>
         <div>
           <ul className="list-group">
-          {
-          (songs && songs.map((song) => {
-                if(song.genre === 'Rock') {
-              return (
-                <div key={song.id}>
-                  <li className="list-group-item">
-                    <div> Name: { song.name } </div>
-                    <div> Artist: { song.artist } </div>
-                    <div> Price: { song.price } </div>
-                  </li>
-                </div>
-              )
+            {
+              (songs && songs.map((song) => {
+                if (song.genre === 'Rock') {
+                  return (
+                    <div key={song.id}>
+                      <li className="list-group-item">
+                        <div> Name: {song.name} </div>
+                        <div> Artist: {song.artist} </div>
+                        <div> Price: {song.price} </div>
+                      </li>
+                    </div>
+                  )
                 }
-            }))
+              }))
             }
-         </ul>
+          </ul>
         </div>
       </div>
-    );
+    )
   }
 }
 
-
 const mapStateToProps = function(state) {
-  if(state.songs){
-  return {
-    songs: state.songs
-  };
+  if (state.songs) {
+    return {
+      songs: state.songs
+    }
   }
-};
+}
 
-const HomeContainer = connect(mapStateToProps, null)(Home);
+const HomeContainer = connect(mapStateToProps, null)(Home)
 
-export default HomeContainer;
+export default HomeContainer
