@@ -46,6 +46,7 @@ const reducer = (state={}, action) => {
       break
     default:
       return state
+
   }
   return newState
 }
