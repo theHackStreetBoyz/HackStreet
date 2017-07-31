@@ -12,7 +12,7 @@ import { render } from 'react-dom'
 import { Provider, connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
-import { fetchSongs } from '../reducers/songs'
+import { fetchSongs, addingSongToCart } from '../reducers/songs'
 import store from '../store.jsx'
 
 
@@ -25,8 +25,11 @@ class Songs extends Component {
     this.props.loadAllSongs()
   }
   handleBuy(evt) {
+    const userId = this.props.auth.id
     const songId = evt.target.value
     console.log(evt.target.value)
+    this.props.addingSongToCart(userId, songId)
+    //this gives a songid but in the routes it recieves a song, please fix
     // thunk to create new purchase from songId above
     // somehow update song button to show that it was added to cart
   }
@@ -82,6 +85,9 @@ const mapDispatchToProps = function (dispatch) {
   return {
     loadAllSongs: () => {
       dispatch(fetchSongs())
+    },
+    addingSongToCart: (songId) => {
+      dispatch(addingSongToCart(songId))
     }
   }
 }
