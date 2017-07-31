@@ -12,19 +12,27 @@ import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 
-import { fetchSongs } from '../reducers/songs'
+import { fetchSingleSong } from '../reducers/songs'
 import store from '../store.jsx'
 
 
 
-class Songs extends Component {
+class SingleSong extends Component {
+    constructor (props) {
+        super(props);
+        //this.state = store.getState()
+    }
+
     componentDidMount () {
-        this.props.loadAllSongs()
+        //console.log(this.state)
+        //console.log(this.props.match.params.id, this.state)
+        this.props.loadSingleSong(2)
     }
 
 
   render() {
-    const songs = this.props.songs
+    const song = this.props.songs
+    console.log("hi", song)
     return (
        <div>
         <div className="container">
@@ -39,18 +47,12 @@ class Songs extends Component {
                 <th className="d-inline-block ">PRICE</th>
               </tr>
             </thead>
-            <tbody>
-            {
-              (songs && songs.map((song) => {
-              return (
+        <tbody>
                   <tr key={song.id}>
-                    <td>{ song.name }</td>
+                    <td>{ song[0] }</td>
                     <td>{ song.artist }</td>
                     <td>{ song.price }</td>
                   </tr>
-              )
-            }))}
-
         </tbody>
         </table>
         </div>
@@ -63,20 +65,20 @@ class Songs extends Component {
 
 
 const mapStateToProps = function(state) {
-    console.log(state)
     return {
-      songs: state.songs
+      songs: state.songs,
+      auth: state.auth
     };
 };
 
-const mapDispatchToProps = function (dispatch) {
+const mapDispatchToProps = function (dispatch, ownProps) {
   return {
-    loadAllSongs: () => {
-      dispatch(fetchSongs())
+    loadSingleSong: (songId) => {
+      dispatch(fetchSingleSong(songId))
     }
   }
 }
 
-const songsListContainer = connect(mapStateToProps, mapDispatchToProps)(Songs);
+const songsListContainer = connect(mapStateToProps, mapDispatchToProps)(SingleSong);
 
 export default songsListContainer;

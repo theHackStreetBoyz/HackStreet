@@ -13,6 +13,7 @@ import { Provider, connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import { fetchSongs } from '../reducers/songs'
+import { updatingCart } from '../reducers/auth'
 import store from '../store.jsx'
 
 class Songs extends Component {
@@ -25,8 +26,10 @@ class Songs extends Component {
   }
   handleBuy(evt) {
     const songId = evt.target.value
-    console.log(evt.target.value)
-    console.log('Hi dan')
+    //console.log(this.props.songs.filter(song => song.id == songId)[0])
+    this.props.updateCart(1, 2)
+    // console.log(evt.target.value)
+    // console.log('Hi dan')
     // this.addedSongs[songId] = true
     evt.target.setAttribute('disabled', 'disabled')
     evt.target.innerHTML = 'ADDED TO CART'
@@ -89,6 +92,10 @@ const mapDispatchToProps = function(dispatch) {
   return {
     loadAllSongs: () => {
       dispatch(fetchSongs())
+    },
+    updateCart: (userId, songId) => {
+      //console.log("mapping", userId, songId)
+      dispatch(updatingCart(userId, songId))
     }
   }
 }
