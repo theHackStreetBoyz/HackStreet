@@ -12,7 +12,6 @@ componentDidMount() {
 }
 
   render() {
-    //st
     const user = this.props.auth
     return (
       <div>
