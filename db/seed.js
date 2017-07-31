@@ -106,7 +106,7 @@ const songs = seed(Song, {
     name: 'Darryns Anthem',
     genre: 'Rock',
     length: 180,
-    price: 99,
+    price: 0.99,
     url: 'http://cdn.skim.gs/image/upload/v1456344012/msi/Puppy_2_kbhb4a.jpg',
     album: "Darryn's Greatest Hits",
     artist: "The Deadly Darryn's"
@@ -115,7 +115,7 @@ const songs = seed(Song, {
     name: 'Maxs Anthem',
     genre: 'Jazz',
     length: 190,
-    price: 99,
+    price: 0.99,
     url: 'https://assets.merriam-webster.com/mw/images/article/art-wap-article-main/puppy-3143-7cfb4d6a42dfc7d9d1ae7e23126279e8@1x.jpg',
     album: "Max's Greatest Hits",
     artist: "The Miraculous Max's"
@@ -124,7 +124,7 @@ const songs = seed(Song, {
     name: 'Dans Anthem',
     genre: 'Punk',
     length: 200,
-    price: 99,
+    price: 0.99,
     url: 'https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/The-stages-of-puppy-growth.jpg?itok=9ptPJwY8',
     album: "Dan's Greatest Hits",
     artist: 'Manganesey Dan'
@@ -133,7 +133,7 @@ const songs = seed(Song, {
     name: 'Karens Anthem',
     genre: 'DEATH METAL MOTHER F*****R',
     length: 210,
-    price: 99,
+    price: 0.99,
     url: 'https://i.ytimg.com/vi/mRf3-JkwqfU/hqdefault.jpg',
     album: "Alvin's Greatest Hits",
     artist: 'Alvin and his Chipmunks'
@@ -142,7 +142,7 @@ const songs = seed(Song, {
     name: 'Darryns Least Favorite Songs',
     genre: 'Rock',
     length: 180,
-    price: 99,
+    price: 0.99,
     url: 'https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/The-stages-of-puppy-growth.jpg?itok=9ptPJwY8',
     album: "Darryn's Greatest Hits",
     artist: "The Deadly Darryn's"
@@ -151,7 +151,7 @@ const songs = seed(Song, {
     name: 'Maxs Least Favorite Songs',
     genre: 'Jazz',
     length: 190,
-    price: 99,
+    price: 0.99,
     url: 'http://cdn3-www.dogtime.com/assets/uploads/gallery/30-impossibly-cute-puppies/impossibly-cute-puppy-5.jpg',
     album: "Max's Greatest Hits",
     artist: "The Miraculous Max's"
@@ -160,7 +160,7 @@ const songs = seed(Song, {
     name: 'Dans Least Favorite Songs',
     genre: 'Punk',
     length: 200,
-    price: 99,
+    price: 0.99,
     url: 'http://cdn1-www.dogtime.com/assets/uploads/gallery/30-impossibly-cute-puppies/impossibly-cute-puppy-2.jpg',
     album: "Dan's Greatest Hits",
     artist: 'Manganesey Dan'
@@ -169,7 +169,7 @@ const songs = seed(Song, {
     name: 'Alvins Least Favorite Songs',
     genre: 'DEATH METAL MOTHER F*****R',
     length: 210,
-    price: 99,
+    price: 0.99,
     url: 'http://cdn2-www.dogtime.com/assets/uploads/gallery/30-impossibly-cute-puppies/impossibly-cute-puppy-8.jpg',
     album: "Alvin's Greatest Hits",
     artist: 'Alvin and his Chipmunks'
@@ -178,7 +178,7 @@ const songs = seed(Song, {
     name: 'Kates Anthem',
     genre: 'Rock',
     length: 180,
-    price: 99,
+    price: 0.99,
     url: 'http://ghk.h-cdn.co/assets/16/09/980x490/landscape-1457107485-gettyimages-512366437.jpg',
     album: "Kate's Greatest Hits",
     artist: "The Go Fly a Kate's"
@@ -187,7 +187,7 @@ const songs = seed(Song, {
     name: 'Omris Anthem',
     genre: 'Jazz',
     length: 190,
-    price: 99,
+    price: 0.99,
     url: 'http://cdn.skim.gs/image/upload/v1456344012/msi/Puppy_2_kbhb4a.jpg',
     album: "Omri's Greatest Hits",
     artist: "The Optimistic Omri's"
@@ -196,7 +196,7 @@ const songs = seed(Song, {
     name: 'Cassios Anthem',
     genre: 'Punk',
     length: 200,
-    price: 99,
+    price: 0.99,
     url: 'http://www.pawderosa.com/images/puppies.jpg',
     album: "Cassio's Greatest Hits",
     artist: 'Eh Nois'
@@ -205,7 +205,7 @@ const songs = seed(Song, {
     name: 'Alvins Anthem',
     genre: 'DEATH METAL MOTHER F*****R',
     length: 210,
-    price: 99,
+    price: 0.99,
     url: 'http://dakotapethospital.com/clients/14546/images/pile_of_puppies.jpg',
     album: "Karen's Greatest Hits",
     artist: 'Karen and her Herps'
@@ -214,7 +214,7 @@ const songs = seed(Song, {
     name: 'Kates Least Favorite Songs',
     genre: 'Rock',
     length: 180,
-    price: 99,
+    price: 0.99,
     url: 'https://blogs-images.forbes.com/kristintablang/files/2016/02/Uber-Puppies.jpg',
     album: "Kate's Greatest Hits",
     artist: "The Go Fly a Kate's"
@@ -223,7 +223,7 @@ const songs = seed(Song, {
     name: 'Omris Least Favorite Songs',
     genre: 'Jazz',
     length: 190,
-    price: 99,
+    price: 0.99,
     url: 'http://cdn1-www.dogtime.com/assets/uploads/gallery/30-impossibly-cute-puppies/impossibly-cute-puppy-2.jpg',
     album: "Omri's Greatest Hits",
     artist: "The Optimistic Omri's"
@@ -232,7 +232,7 @@ const songs = seed(Song, {
     name: 'Cassios Least Favorite Songs',
     genre: 'Punk',
     length: 200,
-    price: 99,
+    price: 0.99,
     url: 'https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/The-stages-of-puppy-growth.jpg?itok=9ptPJwY8',
     album: "Cassio's Greatest Hits",
     artist: 'Eh Nois'
@@ -241,7 +241,7 @@ const songs = seed(Song, {
     name: 'Karens Least Favorite Songs',
     genre: 'DEATH METAL MOTHER F*****R',
     length: 210,
-    price: 99,
+    price: 0.99,
     url: 'https://i.ytimg.com/vi/mRf3-JkwqfU/hqdefault.jpg',
     album: "Karen's Greatest Hits",
     artist: 'Karen and her Herps'
