@@ -14,7 +14,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 
 import Home from './Home'
 import Songs from './Songs'
-import Navbar from './Navbar'
+import NavigationBar from './NavigationBar'
 import Cart from './Cart'
 import Footer from './Footer'
 import Login from './Login'
@@ -25,6 +25,7 @@ import Support from './Support'
 
 import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
+import { Panel, PanelGroup } from 'react-bootstrap';
 
 export default class Main extends Component {
   constructor(props) {
@@ -40,10 +41,11 @@ export default class Main extends Component {
     render() {
         return (
             <Router>
-            <div>
+            <Panel>
                 <div>
-                    <Navbar className="navbar-nav" />
+                    <NavigationBar />
                 </div>
+            <div>
                 <Switch>
                     <Route path='/user' component={SingleUser} />
                     <Route path='/login' component={Login} />
@@ -54,9 +56,14 @@ export default class Main extends Component {
                     <Route path='/support' component={Support} />
                     <Route path='/' component={Home} />
                 </Switch>
-                <Footer/>
             </div>
+            <Footer />
+            </Panel>
             </Router>
         )
     }
 }
+
+            /*<NavLink to="/CompanyInfo">
+            CompanyInfo
+            </NavLink>*/

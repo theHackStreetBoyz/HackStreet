@@ -6,7 +6,7 @@ export default class Cart extends Component {
     return (
       <div>
         <h2>Cart:</h2>
-          {this.store.props.cart.songs.map(song => {
+          {/*this.store.props.cart.songs.map(song => {
             totalPrice += song.price
             return (
               <div>
@@ -16,7 +16,7 @@ export default class Cart extends Component {
               <p>song.price</p>
               </div>
             )
-          })}
+          })*/}
           <p>{`Total Price: ${totalPrice}`}</p>
       </div>
     )

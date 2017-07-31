@@ -11,7 +11,7 @@ import React, { Component } from 'react'
 import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 
-const CompanyInfo = (props) => {
+const CompanyInfo = () => {
 
     return (
       <div>
