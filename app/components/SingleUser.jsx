@@ -2,10 +2,19 @@ import React, { Component } from 'react'
 import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
+import { fetchUserSongs } from '../reducers/auth'
+import Songs from './Songs.jsx'
 
 class SingleUser extends Component {
+
+componentDidMount() {
+  const loadedSongs = this.props.loadUserSongs()
+  console.log("this is loadedSongs", loadedSongs);
+}
+
   render() {
     const user = this.props.auth
+    console.log(this.props.auth.songs)
     return (
       <div>
         <h1>User:</h1>
@@ -17,10 +26,17 @@ class SingleUser extends Component {
           <h3>Email:</h3>
           <p>{user.email}</p>
         </div>
+          <h3>WhoAmI(User Id):</h3>
+          <p>{user.id} </p>
+          <h3>List of Songs</h3>
+          <Songs songs={this.props.auth.songs} />
       </div>
     )
   }
 }
+
+
+// <Songs props={SONGSTHATWEFOUND} />
 
 const mapStateToProps = function(state) {
   return {
@@ -28,6 +44,15 @@ const mapStateToProps = function(state) {
   }
 }
 
-const userContainer = connect(mapStateToProps, null)(SingleUser)
+const mapStateToDispatch = function(dispatch) {
+  return {
+    loadUserSongs: () => {
+      dispatch(fetchUserSongs())
+    }
+  }
+}
+
+const userContainer = connect(mapStateToProps, mapStateToDispatch)(SingleUser)
 
 export default userContainer
+

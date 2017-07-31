@@ -47,9 +47,15 @@ module.exports = require('express').Router()
 
    .get('/:id/songs',
     (req, res, next) =>
-      User.findById(req.params.id)
-      .then(user => user.getSongs())
-      .then(userSongs => res.json(userSongs))
+      User.findById(req.user.id)
+      .then(user => {
+        console.log("USERRRRRRRR", user)
+        return user.getSongs()
+      })
+      .then(userSongs => {
+        console.log(userSongs)
+        res.json(userSongs)
+      })
       .catch(next)
   )
 

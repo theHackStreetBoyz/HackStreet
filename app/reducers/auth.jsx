@@ -32,20 +32,21 @@ export const addingPurchase = purchase => ({
 const reducer = (state={}, action) => {
   let newState = {}
   switch (action.type) {
-  case AUTHENTICATED:
-    newState = action.user
-    break
-  case GET_USER:
-    newState = action.user
-    break
-  case GET_USER_SONGS:
-    newState.songs = action.songs
-    break
-  case ADDING_PURCHASE:
-      // newState.purchase = [...newState.purchase, action.purchase]
-    break
-  default:
-    return state
+    case AUTHENTICATED:
+      newState = action.user
+      break
+    case GET_USER:
+      newState = action.user
+      break
+    case GET_USER_SONGS:
+      newState = Object.assign({}, state, {songs: action.songs})
+      break
+    case ADDING_PURCHASE:
+      //newState.purchase = [...newState.purchase, action.purchase]
+      break
+    default:
+      return state
+
   }
   return newState
 }
