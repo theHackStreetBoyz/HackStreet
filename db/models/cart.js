@@ -4,13 +4,11 @@ module.exports = db => db.define('cart', {}, {
   classMethods: {
     newPurchase: function(cart, userId) {
       return db.model('purchase').create(cart)
-        .then(purchase => {
-          return Promise.all([
-            cart.getSongs()
+        .then(purchase => Promise.all([
+          cart.getSongs()
             .then(songs => purchase.setSongs(songs)),
-            purchase.setUser(userId)
-          ])
-        })
+          purchase.setUser(userId)
+        ]))
     }
   }
 })

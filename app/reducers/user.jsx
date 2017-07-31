@@ -1,6 +1,5 @@
 // import axios from 'axios'
 
-
 // //reducer
 // const reducer = (state={}, action) => {
 //   let newState = {}
@@ -28,7 +27,6 @@
 //   return newState
 // }
 
-
 // //action type
 // const GET_USER = 'GET_USER'
 // const GET_USER_SONGS = 'GET_USER_SONGS'
@@ -37,7 +35,6 @@
 // const ADDING_PURCHASE = 'ADDING_PURCHASE'
 // const ADDING_TO_CART = 'ADDING_TO_CART'
 // // const UPDATE_USER = 'UPDATE_USER' can we just use get user?
-
 
 // //action creator
 // export const getUser = user => ({
@@ -93,7 +90,6 @@
 //       .then((purchases) => dispatch(getUserPurchases(purchases.data)))
 //       .catch(() => console.log('error'))
 
-
 // //use this when cart is purchased, be careful of the 3 params passed in
 // //we don't have a single purchase page
 // export const creatingPurchase = (id, purchase, history) =>
@@ -116,6 +112,5 @@
 // //   dispatch =>
 // //     axios.post(`/api/users/${id}/cart/newSong`, song)
 // //       .then(newSong => dispatch(addingToCart(newSong)))
-
 
 // export default reducer
