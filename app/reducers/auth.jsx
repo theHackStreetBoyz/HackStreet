@@ -39,7 +39,7 @@ const reducer = (state={}, action) => {
       newState = action.user
       break
     case GET_USER_SONGS:
-      newState.songs = action.songs
+      newState = Object.assign({}, state, {songs: action.songs})
       break
     case ADDING_PURCHASE:
       //newState.purchase = [...newState.purchase, action.purchase]
