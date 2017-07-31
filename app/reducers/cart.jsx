@@ -24,7 +24,7 @@ const reducer = (state=initialState, action) => {
   return state
 }
 
-export const updatingCart = (id, song_id) =>
+export const updatingCart = (id, song_id) => //eslint-disable-line
   dispatch =>
     axios.post(`/api/users/${id}/cart/newSong`, ({song_id}))
       .then(res => res.data)

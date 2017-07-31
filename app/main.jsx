@@ -19,7 +19,6 @@ import Home from './components/Home'
 import Main from './components/Main'
 import SingleSong from './components/SingleSong'
 
-
 render(
   <Provider store={store}>
     <Router>

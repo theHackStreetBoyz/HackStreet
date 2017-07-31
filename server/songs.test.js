@@ -17,9 +17,7 @@ describe('/api/users', () => {
           .get(`/api/songs`)
           .expect(200)
       )))
-
 })
-
 
 // describe('/api/songs', () => {
 //   before('Await database sync', () => db.didSync)
@@ -59,5 +57,3 @@ describe('/api/users', () => {
   //         .expect(200)
 
   //     )))
-
-
