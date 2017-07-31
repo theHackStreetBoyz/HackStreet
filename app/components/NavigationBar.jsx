@@ -11,12 +11,10 @@ import React, { Component } from 'react'
 import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect, Link} from 'react-router-dom'
-import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import {Navbar, Nav, NavItem} from 'react-bootstrap'
 
 
-const NavigationBar = () => {
-
-  return (
+const NavigationBar = () => (
     <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
@@ -30,7 +28,6 @@ const NavigationBar = () => {
       <NavItem eventKey={3} href="/login">Login</NavItem>
     </Nav>
     </Navbar>
-  )
-};
+  );
 
-export default NavigationBar;
+export default NavigationBar

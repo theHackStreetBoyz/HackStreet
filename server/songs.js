@@ -6,8 +6,8 @@ const Songs = db.model('song')
 const SongReviews = db.model('songReview')
 
 module.exports = require('express').Router()
-    .get('/', 
-    (req, res, next) => 
+    .get('/',
+    (req, res, next) =>
         Songs.findAll()
         .then(songs => res.json(songs))
         .catch(next)
@@ -23,9 +23,9 @@ module.exports = require('express').Router()
     .get('/:id/reviews',
     (req, res, next) =>
         SongReviews.findAll({
-            where: {
-                song_id: req.params.id
-            }
+          where: {
+            song_id: req.params.id
+          }
         })
         .then(reviews => res.json(reviews))
         .catch(next)
@@ -33,16 +33,15 @@ module.exports = require('express').Router()
 
     .post('/:id/review',
         (req, res, next) => {
-            Songs.findOne({
-                where: {
-                    id: req.params.id
-                }
-            })
+          Songs.findOne({
+            where: {
+              id: req.params.id
+            }
+          })
             .then(song => SongReviews.create({
-                stars: req.body.stars,
-                text: req.body.text,
-                song_id: song.id
-                //user_id: req.user.id
+              stars: req.body.stars,
+              text: req.body.text,
+              song_id: song.id
             }))
             .then(newReview => res.json(newReview))
             .catch(next)
@@ -52,12 +51,12 @@ module.exports = require('express').Router()
     .delete('/:id/review',
     (req, res, next) =>
         SongReviews.findOne({
-            where: {
-                song_id: req.params.id
-            }
+          where: {
+            song_id: req.params.id
+          }
         })
         .then(review => review.destroy())
-        .then(() => res.json("Review Deleted"))
+        .then(() => res.json('Review Deleted'))
         .catch(next)
     )
 

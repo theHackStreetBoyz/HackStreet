@@ -15,24 +15,13 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 import { fetchSingleSong } from '../reducers/songs'
 import store from '../store.jsx'
 
-
-
 class SingleSong extends Component {
-    constructor (props) {
-        super(props);
-        //this.state = store.getState()
-    }
-
-    componentDidMount () {
-        //console.log(this.state)
-        //console.log(this.props.match.params.id, this.state)
-        this.props.loadSingleSong(2)
-    }
-
+  componentDidMount() {
+    this.props.loadSingleSong(2)
+  }
 
   render() {
     const song = this.props.songs
-    console.log("hi", song)
     return (
        <div>
         <div className="container">
@@ -59,19 +48,18 @@ class SingleSong extends Component {
         </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-
 const mapStateToProps = function(state) {
-    return {
-      songs: state.songs,
-      auth: state.auth
-    };
-};
+  return {
+    songs: state.songs,
+    auth: state.auth
+  }
+}
 
-const mapDispatchToProps = function (dispatch, ownProps) {
+const mapDispatchToProps = function(dispatch, ownProps) {
   return {
     loadSingleSong: (songId) => {
       dispatch(fetchSingleSong(songId))
@@ -79,6 +67,6 @@ const mapDispatchToProps = function (dispatch, ownProps) {
   }
 }
 
-const songsListContainer = connect(mapStateToProps, mapDispatchToProps)(SingleSong);
+const songsListContainer = connect(mapStateToProps, mapDispatchToProps)(SingleSong)
 
-export default songsListContainer;
+export default songsListContainer

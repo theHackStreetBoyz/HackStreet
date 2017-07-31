@@ -18,7 +18,6 @@ const db = require('APP/db'),
   } = require('lodash')
 
 function seedEverything() {
-  console.log('CartSong:', CartSong)
   const seeded = {
     users: users(),
     songs: songs(),
@@ -94,7 +93,6 @@ function seed(Model, rows) {
         )
       ))
       .then(seeded => {
-        // console.log(seeded)
         console.log(`Seeded ${Object.keys(seeded).length} ${Model.name} OK`)
         return seeded
       }).catch(error => {

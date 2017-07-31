@@ -25,45 +25,35 @@ import Support from './Support'
 
 import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
-import { Panel, PanelGroup } from 'react-bootstrap';
+import { Panel, PanelGroup } from 'react-bootstrap'
 
 export default class Main extends Component {
-  constructor(props) {
-      super(props)
-    }
-
   componentDidMount() {
-      store.dispatch(fetchSongs())
+    store.dispatch(fetchSongs())
+  }
 
-        // store.dispatch(fetchUser())
-    }
-
-    render() {
-        return (
+  render() {
+    return (
             <Router>
-            <Panel>
-                <div>
-                    <NavigationBar />
-                </div>
-            <div>
-                <Switch>
-                    <Route path='/user' component={SingleUser} />
-                    <Route path='/login' component={Login} />
-                    <Route path='/cart' component={Cart} />
-                    <Route exact path='/songs' component={Songs} />
-                    <Route path='/songs/:id' component={SingleSong} />
-                    <Route path='/companyinfo' component={CompanyInfo} />
-                    <Route path='/support' component={Support} />
-                    <Route path='/' component={Home} />
-                </Switch>
-            </div>
-            <Footer />
-            </Panel>
+                <Panel>
+                    <div>
+                        <NavigationBar />
+                    </div>
+                    <div>
+                        <Switch>
+                            <Route path='/user' component={SingleUser} />
+                            <Route path='/login' component={Login} />
+                            <Route path='/cart' component={Cart} />
+                            <Route exact path='/songs' component={Songs} />
+                            <Route path='/songs/:id' component={SingleSong} />
+                            <Route path='/companyinfo' component={CompanyInfo} />
+                            <Route path='/support' component={Support} />
+                            <Route path='/' component={Home} />
+                        </Switch>
+                    </div>
+                    <Footer />
+                </Panel>
             </Router>
-        )
-    }
+    )
+  }
 }
-
-            /*<NavLink to="/CompanyInfo">
-            CompanyInfo
-            </NavLink>*/
