@@ -127,6 +127,32 @@ auth.post('/login/local', (req, res, next) => {
   passport.authenticate('local', {successRedirect: '/'})(req, res, next)
 })
 
+auth.post('/me', function (req, res, next) {
+  User.findOrCreate({
+    where: {
+      email: req.body.email
+    },
+    defaults: { // if the user doesn't exist, create including this info
+      password: req.body.password
+    }
+  })
+  .spread((user, created) => {
+    if (created) {
+      // with Passport:
+      req.logIn(user, function (err) {
+        if (err) return next(err);
+        res.json(user);
+      });
+      // // before, without Passport:
+      // req.session.userId = user.id;
+      // res.json(user);
+    } else {
+      res.sendStatus(401); // this user already exists, you cannot sign up
+    }
+  });
+});
+
+
 // GET requests for OAuth login:
 // Register this route as a callback URL with OAuth provider
 auth.get('/login/:strategy', (req, res, next) =>

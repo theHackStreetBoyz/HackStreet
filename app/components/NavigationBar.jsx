@@ -25,6 +25,7 @@ const NavigationBar = () => (
       <NavItem eventKey={1} href="/user">Account</NavItem>
       <NavItem eventKey={2} href="/cart">Cart</NavItem>
       <NavItem eventKey={3} href="/login">Login</NavItem>
+      <NavItem eventKey={4} href="/signup">SignUp</NavItem>
     </Nav>
     </Navbar>
   )

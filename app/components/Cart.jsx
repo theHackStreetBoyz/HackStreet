@@ -21,13 +21,12 @@ class Cart extends Component {
   }
 
   componentWillMount() {
-    this.props.loadCart(this.props.auth.id)
+    this.props.loadCart()
   }
 
   render() {
     let totalPrice = 0
     const cart = this.props.cart
-    console.log('pt.s', cart)
     return (
       <div>
         <div className="container">
@@ -45,7 +44,7 @@ class Cart extends Component {
                 <tbody>
                    {
                     (Array.isArray(cart) && cart.map((song) => {
-                      totalPrice += (+song.price)/100
+                      totalPrice += (+song.price)
                       return (
                         <tr key={song.id}>
                           <td>{song.name}</td>
@@ -76,8 +75,8 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = function(dispatch) {
   return {
-    loadCart: (userId) => {
-      dispatch(fetchCart(userId))
+    loadCart: () => {
+      dispatch(fetchCart())
     }
   }
 }

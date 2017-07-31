@@ -37,7 +37,7 @@ module.exports = require('express').Router()
     (req, res, next) =>
       Cart.findOne({
         where: {
-          user_id: req.params.id
+          user_id: req.user.id
         }
       })
       .then(cart => cart.getSongs())
@@ -108,11 +108,11 @@ module.exports = require('express').Router()
   )
 
   .post('/',
-    (req, res, next) =>
+    (req, res, next) => {
       User.create(req.body)
       .then(user => res.status(201).json(user))
       .catch(next)
-    )
+    })
 
   .put('/:id',
     (req, res, next) =>

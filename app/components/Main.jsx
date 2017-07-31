@@ -22,6 +22,7 @@ import SingleUser from './SingleUser'
 import SingleSong from './SingleSong'
 import CompanyInfo from './CompanyInfo'
 import Support from './Support'
+import SignUp from './SignUp'
 
 import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
@@ -49,6 +50,7 @@ export default class Main extends Component {
                     <Route path='/songs/:id' component={SingleSong} />
                     <Route path='/companyinfo' component={CompanyInfo} />
                     <Route path='/support' component={Support} />
+                    <Route path='/signup' component={SignUp} />
                     <Route path='/' component={Songs} />
                 </Switch>
             </div>
