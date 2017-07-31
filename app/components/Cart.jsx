@@ -26,8 +26,8 @@ class Cart extends Component {
 
   render() {
     let totalPrice = 0
-    let cart = this.props.cart
-    console.log("pt.s", cart)
+    const cart = this.props.cart
+    console.log('pt.s', cart)
     return (
       <div>
         <div className="container">
@@ -54,11 +54,11 @@ class Cart extends Component {
                         </tr>
                       )
                     }
-                    ))} 
+                    ))}
                 </tbody>
               </table>
             </div>
-            <h2>{`Total Price: $${totalPrice}`}</h2>
+            <h2>{`Total Price: $${totalPrice.toFixed(2)}`}</h2>
           </div>
         </div>
       </div>
