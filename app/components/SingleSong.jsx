@@ -20,18 +20,19 @@ import store from '../store.jsx'
 class SingleSong extends Component {
     constructor (props) {
         super(props);
-        this.state = store.getState()
+        //this.state = store.getState()
     }
 
     componentDidMount () {
-        console.log(this.state.user)
+        //console.log(this.state)
         //console.log(this.props.match.params.id, this.state)
-        this.props.loadSingleSong(this.props.match.params.id)
+        this.props.loadSingleSong(2)
     }
 
 
   render() {
-    const songs = this.props.songs
+    const song = this.props.songs
+    console.log("hi", song)
     return (
        <div>
         <div className="container">
@@ -46,18 +47,12 @@ class SingleSong extends Component {
                 <th className="d-inline-block ">PRICE</th>
               </tr>
             </thead>
-            <tbody>
-            {
-              (songs && songs.map((song) => {
-              return (
+        <tbody>
                   <tr key={song.id}>
-                    <td>{ song.name }</td>
+                    <td>{ song[0] }</td>
                     <td>{ song.artist }</td>
                     <td>{ song.price }</td>
                   </tr>
-              )
-            }))}
-
         </tbody>
         </table>
         </div>
@@ -78,8 +73,8 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = function (dispatch, ownProps) {
   return {
-    loadSingleSong: (id) => {
-      dispatch(fetchSingleSong(id))
+    loadSingleSong: (songId) => {
+      dispatch(fetchSingleSong(songId))
     }
   }
 }

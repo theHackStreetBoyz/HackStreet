@@ -13,7 +13,8 @@ const reducer = (state=[], action) => {
     newState = action.songs
     break
   case GET_SONG:
-    newState = [...newState.songs, action.song]
+    //newState = [...newState.songs, action.song]
+    newState = action.song
     break
   default:
     return state
@@ -39,9 +40,9 @@ export const fetchSongs = () =>
         dispatch(getSongs(songs))
       })
 
-export const fetchSingleSong = (id) =>
+export const fetchSingleSong = (songId) =>
     dispatch =>
-      axios.get(`api/songs/${id}`)
+      axios.get(`/api/songs/${songId}`)
         .then((res) => res.data)
         .then((song) => {
           dispatch(getSong(song))
