@@ -5,7 +5,6 @@ import axios from 'axios'
 const AUTHENTICATED = 'AUTHENTICATED'
 const GET_USER = 'GET_USER'
 const GET_USER_SONGS = 'GET_USER_SONGS'
-const GET_USER_CART = 'GET_USER_CART'
 const GET_USER_PURCHASES = 'GET_USER_PURCHASES'
 const ADDING_PURCHASE = 'ADDING_PURCHASE'
 
@@ -21,10 +20,6 @@ export const getUser = user => ({
 
 export const getUserSongs = songs => ({
   type: GET_USER_SONGS, songs
-})
-
-export const getUserCart = cart => ({
-  type: GET_USER_CART, cart
 })
 
 export const getUserPurchases = purchases => ({
@@ -47,9 +42,6 @@ const reducer = (state={}, action) => {
       break
     case GET_USER_SONGS:
       newState.songs = action.songs
-      break
-    case GET_USER_CART:
-      newState.cart = action.cart
       break
     case ADDING_PURCHASE:
       //newState.purchase = [...newState.purchase, action.purchase]
@@ -95,12 +87,6 @@ export const fetchUserSongs = (id) =>
   dispatch =>
     axios.get(`/api/users/${id}/songs`)
       .then((songs) => dispatch(getUserSongs(songs.data)))
-      .catch(() => console.log('error'))
-
-export const fetchCart = (id) =>
-  dispatch =>
-    axios.get(`/api/${id}/carts`)
-      .then((cart) => dispatch(getUserCart(cart.data)))
       .catch(() => console.log('error'))
 
 export const fetchPurchases = (id) =>
