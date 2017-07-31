@@ -1,15 +1,13 @@
 import axios from 'axios'
 
-
-//action type
+// action type
 const AUTHENTICATED = 'AUTHENTICATED'
 const GET_USER = 'GET_USER'
 const GET_USER_SONGS = 'GET_USER_SONGS'
 const GET_USER_PURCHASES = 'GET_USER_PURCHASES'
 const ADDING_PURCHASE = 'ADDING_PURCHASE'
 
-
-//action creators
+// action creators
 export const authenticated = user => ({
   type: AUTHENTICATED, user
 })
@@ -30,7 +28,7 @@ export const addingPurchase = purchase => ({
   type: ADDING_PURCHASE, purchase
 })
 
-//reducers
+// reducers
 const reducer = (state={}, action) => {
   let newState = {}
   switch (action.type) {
@@ -52,8 +50,7 @@ const reducer = (state={}, action) => {
   return newState
 }
 
-
-//thunks
+// thunks
 export const login = (username, password) =>
   dispatch =>
     axios.post('/api/auth/login/local',
@@ -72,7 +69,7 @@ export const whoami = () =>
     axios.get('/api/auth/whoami')
       .then(response => {
         const user = response.data
-        //dispatch(fetchUser(user.id))
+        // dispatch(fetchUser(user.id))
         dispatch(authenticated(user))
       })
       .catch(failed => dispatch(authenticated(null)))
@@ -95,9 +92,8 @@ export const fetchPurchases = (id) =>
       .then((purchases) => dispatch(getUserPurchases(purchases.data)))
       .catch(() => console.log('error'))
 
-
-//use this when cart is purchased, be careful of the 3 params passed in
-//we don't have a single purchase page
+// use this when cart is purchased, be careful of the 3 params passed in
+// we don't have a single purchase page
 export const creatingPurchase = (id, purchase, history) =>
   dispatch =>
     axios.post(`/api/${id}/purchase`, purchase)

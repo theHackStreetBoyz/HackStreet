@@ -14,9 +14,7 @@ import { NavLink } from 'react-router-dom'
 import CompanyInfo from './CompanyInfo'
 import Support from './Support'
 
-const Footer = (props) => {
-
-     return (
+const Footer = (props) => (
       <div>
         <div className="row">
         <footer className ="footer">
@@ -37,6 +35,4 @@ const Footer = (props) => {
     </div>
     )
 
-}
-
-export default Footer;
+export default Footer

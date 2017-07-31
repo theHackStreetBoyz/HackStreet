@@ -6,8 +6,8 @@
 // const AlbumReviews = db.model('albumReview')
 
 // module.exports = require('express').Router()
-//     .get('/', 
-//     (req, res, next) => 
+//     .get('/',
+//     (req, res, next) =>
 //         // res.json('hi')
 //         Albums.findAll()
 //         .then(albums => res.json(albums))

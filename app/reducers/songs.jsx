@@ -1,19 +1,18 @@
 import axios from 'axios'
 
-//action type
+// action type
 const GET_SONGS = 'GET_SONGS'
 const GET_SONG = 'GET_SONG'
 
-//reducer
+// reducer
 const reducer = (state=[], action) => {
-  //let newState = Object.assign({}, state)
   let newState = []
   switch (action.type) {
   case GET_SONGS:
     newState = action.songs
     break
   case GET_SONG:
-    //newState = [...newState.songs, action.song]
+    // newState = [...newState.songs, action.song]
     newState = action.song
     break
   default:
@@ -22,7 +21,7 @@ const reducer = (state=[], action) => {
   return newState
 }
 
-//action creator
+// action creator
 export const getSongs = songs => ({
   type: GET_SONGS, songs
 })
@@ -31,7 +30,7 @@ export const getSong = song => ({
   type: GET_SONG, song
 })
 
-//thunks
+// thunks
 export const fetchSongs = () =>
   dispatch =>
     axios.get('/api/songs')

@@ -59,7 +59,6 @@ module.exports = db => {
         // Metamodel::associations(self: Model, others: {[name: String]: Model}) -> ()
         //
         // Associate self with others.
-        // console.log(name, associations)
         associations.call(metaModels[name], models[name], models)
       }
     })

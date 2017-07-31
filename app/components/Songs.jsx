@@ -26,23 +26,14 @@ class Songs extends Component {
   }
   handleBuy(evt) {
     const songId = evt.target.value
-    //console.log("props", this.props)
-    //console.log(this.props.songs.filter(song => song.id == songId)[0])
     this.props.updateCart(this.props.auth.id, songId)
-    // console.log(evt.target.value)
-    // console.log('Hi dan')
-    // this.addedSongs[songId] = true
     evt.target.setAttribute('disabled', 'disabled')
     evt.target.innerHTML = 'ADDED TO CART'
     this.render()
-    // thunk to create new purchase from songId above
-    // somehow update song button to show that it was added to cart
   }
 
   render() {
     const songs = this.props.songs
-    // const cart = this.props.cart
-    // console.log("cart", cart)
     return (
       <div>
         <div className="container">
@@ -84,13 +75,12 @@ class Songs extends Component {
   }
 }
 
-const mapStateToProps = function(state) {
+const mapStateToProps = function(state, ownProps) {
   return {
-    songs: state.songs,
+    songs: ownProps.songs || state.songs,
     auth: state.auth,
     cart: state.cart
   }
-
 }
 
 const mapDispatchToProps = function(dispatch) {
@@ -99,7 +89,6 @@ const mapDispatchToProps = function(dispatch) {
       dispatch(fetchSongs())
     },
     updateCart: (userId, songId) => {
-      //console.log("mapping", userId, songId)
       dispatch(updatingCart(userId, songId))
     }
   }

@@ -71,9 +71,7 @@ module.exports = require('express').Router()
           user_id: req.params.id
         }
       })
-      .then(cart => {
-        return cart.addSong(req.body.song_id)
-      })
+      .then(cart => cart.addSong(req.body.song_id))
       .then(updatedCart => res.json(updatedCart))
       .catch(next)
     }

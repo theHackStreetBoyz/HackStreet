@@ -5,8 +5,7 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 
 class SingleUser extends Component {
   render() {
-      const user = this.props.auth
-      console.log(this.props.auth)
+    const user = this.props.auth
     return (
       <div>
         <h1>User:</h1>
@@ -24,13 +23,11 @@ class SingleUser extends Component {
 }
 
 const mapStateToProps = function(state) {
-  console.log(state)
   return {
     auth: state.auth
-  };
-};
+  }
+}
 
-const userContainer = connect(mapStateToProps, null)(SingleUser);
+const userContainer = connect(mapStateToProps, null)(SingleUser)
 
-export default userContainer;
-
+export default userContainer

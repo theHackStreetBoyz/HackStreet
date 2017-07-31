@@ -13,15 +13,12 @@ import {Provider, connect} from 'react-redux'
 import store, { getAllAlbums } from '../store'
 
 class Albums extends Component {
-
-componentDidMount(){
-  store.dispatch(getAlbums);
-
-}
+  componentDidMount() {
+    // store.dispatch(getAlbums)
+  }
 
   render() {
-
-    const albums = this.props;
+    const albums = this.props
     return (
       <div>
         <h3>Albums</h3>
@@ -29,7 +26,6 @@ componentDidMount(){
         {
             albums.map(album => (
             <div className="col-xs-4" key={ album.id }>
-
 
                 <div className="caption">
                   <h5>
@@ -43,16 +39,16 @@ componentDidMount(){
         }
         </div>
       </div>
-    );
+    )
   }
 }
 
-const mapStateToProps = function (state) {
+const mapStateToProps = function(state) {
   return {
     albums: state.albums
   }
 }
 
-const albumsContainer = connect( mapStateToProps, null )(Albums);
+const albumsContainer = connect(mapStateToProps, null)(Albums)
 
-export default albumsContainer;
+export default albumsContainer
