@@ -43,7 +43,11 @@ export const addingToCart = song => ({
 
 //reducers
 const reducer = (state={}, action) => {
-  let newState = {}
+  let newState = {
+    songs: [],
+    cart: {},
+    purchase: {}
+  }
   switch (action.type) {
     case AUTHENTICATED:
       newState = action.user
@@ -58,10 +62,10 @@ const reducer = (state={}, action) => {
       newState.cart = action.cart
       break
     case ADDING_PURCHASE:
-      newState.purchase = [...newState.purchase, action.purchase]
+      //newState.purchase = [...newState.purchase, action.purchase]
       break
     case ADDING_TO_CART:
-      newState.cart.song = [...newState.cart.song, action.song]
+    // newState.cart.song = [...newState.cart.song, action.song]
   default:
     return state
   }
@@ -136,9 +140,13 @@ export const updatingUser = (id, content) =>
       .then(modifiedUser => dispatch(getUser(modifiedUser)))
       .catch(() => console.log('error'))
 
-// export const updatingCart = (id, song) =>
-//   dispatch =>
-//     axios.post(`/api/users/${id}/cart/newSong`, song)
-//       .then(newSong => dispatch(addingToCart(newSong)))
-
+export const updatingCart = (id, song_id) => {
+  // console.log(`/api/users/${id}/cart/newSong`, songId)
+  return dispatch =>
+    axios.post(`/api/users/${id}/cart/newSong`, ({user_id, song_id}))
+      .then(newSong => {
+        return dispatch(addingToCart(newSong))
+      })
+      .catch((error) => console.log(error))
+}
 export default reducer
