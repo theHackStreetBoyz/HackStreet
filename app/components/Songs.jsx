@@ -15,7 +15,6 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
 
-
 class Songs extends Component {
   constructor(props) {
     super(props)
@@ -27,10 +26,14 @@ class Songs extends Component {
   handleBuy(evt) {
     const songId = evt.target.value
     console.log(evt.target.value)
+    console.log('Hi dan')
+    // this.addedSongs[songId] = true
+    evt.target.setAttribute('disabled', 'disabled')
+    evt.target.innerHTML = 'ADDED TO CART'
+    this.render()
     // thunk to create new purchase from songId above
     // somehow update song button to show that it was added to cart
   }
-
 
   render() {
     const songs = this.props.songs
@@ -50,35 +53,39 @@ class Songs extends Component {
                 </thead>
                 <tbody>
                   {
-                    (songs && songs.map((song) => {
-                      return (
+                    (songs && songs.map((song) => (
                         <tr key={song.id}>
                           <td>{song.name}</td>
                           <td>{song.artist}</td>
                           <td>{song.price}</td>
-                          <td><button value={song.id} onClick={this.handleBuy} type="submit" className="btn btn-default">BUY</button></td>
+                          <td><button
+                            value={song.id}
+                            onClick={this.handleBuy}
+                            type="submit"
+                            className="btn btn-default">
+                            ADD TO CART
+                          </button></td>
                         </tr>
                       )
-                    }))}
+                    ))}
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-
-const mapStateToProps = function (state) {
+const mapStateToProps = function(state) {
   console.log(state)
   return {
     songs: state.songs
-  };
-};
+  }
+}
 
-const mapDispatchToProps = function (dispatch) {
+const mapDispatchToProps = function(dispatch) {
   return {
     loadAllSongs: () => {
       dispatch(fetchSongs())
@@ -86,10 +93,6 @@ const mapDispatchToProps = function (dispatch) {
   }
 }
 
-const songsListContainer = connect(mapStateToProps, mapDispatchToProps)(Songs);
+const songsListContainer = connect(mapStateToProps, mapDispatchToProps)(Songs)
 
-export default songsListContainer;
-
-
-
-
+export default songsListContainer
