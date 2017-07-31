@@ -34,7 +34,6 @@ class Songs extends Component {
 
   render() {
     const songs = this.props.songs
-    const cart = this.props.cart
     return (
       <div>
         <div className="container">
