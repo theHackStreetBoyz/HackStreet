@@ -54,7 +54,7 @@ export default class Main extends Component {
                     <Route path='/songs/:id' component={SingleSong} />
                     <Route path='/companyinfo' component={CompanyInfo} />
                     <Route path='/support' component={Support} />
-                    <Route path='/' component={Home} />
+                    <Route path='/' component={Songs} />
                 </Switch>
             </div>
             <Footer />

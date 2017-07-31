@@ -25,7 +25,7 @@ const NavigationBar = () => {
     </Navbar.Header>
 
     <Nav>
-      <NavItem eventKey={1} href="/songs">Songs</NavItem>
+      <NavItem eventKey={1} href="/user">Account</NavItem>
       <NavItem eventKey={2} href="/cart">Cart</NavItem>
       <NavItem eventKey={3} href="/login">Login</NavItem>
     </Nav>
