@@ -35,24 +35,25 @@ export default class Main extends Component {
   render() {
     return (
             <Router>
-                <Panel>
-                    <div>
-                        <NavigationBar />
-                    </div>
-                    <div>
-                        <Switch>
-                            <Route path='/user' component={SingleUser} />
-                            <Route path='/login' component={Login} />
-                            <Route path='/cart' component={Cart} />
-                            <Route exact path='/songs' component={Songs} />
-                            <Route path='/songs/:id' component={SingleSong} />
-                            <Route path='/companyinfo' component={CompanyInfo} />
-                            <Route path='/support' component={Support} />
-                            <Route path='/' component={Home} />
-                        </Switch>
-                    </div>
-                    <Footer />
-                </Panel>
+
+            <Panel>
+                <div>
+                    <NavigationBar />
+                </div>
+            <div>
+                <Switch>
+                    <Route path='/user' component={SingleUser} />
+                    <Route path='/login' component={Login} />
+                    <Route path='/cart' component={Cart} />
+                    <Route exact path='/songs' component={Songs} />
+                    <Route path='/songs/:id' component={SingleSong} />
+                    <Route path='/companyinfo' component={CompanyInfo} />
+                    <Route path='/support' component={Support} />
+                    <Route path='/' component={Songs} />
+                </Switch>
+            </div>
+            <Footer />
+            </Panel>
             </Router>
     )
   }
