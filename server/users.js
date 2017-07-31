@@ -64,6 +64,21 @@ module.exports = require('express').Router()
       .catch(next)
   )
 
+  .post('/:id/cart/newSong',
+    (req, res, next) => {
+      Cart.findOne({
+        where: {
+          user_id: req.params.id
+        }
+      })
+      .then(cart => {
+        return cart.addSong(req.body.song_id)
+      })
+      .then(updatedCart => res.json(updatedCart))
+      .catch(next)
+    }
+  )
+
   .post('/:id/cart',
     (req, res, next) =>
       User.findById(req.params.id)
@@ -71,21 +86,6 @@ module.exports = require('express').Router()
         user_id: req.params.id
       }))
       .then(newCart => res.json(newCart))
-      .catch(next)
-  )
-
-  .post('/:id/cart/newSong',
-    (req, res, next) =>
-      Cart.findOne({
-        where: {
-          user_id: req.params.id
-        }
-      })
-      .then(cart => {
-        console.log(req.body)
-        cart.addSong(req.body)
-      })
-      .then(updatedCart => res.json(updatedCart))
       .catch(next)
   )
 
