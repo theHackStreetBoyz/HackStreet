@@ -124,7 +124,6 @@ auth.get('/whoami', (req, res) => res.send(req.user))
 
 // POST requests for local login:
 auth.post('/login/local', (req, res, next) => {
-  console.log('req:', req.body)
   passport.authenticate('local', {successRedirect: '/'})(req, res, next)
 })
 
