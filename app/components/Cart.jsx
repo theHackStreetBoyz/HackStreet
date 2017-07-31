@@ -20,8 +20,8 @@ class Cart extends Component {
     this.state = store.getState()
   }
 
-  componentDidMount() {
-    this.props.loadCart(1)
+  componentWillMount() {
+    this.props.loadCart(this.props.auth.id)
   }
 
   render() {
