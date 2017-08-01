@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
-import { fetchUserSongs } from '../reducers/auth'
+import { fetchUserSongs, fetchPurchases } from '../reducers/auth'
 import Songs from './Songs.jsx'
 
 class SingleUser extends Component {
 
 componentDidMount() {
   this.props.loadUserSongs()
+  this.props.fetchPurchases()
 }
 
   render() {
@@ -48,6 +49,15 @@ componentDidMount() {
                     )
                   ))}
                 </tbody>
+                <tbody>
+                  {
+                    (user.purchases && user.purchases.map((purchase) => (
+                      <tr key={purchase.id}>
+                        <td>{purchase.created_at}</td>
+                      </tr>
+                    )
+                  ))}
+                </tbody>
               </table>
             </div>
           </div> 
@@ -57,6 +67,7 @@ componentDidMount() {
 }
 const mapStateToProps = function(state) {
   return {
+    
     auth: state.auth
   }
 }
@@ -65,6 +76,9 @@ const mapStateToDispatch = function(dispatch) {
   return {
     loadUserSongs: () => {
       dispatch(fetchUserSongs())
+    },
+    fetchPurchases: () => {
+      dispatch(fetchPurchases())
     }
   }
 }
