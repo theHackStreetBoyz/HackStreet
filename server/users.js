@@ -54,7 +54,7 @@ module.exports = require('express').Router()
   )
 
   .get('/:id/songs',
-  mustBeLoggedIn,
+    mustBeLoggedIn,
     (req, res, next) =>
     User.findById(req.user.id)
     .then(user => user.getSongs())
@@ -66,7 +66,7 @@ module.exports = require('express').Router()
   )
 
   .get('/:id/purchases',
-  mustBeLoggedIn,
+    mustBeLoggedIn,
     (req, res, next) =>
     Purchase.findAll({
       where: {
@@ -78,12 +78,12 @@ module.exports = require('express').Router()
   )
 
   .post('/:id/cart/newSong',
-  mustBeLoggedIn,
+    mustBeLoggedIn,
     (req, res, next) => {
       Cart.findOne({
         where: {
-          user_id: req.params.id
-        }
+            user_id: req.params.id
+          }
       })
         .then(cart => cart.addSong(req.body.song_id))
         .then(updatedCart => res.json(updatedCart))
@@ -92,7 +92,7 @@ module.exports = require('express').Router()
   )
 
   .post('/:id/cart',
-  mustBeLoggedIn,
+    mustBeLoggedIn,
     (req, res, next) =>
     User.findById(req.params.id)
     .then(user => Cart.create({
@@ -107,8 +107,8 @@ module.exports = require('express').Router()
     (req, res, next) => {
       Cart.findOne({
         where: {
-          user_id: req.params.id
-        }
+            user_id: req.params.id
+          }
       })
         .then(cart => Cart.newPurchase(cart, req.params.id))
         .then(purchase => res.json(purchase))
@@ -131,7 +131,6 @@ module.exports = require('express').Router()
     .then(updatedUser => res.json(updatedUser))
     .catch(next)
   )
-
   .delete('/:id/cart',
     (req, res, next) =>
     Cart.findOne({
@@ -145,9 +144,13 @@ module.exports = require('express').Router()
   )
 
   .delete('/:id',
-    (req, res, next) =>
-    User.findById(req.params.id)
-    .then(user => user.destroy())
-    .then(() => res.json('User Deleted'))
-    .catch(next)
-  )
+    mustBeLoggedIn,
+    (req, res, next) => {
+      if (!req.user.isAdmin) res.status(404).send('Access Denied')
+      else {
+        User.findById(req.params.id)
+          .then(user => user.destroy())
+          .then(() => res.json('User Deleted'))
+          .catch(next)
+      }
+    })
