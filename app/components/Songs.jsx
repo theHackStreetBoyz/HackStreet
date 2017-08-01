@@ -27,13 +27,13 @@ class Songs extends Component {
   componentDidMount() {
     this.props.loadAllSongs()
     this.props.loadAllReviews()
+    // this.render()
   }
   handleBuy(evt) {
     const songId = evt.target.value
     this.props.updateCart(this.props.auth.id, songId)
     evt.target.setAttribute('disabled', 'disabled')
     evt.target.innerHTML = 'ADDED TO CART'
-    this.render()
   }
 
   renderStars(num) {
@@ -48,24 +48,28 @@ class Songs extends Component {
   }
 
   getReviews(reviews) {
+    if (!Array.isArray(reviews)) return {}
     const result = {}
+    console.log(reviews)
     reviews.forEach(review => {
-      let current = result[review.song_id]
+      const current = result[review.song_id]
       if (current) current.push(review.stars)
       else {
-        current = [review.stars]
+        result[review.song_id] = [review.stars]
       }
     })
-    result.forEach(songReviews => {
-      songReviews = songReviews.reduce((a, b) => a + b)/songReviews.length
+    console.log('HIYA THERE FOLS', result)
+    Object.keys(result).forEach(key => {
+      result[key] = result[key].reduce((a, b) => a + b)/result[key].length
     })
     return result
   }
 
   render() {
+    console.log('PROPS IN RENDER', this.props)
     const songs = this.props.songs
-    console.log('REVIEWS: ', this.props.reviews)
-    // const songReviews = this.getReviews(this.props.reviews)
+    const songReviews = this.getReviews(this.props.reviews)
+    console.log('HELLO DAN', songReviews)
     return (
       <div>
         <div className="container">
@@ -88,7 +92,7 @@ class Songs extends Component {
                           <td>{song.name}</td>
                           <td>{song.artist}</td>
                           <td>{song.price}</td>
-                          {/* <td>{this.renderStars(songReviews[song.id])}</td> */}
+                          <td>{this.renderStars(songReviews[song.id]?songReviews[song.id] : 0)}</td>
                           {(this.props.nested) ? <td></td>
                           : <td>
                               <button
@@ -113,7 +117,7 @@ class Songs extends Component {
 }
 
 const mapStateToProps = function(state, ownProps) {
-  console.log('STATE IN PROPS: ', state)
+  // console.log('STATE IN PROPS: ', state)
   const songs = ownProps.songs || state.songs
   const nested = ownProps.nested
 

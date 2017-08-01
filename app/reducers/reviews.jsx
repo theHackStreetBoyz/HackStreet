@@ -8,9 +8,14 @@ export const getReviews = reviews => ({
   type: GET_REVIEWS, reviews
 })
 
+// initialState
+const initialState = {
+  reviews: []
+}
+
 // reducers
-const reducer = (state=[], action) => {
-  const newState = []
+const reducer = (state=initialState, action) => {
+  // let newState = []
   switch (action.type) {
   case GET_REVIEWS:
     state = action.reviews
@@ -18,18 +23,13 @@ const reducer = (state=[], action) => {
   default:
     return state
   }
-  return newState
+  return state
 }
 
-export const fetchReviews = () => {
-  dispatch => {
-    console.log('HIYA')
-    axios.get('/reviews')
+export const fetchReviews = () =>
+  dispatch =>
+    axios.get('/api/songs/reviews')
     .then(res => res.data)
-    .then(reviews => {
-      dispatch(getReviews(reviews))
-    })
-  }
-}
+    .then(reviews => dispatch(getReviews(reviews)))
 
 export default reducer

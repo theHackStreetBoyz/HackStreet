@@ -174,7 +174,7 @@ const songs = seed(Song, {
     album: "Alvin's Greatest Hits",
     artist: 'Alvin and his Chipmunks'
   },
-  9: {
+  songNine: {
     name: 'Kates Anthem',
     genre: 'Rock',
     length: 180,
@@ -183,7 +183,7 @@ const songs = seed(Song, {
     album: "Kate's Greatest Hits",
     artist: "The Go Fly a Kate's"
   },
-  10: {
+  songTen: {
     name: 'Omris Anthem',
     genre: 'Jazz',
     length: 190,
@@ -192,7 +192,7 @@ const songs = seed(Song, {
     album: "Omri's Greatest Hits",
     artist: "The Optimistic Omri's"
   },
-  11: {
+  songEleven: {
     name: 'Cassios Anthem',
     genre: 'Punk',
     length: 200,
@@ -201,7 +201,7 @@ const songs = seed(Song, {
     album: "Cassio's Greatest Hits",
     artist: 'Eh Nois'
   },
-  12: {
+  songTwelve: {
     name: 'Alvins Anthem',
     genre: 'DEATH METAL MOTHER F*****R',
     length: 210,
@@ -210,7 +210,7 @@ const songs = seed(Song, {
     album: "Karen's Greatest Hits",
     artist: 'Karen and her Herps'
   },
-  13: {
+  songThirteen: {
     name: 'Kates Least Favorite Songs',
     genre: 'Rock',
     length: 180,
@@ -219,7 +219,7 @@ const songs = seed(Song, {
     album: "Kate's Greatest Hits",
     artist: "The Go Fly a Kate's"
   },
-  14: {
+  songFourteen: {
     name: 'Omris Least Favorite Songs',
     genre: 'Jazz',
     length: 190,
@@ -228,7 +228,7 @@ const songs = seed(Song, {
     album: "Omri's Greatest Hits",
     artist: "The Optimistic Omri's"
   },
-  15: {
+  songFifteen: {
     name: 'Cassios Least Favorite Songs',
     genre: 'Punk',
     length: 200,
@@ -237,7 +237,7 @@ const songs = seed(Song, {
     album: "Cassio's Greatest Hits",
     artist: 'Eh Nois'
   },
-  16: {
+  songSixteen: {
     name: 'Karens Least Favorite Songs',
     genre: 'DEATH METAL MOTHER F*****R',
     length: 210,
@@ -316,13 +316,13 @@ const reviews = seed(SongReview,
     users
   }) => ({
     'godReviewOne': {
-      stars: 3,
+      stars: 5,
       text: "This has got to be the best song I've ever heard!",
       song_id: songs.songOne.id,
       user_id: users.god.id
     },
     'godReviewTwo': {
-      stars: 3,
+      stars: 2,
       text: 'Honestly? eh...',
       song_id: songs.songTwo.id,
       user_id: users.god.id
@@ -334,13 +334,13 @@ const reviews = seed(SongReview,
       user_id: users.god.id
     },
     'godReviewFour': {
-      stars: 3,
+      stars: 1,
       text: 'This song is the musical equivalent of an above ground swimming pool',
       song_id: songs.songFour.id,
       user_id: users.god.id
     },
     'barackReviewOne': {
-      stars: 3,
+      stars: 5,
       text: "This has got to be the best song I've ever heard!",
       song_id: songs.songFive.id,
       user_id: users.barack.id
@@ -358,10 +358,71 @@ const reviews = seed(SongReview,
       user_id: users.barack.id
     },
     'barackReviewFour': {
-      stars: 3,
+      stars: 1,
+      text: 'This song is the musical equivalent of an above ground swimming pool',
+      song_id: songs.songNine.id,
+      user_id: users.barack.id
+    },
+    'barackReviewFive': {
+      stars: 1,
       text: 'This song is the musical equivalent of an above ground swimming pool',
       song_id: songs.songEight.id,
       user_id: users.barack.id
+    },
+
+    'stanReviewOne': {
+      stars: 4,
+      text: "This has got to be the best song I've ever heard!",
+      song_id: songs.songTen.id,
+      user_id: users.stan.id
+    },
+    'stanReviewTwo': {
+      stars: 3,
+      text: 'Honestly? eh...',
+      song_id: songs.songEleven.id,
+      user_id: users.stan.id
+    },
+    'stanReviewThree': {
+      stars: 3,
+      text: 'This song was equal parts insightful and utter nonsense',
+      song_id: songs.songTwelve.id,
+      user_id: users.stan.id
+    },
+    'stanReviewFour': {
+      stars: 2,
+      text: 'This song is the musical equivalent of an above ground swimming pool',
+      song_id: songs.songThirteen.id,
+      user_id: users.stan.id
+    },
+    'alexReviewOne': {
+      stars: 4,
+      text: "This has got to be the best song I've ever heard!",
+      song_id: songs.songFourteen.id,
+      user_id: users.alez.id
+    },
+    'alexReviewTwo': {
+      stars: 3,
+      text: 'Honestly? eh...',
+      song_id: songs.songFifteen.id,
+      user_id: users.alez.id
+    },
+    'alexReviewThree': {
+      stars: 2,
+      text: 'This song was equal parts insightful and utter nonsense',
+      song_id: songs.songSixteen.id,
+      user_id: users.alez.id
+    },
+    'alexReviewFour': {
+      stars: 1,
+      text: 'This song is the musical equivalent of an above ground swimming pool',
+      song_id: songs.songOne.id,
+      user_id: users.alez.id
+    },
+    'alexReviewFive': {
+      stars: 3,
+      text: 'This song is the musical equivalent of an above ground swimming pool',
+      song_id: songs.songEleven.id,
+      user_id: users.alez.id
     },
   }))
 
