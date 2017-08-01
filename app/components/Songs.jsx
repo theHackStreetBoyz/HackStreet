@@ -55,16 +55,19 @@ class Songs extends Component {
                           <td>{song.name}</td>
                           <td>{song.artist}</td>
                           <td>{song.price}</td>
-                          <td><button
-                            value={song.id}
-                            onClick={this.handleBuy}
-                            type="submit"
-                            className="btn btn-default">
-                            ADD TO CART
-                          </button></td>
+                          {(this.props.nested) ? <td></td> :
+                          <td>
+                              <button
+                              value={song.id}
+                              onClick={this.handleBuy}
+                              type="submit"
+                              className="btn btn-default">
+                              ADD TO CART
+                              </button>
+                          </td>
+                          }
                         </tr>
-                      )
-                    ))}
+                  )))}
                 </tbody>
               </table>
             </div>
@@ -76,10 +79,11 @@ class Songs extends Component {
 }
 
 const mapStateToProps = function(state, ownProps) {
-  console.log("Own Props:", ownProps.songs)
   let songs = ownProps.songs || state.songs
-  console.log('Songs being rendered: ', songs)
+  let nested = ownProps.nested
+
   return {
+    nested,
     songs,
     auth: state.auth,
     cart: state.cart

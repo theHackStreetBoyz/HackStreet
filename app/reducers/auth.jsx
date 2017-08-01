@@ -6,7 +6,7 @@ const GET_USER = 'GET_USER'
 const GET_USER_SONGS = 'GET_USER_SONGS'
 const GET_USER_PURCHASES = 'GET_USER_PURCHASES'
 const ADDING_PURCHASE = 'ADDING_PURCHASE'
-const CREATE_USER = "CREATE USER"
+const CREATE_USER = 'CREATE USER'
 
 // action creators
 export const authenticated = user => ({
@@ -38,7 +38,7 @@ const reducer = (state={}, action) => {
   let newState = {}
   switch (action.type) {
   case AUTHENTICATED:
-    newState = action.user
+    newState.user = action.user
     break
   case GET_USER:
     newState = action.user
@@ -47,10 +47,13 @@ const reducer = (state={}, action) => {
     newState.songs = action.songs
     break
   case ADDING_PURCHASE:
-      // newState.purchase = [...newState.purchase, action.purchase]
+    newState.purchase = [...newState.purchase, action.purchase]
     break
   case CREATE_USER:
     newState = action.user
+    break
+  case GET_USER_PURCHASES:
+    newState.purchases = action.purchases
     break
   default:
     return state
@@ -87,7 +90,7 @@ export const signup = (credentials) =>
   axios.post('/api/users', credentials)
   .then(res => res.data)
   .then(user => {
-    dispatch(createUser(user));
+    dispatch(createUser(user))
     dispatch(login(credentials.email, credentials.password))
   })
   .catch(error => console.log(error))
@@ -104,21 +107,28 @@ export const fetchUserSongs = (id) =>
       .then((songs) => dispatch(getUserSongs(songs.data)))
       .catch(() => console.log('error'))
 
-export const fetchPurchases = (id) =>
+export const fetchPurchases = () =>
   dispatch =>
-    axios.get(`/api/${id}/purchases`)
-      .then((purchases) => dispatch(getUserPurchases(purchases.data)))
+    axios.get(`/api/users/purchases`)
+      .then(res => res.data)
+      .then((purchases) => {
+        // console.log('hello')
+        dispatch(getUserPurchases(purchases))
+      })
       .catch(() => console.log('error'))
 
 // use this when cart is purchased, be careful of the 3 params passed in
 // we don't have a single purchase page
-export const creatingPurchase = (id, purchase, history) =>
+export const creatingPurchase = (cart) =>
   dispatch =>
-    axios.post(`/api/${id}/purchase`, purchase)
+    axios.post(`/api/users/purchase`, ({cart}))
       .then(purchased => {
-        dispatch(addingPurchase(purchased.data))
-        history.push('/')
-        // history.push(`/purchase/${purchased.data.id}`)
+        // console.log(purchased)
+        purchased.data
+      })
+      .then((purchase) => {
+        // console.log(purchase)
+        dispatch(addingPurchase(purchase))
       })
       .catch(() => console.log('error'))
 

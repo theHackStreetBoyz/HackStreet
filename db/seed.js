@@ -370,6 +370,7 @@ const users = seed(User, {
     email: 'god@example.com',
     name: 'So many names',
     password: '1234',
+    isAdmin: true
   },
   barack: {
     name: 'Barack Obama',

@@ -1,14 +1,13 @@
-import React, { Component }  from 'react';
-import { connect } from 'react-redux';
-import { signup } from '../reducers/auth';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { signup } from '../reducers/auth'
 
 /* -----------------    COMPONENT     ------------------ */
 
 class SignUp extends Component {
-
   constructor(props) {
-    super(props);
-    this.onSignupSubmit = this.onSignupSubmit.bind(this);
+    super(props)
+    this.onSignupSubmit = this.onSignupSubmit.bind(this)
   }
 
   render() {
@@ -47,16 +46,16 @@ class SignUp extends Component {
           </form>
         </div>
       </div>
-    ); 
+    )
   }
 
   onSignupSubmit(event) {
-    event.preventDefault();
+    event.preventDefault()
     const credentials = {
       email: event.target.email.value,
       name: event.target.name.value,
       password: event.target.password.value
-    };
+    }
     this.props.signup(credentials)
     this.props.history.push('/')
   }
@@ -66,12 +65,10 @@ class SignUp extends Component {
 
 const mapState = (dispatch) => ({})
 
-const mapDispatch = (dispatch) => {
-  return {
-    signup: (credentials) => {
-      dispatch(signup(credentials));
-    }
-  };
-};
+const mapDispatch = (dispatch) => ({
+  signup: (credentials) => {
+    dispatch(signup(credentials))
+  }
+})
 
-export default connect(mapState, mapDispatch)(SignUp);
+export default connect(mapState, mapDispatch)(SignUp)

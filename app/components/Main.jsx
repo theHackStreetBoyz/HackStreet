@@ -24,15 +24,16 @@ import SingleSong from './SingleSong'
 import CompanyInfo from './CompanyInfo'
 import Support from './Support'
 import SignUp from './SignUp'
+import Checkout from './Checkout'
 
 import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
 import { Panel, PanelGroup } from 'react-bootstrap'
 
 export default class Main extends Component {
-  componentDidMount() {
-    store.dispatch(fetchSongs())
-  }
+//   componentDidMount() {
+//     store.dispatch(fetchSongs())
+//   }
 
   render() {
     return (
@@ -48,6 +49,7 @@ export default class Main extends Component {
                     <Route path='/login' component={Login} />
                     <Route path='/logout' component={Logout} />
                     <Route path='/cart' component={Cart} />
+                    <Route path='/checkout' component={Checkout} />
                     <Route exact path='/songs' component={Songs} />
                     <Route path='/songs/:id' component={SingleSong} />
                     <Route path='/companyinfo' component={CompanyInfo} />

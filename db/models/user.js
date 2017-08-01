@@ -2,7 +2,7 @@
 
 // bcrypt docs: https://www.npmjs.com/package/bcrypt
 const bcrypt = require('bcryptjs')
-    , {STRING, VIRTUAL, INTEGER, ARRAY} = require('sequelize')
+    , {STRING, VIRTUAL, INTEGER, ARRAY, BOOLEAN} = require('sequelize')
 
 module.exports = db => db.define('users', {
   name: STRING,
@@ -13,6 +13,7 @@ module.exports = db => db.define('users', {
       notEmpty: true,
     }
   },
+  isAdmin: BOOLEAN,
   cart_id: INTEGER,
   // We support oauth, so users may or may not have passwords.
   password_digest: STRING, // This column stores the hashed password in the DB, via the beforeCreate/beforeUpdate hooks
