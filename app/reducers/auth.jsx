@@ -6,7 +6,7 @@ const GET_USER = 'GET_USER'
 const GET_USER_SONGS = 'GET_USER_SONGS'
 const GET_USER_PURCHASES = 'GET_USER_PURCHASES'
 const ADDING_PURCHASE = 'ADDING_PURCHASE'
-const CREATE_USER = "CREATE USER"
+const CREATE_USER = 'CREATE USER'
 
 // action creators
 export const authenticated = user => ({
@@ -87,7 +87,7 @@ export const signup = (credentials) =>
   axios.post('/api/users', credentials)
   .then(res => res.data)
   .then(user => {
-    dispatch(createUser(user));
+    dispatch(createUser(user))
     dispatch(login(credentials.email, credentials.password))
   })
   .catch(error => console.log(error))

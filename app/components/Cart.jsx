@@ -18,10 +18,14 @@ class Cart extends Component {
   constructor(props) {
     super(props)
     this.state = store.getState()
+    this.handleCheckout = this.handleCheckout.bind(this)
   }
 
   componentWillMount() {
     this.props.loadCart()
+  }
+  handleCheckout() {
+    this.props.history.push('/checkout')
   }
 
   render() {
@@ -58,6 +62,7 @@ class Cart extends Component {
               </table>
             </div>
             <h2>{`Total Price: $${totalPrice.toFixed(2)}`}</h2>
+            {this.props.nested? null : (<button onClick={this.handleCheckout}>Proceed to Checkout</button>)}
           </div>
         </div>
       </div>
@@ -65,11 +70,13 @@ class Cart extends Component {
   }
 }
 
-const mapStateToProps = function(state) {
+const mapStateToProps = function(state, ownProps) {
   return {
+    nested: ownProps.nested,
     songs: state.songs,
     auth: state.auth,
-    cart: state.cart
+    cart: state.cart,
+    history: ownProps.history,
   }
 }
 

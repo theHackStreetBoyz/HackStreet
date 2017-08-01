@@ -6,11 +6,10 @@ import { fetchUserSongs } from '../reducers/auth'
 import Songs from './Songs.jsx'
 
 class SingleUser extends Component {
-
-componentDidMount() {
-  const loadedSongs = this.props.loadUserSongs()
-  console.log("this is loadedSongs", loadedSongs);
-}
+  componentDidMount() {
+    const loadedSongs = this.props.loadUserSongs()
+    console.log('this is loadedSongs', loadedSongs)
+  }
 
   render() {
     const user = this.props.auth
@@ -35,7 +34,6 @@ componentDidMount() {
   }
 }
 
-
 // <Songs props={SONGSTHATWEFOUND} />
 
 const mapStateToProps = function(state) {
@@ -55,4 +53,3 @@ const mapStateToDispatch = function(dispatch) {
 const userContainer = connect(mapStateToProps, mapStateToDispatch)(SingleUser)
 
 export default userContainer
-
