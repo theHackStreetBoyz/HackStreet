@@ -20,7 +20,7 @@ module.exports = require('express').Router()
     // If you want to only let admins list all the users, then you'll
     // have to add a role column to the users table to support
     // the concept of admin users.
-    // (req, res, next) => { if (!req.user.isAdmin) forbidden('listing users is not allowed') },
+    // forbidden('listing users is not allowed'),
     mustBeLoggedIn,
     (req, res, next) => {
       if (!req.user.isAdmin) res.status(404).send('Access Denied')
@@ -82,8 +82,8 @@ module.exports = require('express').Router()
     (req, res, next) => {
       Cart.findOne({
         where: {
-            user_id: req.params.id
-          }
+          user_id: req.params.id
+        }
       })
         .then(cart => cart.addSong(req.body.song_id))
         .then(updatedCart => res.json(updatedCart))
@@ -107,8 +107,8 @@ module.exports = require('express').Router()
     (req, res, next) => {
       Cart.findOne({
         where: {
-            user_id: req.params.id
-          }
+          user_id: req.params.id
+        }
       })
         .then(cart => Cart.newPurchase(cart, req.params.id))
         .then(purchase => res.json(purchase))

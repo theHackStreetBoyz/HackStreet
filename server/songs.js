@@ -5,6 +5,11 @@ const User = db.model('users')
 const Songs = db.model('song')
 const SongReviews = db.model('songReview')
 
+const {
+  mustBeLoggedIn,
+  forbidden
+} = require('./auth.filters')
+
 module.exports = require('express').Router()
     .get('/',
     (req, res, next) =>
@@ -32,6 +37,7 @@ module.exports = require('express').Router()
     )
 
     .post('/:id/review',
+        mustBeLoggedIn,
         (req, res, next) => {
           Songs.findOne({
             where: {
@@ -49,6 +55,7 @@ module.exports = require('express').Router()
     )
 
     .delete('/:id/review',
+    mustBeLoggedIn,
     (req, res, next) =>
         SongReviews.findOne({
           where: {
@@ -61,6 +68,7 @@ module.exports = require('express').Router()
     )
 
     .put('/:id',
+    mustBeLoggedIn,
     (req, res, next) =>
         Songs.findById(req.params.id)
         .then(song => song.update(req.body))
