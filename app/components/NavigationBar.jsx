@@ -8,28 +8,49 @@
 import 'babel-polyfill'
 
 import React, { Component } from 'react'
-import {render} from 'react-dom'
-import {Provider, connect} from 'react-redux'
-import {BrowserRouter as Router, Switch, Route, Redirect, Link} from 'react-router-dom'
-import {Navbar, Nav, NavItem} from 'react-bootstrap'
-import Logout from "./Logout"
+import { render } from 'react-dom'
+import { Provider, connect } from 'react-redux'
+import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom'
+import { Navbar, Nav, NavItem } from 'react-bootstrap'
+import Logout from './Logout'
 
-const NavigationBar = () => (
-    <Navbar>
-    <Navbar.Header>
-      <Navbar.Brand>
-        <a href="/">HackStreet Store</a>
-      </Navbar.Brand>
-    </Navbar.Header>
+export class NavigationBar extends Component {
+  constructor(props) {
+    super(props)
+    this.loggedIn = true
+  }
+  render() {
+    this.loggedIn = !!this.props.auth
+    return (
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <a href="/">HackStreet Store</a>
+          </Navbar.Brand>
+        </Navbar.Header>
 
-    <Nav>
-      <NavItem eventKey={1} href="/user">Account</NavItem>
-      <NavItem eventKey={2} href="/cart">Cart</NavItem>
-      <NavItem eventKey={3} href="/login">Login</NavItem>
-      <NavItem eventKey={4} href="/logout">Logout</NavItem>
-      <NavItem eventKey={5} href="/signup">SignUp</NavItem>
-    </Nav>
-    </Navbar>
-  )
+        <Nav>
+          <NavItem eventKey={1} href="/user">Account</NavItem>
+          <NavItem eventKey={2} href="/cart">Cart</NavItem>
+          <NavItem eventKey={3} href="/login">Login</NavItem>
+          <NavItem eventKey={4} href="/logout">Logout</NavItem>
+          <NavItem eventKey={5} href="/signup">SignUp</NavItem>
+        </Nav>
+      </Navbar>
+    )
+  }
+}
 
-export default NavigationBar
+const mapStateToProps = function(state) {
+  return {
+    auth: state.auth,
+  }
+}
+
+const mapDispatchToProps = function(dispatch) {
+  return {}
+}
+
+const songsListContainer = connect(mapStateToProps, mapDispatchToProps)(NavigationBar)
+
+export default songsListContainer
