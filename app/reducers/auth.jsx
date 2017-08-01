@@ -38,7 +38,7 @@ const reducer = (state={}, action) => {
   let newState = {}
   switch (action.type) {
   case AUTHENTICATED:
-    newState = action.user
+    newState.user = action.user
     break
   case GET_USER:
     newState = action.user

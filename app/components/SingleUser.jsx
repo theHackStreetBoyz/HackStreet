@@ -12,20 +12,30 @@ componentDidMount() {
   this.props.fetchPurchases()
 }
 
+
   render() {
     const user = this.props.auth
+    // // .loadUserInfo()
+    console.log('USERRRR....', user)
+    //const user = state.auth
+    // console.log('this.props.auth.songs', this.props.auth.songs)
+
+    // console.log("userId", this.props.userId)
+
     return (
       <div>
         <h1>User:</h1>
         <div>
           <h3>Name:</h3>
-           <p>{user.name}</p> 
+           {/*<p>{ user.name }</p>*/}
         </div>
         <div>
           <h3>Email:</h3>
-           <p>{user.email}</p> 
+           {/*<p>{ user.email }</p>*/}
         </div>
           <h3>WhoAmI(User Id):</h3>
+          {/*<p>{ user.id } </p>*/}
+        {/*
            <p>{user.id} </p> 
           <h3>List of Songs:</h3>
            <div className='row'>
@@ -62,14 +72,13 @@ componentDidMount() {
             </div>
           </div> 
           <p>{user.id} </p>
+          */}
           <h3>List of Songs</h3>
           <Songs songs={this.props.auth.songs} nested={true} />
       </div>
     )
   }
 }
-
-///
 
 const mapStateToProps = function(state) {
   return {
