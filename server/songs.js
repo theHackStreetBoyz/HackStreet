@@ -13,6 +13,13 @@ module.exports = require('express').Router()
         .catch(next)
     )
 
+    .get('/reviews',
+  (req, res, next) =>
+    SongReviews.findAll({})
+    .then(reviews => res.json(reviews))
+    .catch(next)
+
+)
     .get('/:id',
     (req, res, next) =>
         Songs.findById(req.params.id)

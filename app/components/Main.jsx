@@ -32,7 +32,7 @@ import { Panel, PanelGroup } from 'react-bootstrap'
 
 export default class Main extends Component {
   componentDidMount() {
-    store.dispatch(fetchSongs())
+    // store.dispatch(fetchSongs())
   }
 
   render() {
