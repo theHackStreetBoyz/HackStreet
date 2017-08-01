@@ -81,6 +81,7 @@ class Songs extends Component {
 const mapStateToProps = function(state, ownProps) {
   let songs = ownProps.songs || state.songs
   let nested = ownProps.nested
+
   return {
     nested,
     songs,

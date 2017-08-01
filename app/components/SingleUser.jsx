@@ -8,24 +8,21 @@ import Songs from './Songs.jsx'
 class SingleUser extends Component {
 
 componentDidMount() {
-
   this.props.loadUserSongs()
-
 }
 
   render() {
     const user = this.props.auth
-    console.log(this.props.auth.songs)
     return (
       <div>
         <h1>User:</h1>
         <div>
           <h3>Name:</h3>
-          <p>{user.name}</p>
+           <p>{user.name}</p> 
         </div>
         <div>
           <h3>Email:</h3>
-          <p>{user.email}</p>
+           <p>{user.email}</p> 
         </div>
           <h3>WhoAmI(User Id):</h3>
           <p>{user.id} </p>
@@ -55,4 +52,3 @@ const mapStateToDispatch = function(dispatch) {
 const userContainer = connect(mapStateToProps, mapStateToDispatch)(SingleUser)
 
 export default userContainer
-
