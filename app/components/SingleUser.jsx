@@ -55,7 +55,6 @@ componentDidMount() {
     )
   }
 }
-
 const mapStateToProps = function(state) {
   return {
     auth: state.auth
@@ -73,4 +72,3 @@ const mapStateToDispatch = function(dispatch) {
 const userContainer = connect(mapStateToProps, mapStateToDispatch)(SingleUser)
 
 export default userContainer
-

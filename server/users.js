@@ -7,7 +7,10 @@ const Purchase = db.model('purchase')
 const Song = db.model('song')
 const SongReviews = db.model('songReview')
 
-const {mustBeLoggedIn, forbidden} = require('./auth.filters')
+const {
+  mustBeLoggedIn,
+  forbidden
+} = require('./auth.filters')
 
 module.exports = require('express').Router()
   .get('/',
@@ -17,80 +20,81 @@ module.exports = require('express').Router()
     // If you want to only let admins list all the users, then you'll
     // have to add a role column to the users table to support
     // the concept of admin users.
-  // forbidden('listing users is not allowed'),
-    (req, res, next) =>
-      User.findAll()
-      .then(users => res.json(users))
-      .catch(next)
+    // (req, res, next) => { if (!req.user.isAdmin) forbidden('listing users is not allowed') },
+    (req, res, next) => {
+      if (!req.user.isAdmin) res.status(404).send('Access Denied')
+      else {
+        User.findAll()
+          .then(users => res.json(users))
+          .catch(next)
+      }
+    }
   )
 
   .get('/:id',
     mustBeLoggedIn,
-      (req, res, next) =>
-      User.findById(req.params.id)
-      .then(user => res.json(user))
-      .catch(next)
+    (req, res, next) =>
+    User.findById(req.params.id)
+    .then(user => res.json(user))
+    .catch(next)
   )
 
   .get('/:id/cart',
     mustBeLoggedIn,
     (req, res, next) =>
-      Cart.findOne({
-        where: {
-          user_id: req.user.id
-        }
-      })
-      .then(cart => cart.getSongs())
-      .then(songs => res.json(songs))
-      .catch(next)
+    Cart.findOne({
+      where: {
+        user_id: req.user.id
+      }
+    })
+    .then(cart => cart.getSongs())
+    .then(songs => res.json(songs))
+    .catch(next)
   )
 
-   .get('/:id/songs',
+  .get('/:id/songs',
     (req, res, next) =>
-      User.findById(req.user.id)
-      .then(user => {
-        console.log("USERRRRRRRR", user)
-        return user.getSongs()
-      })
-      .then(userSongs => {
-        console.log(userSongs)
-        res.json(userSongs)
-      })
-      .catch(next)
+    User.findById(req.user.id)
+    .then(user => user.getSongs())
+    .then(userSongs => {
+      console.log(userSongs)
+      res.json(userSongs)
+    })
+    .catch(next)
   )
 
   .get('/:id/purchases',
     (req, res, next) =>
-      Purchase.findAll({
-        where: {
-          user_id: req.params.id
-        }
-      })
-      .then(purchases => res.json(purchases))
-      .catch(next)
+    Purchase.findAll({
+      where: {
+        user_id: req.params.id
+      }
+    })
+    .then(purchases => res.json(purchases))
+    .catch(next)
   )
 
   .post('/:id/cart/newSong',
     (req, res, next) => {
       Cart.findOne({
         where: {
-          user_id: req.params.id
-        }
+            user_id: req.params.id
+          }
       })
-      .then(cart => cart.addSong(req.body.song_id))
-      .then(updatedCart => res.json(updatedCart))
-      .catch(next)
+        .then(cart => cart.addSong(req.body.song_id))
+        .then(updatedCart => res.json(updatedCart))
+        .catch(next)
     }
   )
 
   .post('/:id/cart',
     (req, res, next) =>
-      User.findById(req.params.id)
-      .then(user => Cart.create({
-        user_id: req.params.id
-      }))
-      .then(newCart => res.json(newCart))
-      .catch(next)
+    User.findById(req.params.id)
+    .then(user => Cart.create({
+      user_id: req.params.id
+    }))
+    .then(newCart => res.json(newCart))
+    .catch(next)
   )
 
   .post('/:id/purchase',
@@ -98,28 +102,28 @@ module.exports = require('express').Router()
     (req, res, next) => {
       Cart.findOne({
         where: {
-          user_id: req.params.id
-        }
+            user_id: req.params.id
+          }
       })
-      .then(cart => Cart.newPurchase(cart, req.params.id))
-      .then(purchase => res.json(purchase))
-      .catch(next)
+        .then(cart => Cart.newPurchase(cart, req.params.id))
+        .then(purchase => res.json(purchase))
+        .catch(next)
     }
   )
 
   .post('/',
     (req, res, next) => {
       User.create(req.body)
-      .then(user => res.status(201).json(user))
-      .catch(next)
+        .then(user => res.status(201).json(user))
+        .catch(next)
     })
 
   .put('/:id',
     (req, res, next) =>
-      User.findById(req.params.id)
-      .then(user => user.update(req.body))
-      .then(updatedUser => res.json(updatedUser))
-      .catch(next)
+    User.findById(req.params.id)
+    .then(user => user.update(req.body))
+    .then(updatedUser => res.json(updatedUser))
+    .catch(next)
   )
 
   .delete('/:id/cart',

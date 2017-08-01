@@ -76,8 +76,8 @@ class Songs extends Component {
 }
 
 const mapStateToProps = function(state, ownProps) {
-  console.log("Own Props:", ownProps.songs)
-  let songs = ownProps.songs || state.songs
+  console.log('Own Props:', ownProps.songs)
+  const songs = ownProps.songs || state.songs
   console.log('Songs being rendered: ', songs)
   return {
     songs,
