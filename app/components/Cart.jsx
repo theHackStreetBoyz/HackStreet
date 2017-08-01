@@ -25,14 +25,15 @@ class Cart extends Component {
   componentWillMount() {
     this.props.loadCart()
   }
+
   handleCheckout() {
     this.props.history.push('/checkout')
   }
 
    handleDelete(song_id) {
     const auth = this.props.auth
-    console.log(auth.id, song_id)
-    this.props.deleteASong(auth.id, song_id)
+    console.log(this.props.auth.user.id, song_id)
+    this.props.deleteASong(auth.user.id, song_id)
   }
 
   render() {

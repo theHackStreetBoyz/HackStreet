@@ -26,11 +26,11 @@ class Songs extends Component {
   }
   componentDidMount() {
     this.props.loadAllSongs()
-    this.props.loadAllReviews()
+    //this.props.loadAllReviews()
   }
   handleBuy(evt) {
     const songId = evt.target.value
-    this.props.updateCart(this.props.auth.id, songId)
+    this.props.updateCart(this.props.auth.user.id, songId)
     evt.target.setAttribute('disabled', 'disabled')
     evt.target.innerHTML = 'ADDED TO CART'
     this.render()

@@ -40,13 +40,16 @@ module.exports = require('express').Router()
 
 
     .get('/:id/reviews',
-    (req, res, next) =>
+    (req, res, next) => 
         SongReviews.findAll({
           where: {
             song_id: req.params.id
           }
         })
-        .then(reviews => res.json(reviews))
+        .then(reviews => {
+          console.log("yo dan")
+          return res.json(reviews)
+        })
         .catch(next)
     )
 
