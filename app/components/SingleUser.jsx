@@ -8,8 +8,9 @@ import Songs from './Songs.jsx'
 class SingleUser extends Component {
 
 componentDidMount() {
-  const loadedSongs = this.props.loadUserSongs()
-  console.log("this is loadedSongs", loadedSongs);
+
+  this.props.loadUserSongs()
+
 }
 
   render() {
@@ -29,14 +30,11 @@ componentDidMount() {
           <h3>WhoAmI(User Id):</h3>
           <p>{user.id} </p>
           <h3>List of Songs</h3>
-          <Songs songs={this.props.auth.songs} />
+          <Songs songs={this.props.auth.songs} nested={true} />
       </div>
     )
   }
 }
-
-
-// <Songs props={SONGSTHATWEFOUND} />
 
 const mapStateToProps = function(state) {
   return {
