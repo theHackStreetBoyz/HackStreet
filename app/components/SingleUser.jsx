@@ -61,10 +61,16 @@ componentDidMount() {
               </table>
             </div>
           </div> 
+          <p>{user.id} </p>
+          <h3>List of Songs</h3>
+          <Songs songs={this.props.auth.songs} nested={true} />
       </div>
     )
   }
 }
+
+///
+
 const mapStateToProps = function(state) {
   return {
     
