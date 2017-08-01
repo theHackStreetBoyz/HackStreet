@@ -20,7 +20,6 @@ export class NavigationBar extends Component {
     this.loggedIn = true
   }
   render() {
-    this.loggedIn = !!this.props.auth
     return (
       <Navbar>
         <Navbar.Header>
@@ -29,13 +28,18 @@ export class NavigationBar extends Component {
           </Navbar.Brand>
         </Navbar.Header>
 
-        <Nav>
-          <NavItem eventKey={1} href="/user">Account</NavItem>
-          <NavItem eventKey={2} href="/cart">Cart</NavItem>
-          <NavItem eventKey={3} href="/login">Login</NavItem>
-          <NavItem eventKey={4} href="/logout">Logout</NavItem>
-          <NavItem eventKey={5} href="/signup">SignUp</NavItem>
-        </Nav>
+        {this.props.loggedIn ? (
+          <Nav>
+            <NavItem eventKey={1} href="/user">Account</NavItem>
+            <NavItem eventKey={2} href="/cart">Cart</NavItem>
+            <NavItem eventKey={3} href="/logout">Logout</NavItem>
+          </Nav>
+        ) : (
+          <Nav>
+            <NavItem eventKey={3} href="/login">Login</NavItem>
+            <NavItem eventKey={5} href="/signup">SignUp</NavItem>
+          </Nav>
+        )}
       </Navbar>
     )
   }
@@ -51,6 +55,6 @@ const mapDispatchToProps = function(dispatch) {
   return {}
 }
 
-const songsListContainer = connect(mapStateToProps, mapDispatchToProps)(NavigationBar)
+const navbarContainer = connect(mapStateToProps, mapDispatchToProps)(NavigationBar)
 
-export default songsListContainer
+export default navbarContainer
