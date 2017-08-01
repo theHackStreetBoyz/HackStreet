@@ -23,9 +23,11 @@ module.exports = require('express').Router()
     // (req, res, next) => { if (!req.user.isAdmin) forbidden('listing users is not allowed') },
     (req, res, next) => {
       if (!req.user.isAdmin) res.status(404).send('Access Denied')
-      User.findAll()
-        .then(users => res.json(users))
-        .catch(next)
+      else {
+        User.findAll()
+          .then(users => res.json(users))
+          .catch(next)
+      }
     }
   )
 
