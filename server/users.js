@@ -31,14 +31,6 @@ module.exports = require('express').Router()
     }
   )
 
-  .get('/:id',
-    mustBeLoggedIn,
-    (req, res, next) =>
-    User.findById(req.params.id)
-    .then(user => res.json(user))
-    .catch(next)
-  )
-
   .get('/:id/cart',
     mustBeLoggedIn,
     (req, res, next) =>
@@ -76,13 +68,20 @@ module.exports = require('express').Router()
     })
     .catch(next)
   )
+  .get('/:id',
+    mustBeLoggedIn,
+    (req, res, next) =>
+    User.findById(req.params.id)
+    .then(user => res.json(user))
+    .catch(next)
+  )
 
   .post('/:id/cart/newSong',
     (req, res, next) => {
       Cart.findOne({
         where: {
-            user_id: req.params.id
-          }
+          user_id: req.params.id
+        }
       })
         .then(cart => cart.addSong(req.body.song_id))
         .then(updatedCart => res.json(updatedCart))
@@ -140,7 +139,17 @@ module.exports = require('express').Router()
     .then(updatedCart => res.json(updatedCart))
     .catch(next)
   )
-
+  .delete('/cart',
+    (req, res, next) => {
+      Cart.findOne({
+        where: {
+          user_id: req.user.id
+        }
+      })
+      .then(cart => cart.clearCart())
+      .then(() => res.send(201))
+      .catch(next)
+    })
   .delete('/:id',
     (req, res, next) =>
     User.findById(req.params.id)

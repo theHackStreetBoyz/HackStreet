@@ -31,7 +31,7 @@ class Songs extends Component {
   }
   handleBuy(evt) {
     const songId = evt.target.value
-    this.props.updateCart(this.props.auth.id, songId)
+    this.props.updateCart(this.props.auth.user.id, songId)
     evt.target.setAttribute('disabled', 'disabled')
     evt.target.innerHTML = 'ADDED TO CART'
   }
@@ -50,7 +50,6 @@ class Songs extends Component {
   getReviews(reviews) {
     if (!Array.isArray(reviews)) return {}
     const result = {}
-    console.log(reviews)
     reviews.forEach(review => {
       const current = result[review.song_id]
       if (current) current.push(review.stars)
@@ -58,7 +57,6 @@ class Songs extends Component {
         result[review.song_id] = [review.stars]
       }
     })
-    console.log('HIYA THERE FOLS', result)
     Object.keys(result).forEach(key => {
       result[key] = result[key].reduce((a, b) => a + b)/result[key].length
     })
@@ -66,10 +64,8 @@ class Songs extends Component {
   }
 
   render() {
-    console.log('PROPS IN RENDER', this.props)
     const songs = this.props.songs
     const songReviews = this.getReviews(this.props.reviews)
-    console.log('HELLO DAN', songReviews)
     return (
       <div>
         <div className="container">

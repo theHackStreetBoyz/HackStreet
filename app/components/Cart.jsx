@@ -29,17 +29,16 @@ class Cart extends Component {
     this.props.history.push('/checkout')
   }
 
-   handleDelete(song_id) {
+  handleDelete(song_id) {
     const auth = this.props.auth
-    console.log(auth.id, song_id)
-    this.props.deleteASong(auth.id, song_id)
+    this.props.deleteASong(auth.user.id, song_id)
   }
 
   render() {
     let totalPrice = 0
     const cart = this.props.cart
     const auth = this.props.auth
-    
+
     return (
       <div>
         <div className="container">
@@ -64,9 +63,9 @@ class Cart extends Component {
                           <td>{song.artist}</td>
                           <td>{song.price}</td>
                           <td>
-                            <button 
+                            <button
                             type="delete"
-                            className="btn btn-primary" 
+                            className="btn btn-primary"
                             onClick={() => this.handleDelete(song.id)}>
                             X
                           </button>

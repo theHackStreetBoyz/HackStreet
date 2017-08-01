@@ -10,6 +10,12 @@ module.exports = db => db.define('cart', {}, {
           purchase.setUser(userId)
         ]))
     }
+  },
+  instanceMethods: {
+    clearCart: function() {
+      this.getSongs()
+      .then(songs => this.removeSongs(songs))
+    }
   }
 })
 
