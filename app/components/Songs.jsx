@@ -14,6 +14,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 
 import { fetchSongs } from '../reducers/songs'
 import { updatingCart } from '../reducers/cart'
+import CarouselComponent from './CarouselComponent'
 import store from '../store.jsx'
 
 class Songs extends Component {
@@ -37,6 +38,9 @@ class Songs extends Component {
     return (
       <div>
         <div className="container">
+          {(this.props.nested) ? <div></div> :
+          < CarouselComponent />
+          }
           <h3>Songs</h3>
           <div className='row'>
             <div className='col-md-12'>
