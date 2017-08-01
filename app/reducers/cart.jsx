@@ -3,6 +3,7 @@ import axios from 'axios'
 // action type
 const GET_USER_CART = 'GET_USER_CART'
 const ADDING_TO_CART = 'ADDING_TO_CART'
+const DELETE_FROM_CART = "DELETE_FROM_CART"
 
 // action creators
 export const addingToCart = song => ({
@@ -12,6 +13,11 @@ export const addingToCart = song => ({
 export const getUserCart = cart => ({
   type: GET_USER_CART, cart
 })
+
+export const deleteFromCart = song_id => ({
+  type: DELETE_FROM_CART, song_id
+})
+
 
 // initialState
 
@@ -23,13 +29,15 @@ const initialState= {
 const reducer = (state=initialState, action) => {
   switch (action.type) {
   case ADDING_TO_CART:
-      // console.log(state, action)
     state = [...state, action.song]
-      // console.log("pt2", state)
     break
   case GET_USER_CART:
     state = action.cart
     break
+  case DELETE_FROM_CART:
+    console.log("pt. 1", state)
+    state = state.filter(song => song.id !== action.song_id)
+    console.log("pt.2", state)
   default:
     return state
   }
@@ -47,12 +55,19 @@ export const fetchCart = (id) =>
 
 export const updatingCart = (id, song_id) =>
   dispatch =>
-
     axios.post(`/api/users/${id}/cart/newSong`, ({song_id}))
       .then(res => res.data)
       .then(newSong => {
         dispatch(addingToCart(newSong[0][0]))
       })
       .catch((error) => console.log(error))
+
+export const deleteASong = (id, song_id) =>
+  dispatch =>
+      
+    axios.delete(`/api/users/${id}/cart`, {data: {song_id: song_id}})
+      .then(() => dispatch(deleteFromCart(song_id)))
+      .catch(err => console.error(`Removing song: ${song_id} unsuccesful`, err))
+
 
 export default reducer

@@ -31,9 +31,7 @@ import store from '../store.jsx'
 import { Panel, PanelGroup } from 'react-bootstrap'
 
 export default class Main extends Component {
-  componentDidMount() {
-    // store.dispatch(fetchSongs())
-  }
+
 
   render() {
     return (

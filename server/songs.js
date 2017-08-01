@@ -22,10 +22,22 @@ module.exports = require('express').Router()
 )
     .get('/:id',
     (req, res, next) =>
-        Songs.findById(req.params.id)
+        Songs.findById(req.user.id)
         .then(song => res.json(song))
         .catch(next)
     )
+
+  //    .get('/:id/songs',
+  //   (req, res, next) =>
+  //   User.findById(req.user.id)
+  //   .then(user => user.getSongs())
+  //   .then(userSongs => {
+  //     console.log(userSongs)
+  //     res.json(userSongs)
+  //   })
+  //   .catch(next)
+  // )
+
 
     .get('/:id/reviews',
     (req, res, next) =>
