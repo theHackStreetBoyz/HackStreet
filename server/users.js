@@ -88,6 +88,12 @@ module.exports = require('express').Router()
         .catch(next)
     }
   )
+  .post('/addSongs',
+    (req, res, next) => {
+      User.findById(req.user.id)
+      .then(user => user.addSongs(req.body))
+      .catch(console.error)
+    })
 
   .post('/:id/cart',
     (req, res, next) =>
@@ -146,9 +152,9 @@ module.exports = require('express').Router()
           user_id: req.user.id
         }
       })
-      .then(cart => cart.clearCart())
-      .then(() => res.send(201))
-      .catch(next)
+        .then(cart => cart.clearCart())
+        .then(() => res.send(201))
+        .catch(next)
     })
   .delete('/:id',
     (req, res, next) =>
