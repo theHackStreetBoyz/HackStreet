@@ -6,36 +6,55 @@ import { fetchUserSongs } from '../reducers/auth'
 import Songs from './Songs.jsx'
 
 class SingleUser extends Component {
-  componentDidMount() {
-    const loadedSongs = this.props.loadUserSongs()
-    console.log('this is loadedSongs', loadedSongs)
-  }
+
+componentDidMount() {
+  this.props.loadUserSongs()
+}
 
   render() {
     const user = this.props.auth
-    console.log(this.props.auth.songs)
     return (
       <div>
         <h1>User:</h1>
         <div>
           <h3>Name:</h3>
-          <p>{user.name}</p>
+           <p>{user.name}</p> 
         </div>
         <div>
           <h3>Email:</h3>
-          <p>{user.email}</p>
+           <p>{user.email}</p> 
         </div>
           <h3>WhoAmI(User Id):</h3>
-          <p>{user.id} </p>
-          <h3>List of Songs</h3>
-          <Songs songs={this.props.auth.songs} />
+           <p>{user.id} </p> 
+          <h3>List of Songs:</h3>
+           <div className='row'>
+            <div className='col-md-12'>
+              <table className="table table-responsive table-striped table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th>NAME</th>
+                    <th>ARTIST</th>
+                    <th>PRICE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    (user.songs && user.songs.map((song) => (
+                      <tr key={song.id}>
+                        <td>{song.name}</td>
+                        <td>{song.artist}</td>
+                        <td>{song.price}</td>
+                      </tr>
+                    )
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div> 
       </div>
     )
   }
 }
-
-// <Songs props={SONGSTHATWEFOUND} />
-
 const mapStateToProps = function(state) {
   return {
     auth: state.auth

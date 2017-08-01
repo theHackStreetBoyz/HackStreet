@@ -18,6 +18,7 @@ import NavigationBar from './NavigationBar'
 import Cart from './Cart'
 import Footer from './Footer'
 import Login from './Login'
+import Logout from './Logout'
 import SingleUser from './SingleUser'
 import SingleSong from './SingleSong'
 import CompanyInfo from './CompanyInfo'
@@ -46,6 +47,7 @@ export default class Main extends Component {
                 <Switch>
                     <Route path='/user' component={SingleUser} />
                     <Route path='/login' component={Login} />
+                    <Route path='/logout' component={Logout} />
                     <Route path='/cart' component={Cart} />
                     <Route path='/checkout' component={Checkout} />
                     <Route exact path='/songs' component={Songs} />

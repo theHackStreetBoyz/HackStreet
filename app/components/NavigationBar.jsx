@@ -12,6 +12,7 @@ import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect, Link} from 'react-router-dom'
 import {Navbar, Nav, NavItem} from 'react-bootstrap'
+import Logout from "./Logout"
 
 const NavigationBar = () => (
     <Navbar>
@@ -25,7 +26,8 @@ const NavigationBar = () => (
       <NavItem eventKey={1} href="/user">Account</NavItem>
       <NavItem eventKey={2} href="/cart">Cart</NavItem>
       <NavItem eventKey={3} href="/login">Login</NavItem>
-      <NavItem eventKey={4} href="/signup">SignUp</NavItem>
+      <NavItem eventKey={4} href="/logout">Logout</NavItem>
+      <NavItem eventKey={5} href="/signup">SignUp</NavItem>
     </Nav>
     </Navbar>
   )
