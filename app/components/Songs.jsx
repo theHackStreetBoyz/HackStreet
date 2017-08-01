@@ -15,26 +15,59 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { fetchSongs } from '../reducers/songs'
 import { updatingCart } from '../reducers/cart'
 import CarouselComponent from './CarouselComponent'
+import { fetchReviews } from '../reducers/reviews'
+
 import store from '../store.jsx'
 
 class Songs extends Component {
   constructor(props) {
     super(props)
     this.handleBuy = this.handleBuy.bind(this)
+    this.renderStars = this.renderStars.bind(this)
+    this.getReviews = this.getReviews.bind(this)
   }
   componentDidMount() {
     this.props.loadAllSongs()
+    this.props.loadAllReviews()
+    // this.render()
   }
   handleBuy(evt) {
     const songId = evt.target.value
-    this.props.updateCart(this.props.auth.id, songId)
+    this.props.updateCart(this.props.auth.user.id, songId)
     evt.target.setAttribute('disabled', 'disabled')
     evt.target.innerHTML = 'ADDED TO CART'
-    this.render()
+  }
+
+  renderStars(num) {
+    const empty = '☆'
+    const filled = '★'
+    let result = ''
+    for (let i = 0; i < 5; i++) {
+      if (i < num) result += filled
+      else result += empty
+    }
+    return result
+  }
+
+  getReviews(reviews) {
+    if (!Array.isArray(reviews)) return {}
+    const result = {}
+    reviews.forEach(review => {
+      const current = result[review.song_id]
+      if (current) current.push(review.stars)
+      else {
+        result[review.song_id] = [review.stars]
+      }
+    })
+    Object.keys(result).forEach(key => {
+      result[key] = result[key].reduce((a, b) => a + b)/result[key].length
+    })
+    return result
   }
 
   render() {
     const songs = this.props.songs
+    const songReviews = this.getReviews(this.props.reviews)
     return (
       <div>
         <div className="container">
@@ -50,6 +83,7 @@ class Songs extends Component {
                     <th>NAME</th>
                     <th>ARTIST</th>
                     <th>PRICE</th>
+                    <th>AVERAGE STARS</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -59,8 +93,9 @@ class Songs extends Component {
                           <td>{song.name}</td>
                           <td>{song.artist}</td>
                           <td>{song.price}</td>
-                          {(this.props.nested) ? <td></td> :
-                          <td>
+                          <td>{this.renderStars(songReviews[song.id]?songReviews[song.id] : 0)}</td>
+                          {(this.props.nested) ? <td></td>
+                          : <td>
                               <button
                               value={song.id}
                               onClick={this.handleBuy}
@@ -83,10 +118,12 @@ class Songs extends Component {
 }
 
 const mapStateToProps = function(state, ownProps) {
-  let songs = ownProps.songs || state.songs
-  let nested = ownProps.nested
+  // console.log('STATE IN PROPS: ', state)
+  const songs = ownProps.songs || state.songs
+  const nested = ownProps.nested
 
   return {
+    reviews: state.reviews,
     nested,
     songs,
     auth: state.auth,
@@ -101,6 +138,9 @@ const mapDispatchToProps = function(dispatch) {
     },
     updateCart: (userId, songId) => {
       dispatch(updatingCart(userId, songId))
+    },
+    loadAllReviews: () => {
+      dispatch(fetchReviews())
     }
   }
 }

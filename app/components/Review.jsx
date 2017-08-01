@@ -16,48 +16,36 @@ import { fetchSingleSong } from '../reducers/songs'
 import store from '../store.jsx'
 
 class SingleSong extends Component {
+  constructor(props) {
+    super(props)
+    this.renderStars = this.renderStars.bind(this)
+  }
   componentDidMount() {
     this.props.loadSingleSong(this.props.match.params.id)
   }
+  renderStars(num) {
+    const empty = '☆'
+    const filled = '★'
+    let result = ''
+    for (let i = 0; i < 5; i++) {
+      if (i < num) result += filled
+      else result += empty
+    }
+    return result
+  }
 
   render() {
-    const song = this.props.songs
-    console.log('SONG', song)
-    return (
-      <div>
-        <div className="container">
-          <h3>Single Song</h3>
-          <div className='row'>
-            <div className='col-md-12'>
-              <table className="table table-responsive table-striped table-hover table-sm">
-                <thead>
-                  <tr className="row m-0">
-                    <th className="d-inline-block">NAME</th>
-                    <th className="d-inline-block ">ARTIST</th>
-                    <th className="d-inline-block ">PRICE</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>{song.name}</td>
-                    <td>{song.artist}</td>
-                    <td>{song.price}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div>REVIEWS:</div>
-        </div>
-      </div>
-    )
+    <div>
+    <h3>StarsL</h3>
+    {this.renderStars}
+
+    </div>
   }
 }
 
 const mapStateToProps = function(state, ownProps) {
   return {
-    songs: state.songs,
-    auth: state.auth
+    review: ownProps.review
   }
 }
 

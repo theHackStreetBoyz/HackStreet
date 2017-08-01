@@ -31,14 +31,6 @@ module.exports = require('express').Router()
     }
   )
 
-  .get('/:id',
-    mustBeLoggedIn,
-    (req, res, next) =>
-    User.findById(req.params.id)
-    .then(user => res.json(user))
-    .catch(next)
-  )
-
   .get('/:id/cart',
     mustBeLoggedIn,
     (req, res, next) =>
@@ -63,14 +55,24 @@ module.exports = require('express').Router()
     .catch(next)
   )
 
-  .get('/:id/purchases',
+  .get('/purchases',
     (req, res, next) =>
     Purchase.findAll({
       where: {
-        user_id: req.params.id
+        user_id: req.user.id
       }
     })
-    .then(purchases => res.json(purchases))
+    .then(purchases => {
+      console.log('hello', purchases)
+      res.json(purchases)
+    })
+    .catch(next)
+  )
+  .get('/:id',
+    mustBeLoggedIn,
+    (req, res, next) =>
+    User.findById(req.params.id)
+    .then(user => res.json(user))
     .catch(next)
   )
 
@@ -78,8 +80,8 @@ module.exports = require('express').Router()
     (req, res, next) => {
       Cart.findOne({
         where: {
-            user_id: req.params.id
-          }
+          user_id: req.params.id
+        }
       })
         .then(cart => cart.addSong(req.body.song_id))
         .then(updatedCart => res.json(updatedCart))
@@ -97,15 +99,15 @@ module.exports = require('express').Router()
     .catch(next)
   )
 
-  .post('/:id/purchase',
+  .post('/purchase',
     mustBeLoggedIn,
     (req, res, next) => {
       Cart.findOne({
         where: {
-            user_id: req.params.id
-          }
+          user_id: req.user.id
+        }
       })
-        .then(cart => Cart.newPurchase(cart, req.params.id))
+        .then(cart => Cart.newPurchase(cart, req.user.id))
         .then(purchase => res.json(purchase))
         .catch(next)
     }
@@ -137,7 +139,17 @@ module.exports = require('express').Router()
     .then(updatedCart => res.json(updatedCart))
     .catch(next)
   )
-
+  .delete('/cart',
+    (req, res, next) => {
+      Cart.findOne({
+        where: {
+          user_id: req.user.id
+        }
+      })
+      .then(cart => cart.clearCart())
+      .then(() => res.send(201))
+      .catch(next)
+    })
   .delete('/:id',
     (req, res, next) =>
     User.findById(req.params.id)

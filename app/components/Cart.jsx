@@ -11,13 +11,14 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Provider, connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import { fetchCart } from '../reducers/cart'
+import { fetchCart, deleteASong } from '../reducers/cart'
 import store from '../store.jsx'
 
 class Cart extends Component {
   constructor(props) {
     super(props)
     this.state = store.getState()
+    this.handleDelete = this.handleDelete.bind(this)
     this.handleCheckout = this.handleCheckout.bind(this)
   }
 
@@ -28,9 +29,16 @@ class Cart extends Component {
     this.props.history.push('/checkout')
   }
 
+  handleDelete(song_id) {
+    const auth = this.props.auth
+    this.props.deleteASong(auth.user.id, song_id)
+  }
+
   render() {
     let totalPrice = 0
     const cart = this.props.cart
+    const auth = this.props.auth
+
     return (
       <div>
         <div className="container">
@@ -54,10 +62,18 @@ class Cart extends Component {
                           <td>{song.name}</td>
                           <td>{song.artist}</td>
                           <td>{song.price}</td>
+                          <td>
+                            <button
+                            type="delete"
+                            className="btn btn-primary"
+                            onClick={() => this.handleDelete(song.id)}>
+                            X
+                          </button>
+                          </td>
                         </tr>
                       )
                     }
-                    ))}
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -84,6 +100,9 @@ const mapDispatchToProps = function(dispatch) {
   return {
     loadCart: () => {
       dispatch(fetchCart())
+    },
+    deleteASong: (user_id, song_id) => {
+      dispatch(deleteASong(user_id, song_id))
     }
   }
 }
