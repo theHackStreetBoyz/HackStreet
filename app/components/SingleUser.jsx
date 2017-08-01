@@ -36,6 +36,8 @@ componentDidMount() {
   }
 }
 
+///
+
 const mapStateToProps = function(state) {
   return {
     auth: state.auth
