@@ -39,13 +39,15 @@ componentDidMount() {
                 </thead>
                 <tbody>
                   {
-                    (user.songs && user.songs.map((song) => (
-                      <tr key={song.id}>
-                        <td>{song.name}</td>
-                        <td>{song.artist}</td>
-                        <td>{song.price}</td>
-                      </tr>
-                    )
+                    (Array.isArray(user.songs) && user.songs.map((song) => {
+                      return (
+                        <tr key={song.id}>
+                          <td>{song.name}</td>
+                          <td>{song.artist}</td>
+                          <td>{song.price}</td>
+                        </tr>
+                      )
+                    }
                   ))}
                 </tbody>
               </table>
