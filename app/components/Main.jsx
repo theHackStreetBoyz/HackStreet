@@ -18,11 +18,13 @@ import NavigationBar from './NavigationBar'
 import Cart from './Cart'
 import Footer from './Footer'
 import Login from './Login'
+import Logout from './Logout'
 import SingleUser from './SingleUser'
 import SingleSong from './SingleSong'
 import CompanyInfo from './CompanyInfo'
 import Support from './Support'
 import SignUp from './SignUp'
+import Checkout from './Checkout'
 
 import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
@@ -45,7 +47,9 @@ export default class Main extends Component {
                 <Switch>
                     <Route path='/user' component={SingleUser} />
                     <Route path='/login' component={Login} />
+                    <Route path='/logout' component={Logout} />
                     <Route path='/cart' component={Cart} />
+                    <Route path='/checkout' component={Checkout} />
                     <Route exact path='/songs' component={Songs} />
                     <Route path='/songs/:id' component={SingleSong} />
                     <Route path='/companyinfo' component={CompanyInfo} />
