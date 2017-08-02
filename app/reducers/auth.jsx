@@ -3,7 +3,6 @@ import axios from 'axios'
 // action type
 const AUTHENTICATED = 'AUTHENTICATED'
 const GET_USER = 'GET_USER'
-const GET_USER_SONGS = 'GET_USER_SONGS'
 const GET_USER_PURCHASES = 'GET_USER_PURCHASES'
 const ADDING_PURCHASE = 'ADDING_PURCHASE'
 const CREATE_USER = 'CREATE USER'
@@ -15,10 +14,6 @@ export const authenticated = user => ({
 
 export const getUser = user => ({
   type: GET_USER, user
-})
-
-export const getUserSongs = songs => ({
-  type: GET_USER_SONGS, songs
 })
 
 export const getUserPurchases = purchases => ({
@@ -42,9 +37,6 @@ const reducer = (state={}, action) => {
     break
   case GET_USER:
     newState = action.user
-    break
-  case GET_USER_SONGS:
-    newState.songs = action.songs
     break
   case ADDING_PURCHASE:
     newState.purchase = [...newState.purchase, action.purchase]
@@ -101,11 +93,11 @@ export const fetchUser = (id) =>
       .then((user) => dispatch(getUser(user.data)))
       .catch(() => console.error('error'))
 
-export const fetchUserSongs = (id) =>
-  dispatch =>
-    axios.get(`/api/users/${id}/songs`)
-      .then((songs) => dispatch(getUserSongs(songs.data)))
-      .catch(() => console.error('error'))
+// export const fetchUserSongs = (id) =>
+//   dispatch =>
+//     axios.get(`/api/users/${id}/songs`)
+//       .then((songs) => dispatch(getUserSongs(songs.data)))
+//       .catch(() => console.error('error'))
 
 export const fetchPurchases = () => {
   console.log('HELLO IS IT ME YOU ARE LOOKING FOR')

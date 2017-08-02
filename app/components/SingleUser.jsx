@@ -2,38 +2,35 @@ import React, { Component } from 'react'
 import {render} from 'react-dom'
 import {Provider, connect} from 'react-redux'
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
-import { fetchUserSongs, fetchPurchases } from '../reducers/auth'
+// import { fetchPurchases } from '../reducers/auth'
+import { fetchUserSongs } from '../reducers/userSongs'
+
 import Songs from './Songs.jsx'
 
 class SingleUser extends Component {
-  componentDidMount() {
-    console.log('COMPONENT DID MOUNT')
-    this.props.loadUserSongs()
-    this.props.fetchPurchases()
+
+  componentWillMount() {
+    // console.log('COMPONENT DID MOUNT')
+    this.props.intializeData()
   }
 
   render() {
-    const user = this.props.auth
-    // // .loadUserInfo()
-    console.log('USERRRR....', user.purchases)
-    // const user = state.auth
-    // console.log('this.props.auth.songs', this.props.auth.songs)
 
-    // console.log("userId", this.props.userId)
+    // console.log('this.props.auth.user', this.props.auth.user)
 
     return (
       <div>
         <h1>User:</h1>
         <div>
           <h3>Name:</h3>
-           {/* <p>{ user.name }</p> */}
+            <p>{ this.props.auth.user ? this.props.auth.user.name : null }</p>
         </div>
         <div>
           <h3>Email:</h3>
-           {/* <p>{ user.email }</p> */}
+            <p>{ this.props.auth.user ? this.props.auth.user.email : null }</p>
         </div>
           <h3>WhoAmI(User Id):</h3>
-          {/* <p>{ user.id } </p> */}
+           <p>{ this.props.auth.user ? this.props.auth.user.id : null } </p>
         {/*
            <p>{user.id} </p>
           <h3>List of Songs:</h3>
@@ -75,7 +72,7 @@ class SingleUser extends Component {
           <p>{user.id} </p>
           */}
           <h3>List of Songs</h3>
-          <Songs songs={this.props.auth.songs} nested={true} />
+          <Songs songs={this.props.userSongs.songs} nested={true} />
       </div>
     )
   }
@@ -83,18 +80,16 @@ class SingleUser extends Component {
 
 const mapStateToProps = function(state) {
   return {
-
-    auth: state.auth
+    auth: state.auth,
+    userSongs: state.userSongs
   }
 }
 
 const mapStateToDispatch = function(dispatch) {
   return {
-    loadUserSongs: () => {
+    intializeData: () => {
+     // dispatch(fetchPurchases())
       dispatch(fetchUserSongs())
-    },
-    fetchPurchases: () => {
-      dispatch(fetchPurchases())
     }
   }
 }
