@@ -13,16 +13,19 @@ import { Provider, connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import { fetchSingleSong } from '../reducers/songs'
+import { fetchReviewsForSong} from '../reducers/reviews'
 import store from '../store.jsx'
 
 class SingleSong extends Component {
   componentDidMount() {
     this.props.loadSingleSong(this.props.match.params.id)
+    this.props.loadSongReviews(this.props.match.params.id)
   }
 
   render() {
     const song = this.props.songs
-    console.log('SONG', song)
+    const reviews = this.props.reviews
+    // console.log('Props', this.props)
     return (
       <div>
         <div className="container">
@@ -48,6 +51,29 @@ class SingleSong extends Component {
             </div>
           </div>
           <div>REVIEWS:</div>
+            <div className='row'>
+            <div className='col-md-12'>
+              <table className="table table-responsive table-striped table-hover table-sm">
+                <thead>
+                  <tr className="row m-0">
+                    <th className="d-inline-block">Stars</th>
+                    <th className="d-inline-block ">Text</th>
+                    <th className="d-inline-block ">User Id</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    (Array.isArray(reviews) && reviews.map((review) => (
+                      <tr key={review.id}>
+                        <td>{review.stars}</td>
+                        <td>{review.text}</td>
+                        <td>{review.id}</td>
+                    </tr>
+                  )))} 
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -57,7 +83,8 @@ class SingleSong extends Component {
 const mapStateToProps = function(state, ownProps) {
   return {
     songs: state.songs,
-    auth: state.auth
+    auth: state.auth,
+    reviews: state.reviews
   }
 }
 
@@ -65,6 +92,9 @@ const mapDispatchToProps = function(dispatch, ownProps) {
   return {
     loadSingleSong: (songId) => {
       dispatch(fetchSingleSong(songId))
+    },
+    loadSongReviews: (songId) => {
+      dispatch(fetchReviewsForSong(songId))
     }
   }
 }

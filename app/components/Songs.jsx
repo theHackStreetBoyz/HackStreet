@@ -25,12 +25,14 @@ class Songs extends Component {
     this.handleBuy = this.handleBuy.bind(this)
     this.renderStars = this.renderStars.bind(this)
     this.getReviews = this.getReviews.bind(this)
+    this.viewSong = this.viewSong.bind(this)
   }
   componentDidMount() {
     this.props.loadAllSongs()
     this.props.loadAllReviews()
     // this.render()
   }
+
   handleBuy(evt) {
     const songId = evt.target.value
     this.props.updateCart(this.props.auth.user.id, songId)
@@ -65,6 +67,10 @@ class Songs extends Component {
     return result
   }
 
+  viewSong(songId){
+    this.props.history.push(`/songs/${songId}`)
+  }
+
   render() {
     const songs = this.props.songs
     const songReviews = this.getReviews(this.props.reviews)
@@ -93,6 +99,16 @@ class Songs extends Component {
                           <td>{song.name}</td>
                           <td>{song.artist}</td>
                           <td>{song.price}</td>
+                          <td> 
+                            <button
+                              value={song.id}
+                              onClick={()=> this.viewSong(song.id)}
+                              type="submit"
+                              className="btn btn-default">
+                              VIEW {song.name}
+                              </button>
+                          </td>
+                          {/* <td>{this.renderStars(songReviews[song.id])}</td> */}
                           <td>{this.renderStars(songReviews[song.id]?songReviews[song.id] : 0)}</td>
                           {(this.props.nested) ? <td></td>
                           : <td>

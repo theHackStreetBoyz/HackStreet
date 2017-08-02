@@ -25,6 +25,7 @@ class Cart extends Component {
   componentWillMount() {
     this.props.loadCart()
   }
+
   handleCheckout() {
     this.props.history.push('/checkout')
   }

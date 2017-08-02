@@ -2,22 +2,31 @@ import axios from 'axios'
 
 // action type
 const GET_REVIEWS = 'GET_REVIEWS'
+const GET_SONG_REVIEWS = 'GET_SONG_REVIEWS'
 
 // action creators
 export const getReviews = reviews => ({
   type: GET_REVIEWS, reviews
 })
 
-// initialState
+
+export const getSongReviews = reviews => ({
+  type: GET_SONG_REVIEWS, reviews
+})
+
+
 const initialState = {
   reviews: []
 }
 
 // reducers
 const reducer = (state=initialState, action) => {
-  // let newState = []
   switch (action.type) {
   case GET_REVIEWS:
+    console.log(action, state)
+    state = action.reviews
+    break
+  case GET_SONG_REVIEWS:
     state = action.reviews
     break
   default:
@@ -25,6 +34,14 @@ const reducer = (state=initialState, action) => {
   }
   return state
 }
+
+export const fetchReviewsForSong = (songId) =>
+  dispatch => 
+    axios.get(`/api/songs/${songId}/reviews`)
+    .then(res => res.data)
+    .then(reviews => {
+      dispatch(getSongReviews(reviews))
+    })
 
 export const fetchReviews = () =>
   dispatch =>
