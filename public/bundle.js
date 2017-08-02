@@ -8668,7 +8668,7 @@ module.exports = React;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteASong = exports.updatingCart = exports.fetchCart = exports.deleteFromCart = exports.getUserCart = exports.addingToCart = undefined;
+exports.deleteCartSongs = exports.deleteASong = exports.updatingCart = exports.fetchCart = exports.deleteCart = exports.deleteFromCart = exports.getUserCart = exports.addingToCart = undefined;
 
 var _axios = __webpack_require__(199);
 
@@ -8682,6 +8682,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var GET_USER_CART = 'GET_USER_CART';
 var ADDING_TO_CART = 'ADDING_TO_CART';
 var DELETE_FROM_CART = "DELETE_FROM_CART";
+var DELETE_CART = "DELETE_CART";
 
 // action creators
 var addingToCart = exports.addingToCart = function addingToCart(song) {
@@ -8702,6 +8703,11 @@ var deleteFromCart = exports.deleteFromCart = function deleteFromCart(song_id) {
   };
 };
 
+var deleteCart = exports.deleteCart = function deleteCart() {
+  return {
+    type: DELETE_FROM_CART
+  };
+};
 // initialState
 
 var initialState = {
@@ -8721,11 +8727,13 @@ var reducer = function reducer() {
       state = action.cart;
       break;
     case DELETE_FROM_CART:
-      console.log("pt. 1", state);
       state = state.filter(function (song) {
         return song.id !== action.song_id;
       });
-      console.log("pt.2", state);
+      break;
+    case DELETE_CART:
+      state.cart = [];
+      break;
     default:
       return state;
   }
@@ -8762,6 +8770,14 @@ var deleteASong = exports.deleteASong = function deleteASong(id, song_id) {
       return dispatch(deleteFromCart(song_id));
     }).catch(function (err) {
       return console.error('Removing song: ' + song_id + ' unsuccesful', err);
+    });
+  };
+};
+
+var deleteCartSongs = exports.deleteCartSongs = function deleteCartSongs() {
+  return function (dispatch) {
+    return _axios2.default.delete('/api/users/cart').then(function () {
+      return dispatch(deleteCart());
     });
   };
 };
@@ -27671,8 +27687,9 @@ function warning(message) {
  */
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
+exports.Main = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -27926,58 +27943,71 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Main = function (_Component) {
-    _inherits(Main, _Component);
+var Main = exports.Main = function (_Component) {
+  _inherits(Main, _Component);
 
-    function Main() {
-        _classCallCheck(this, Main);
+  function Main() {
+    _classCallCheck(this, Main);
 
-        return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+  }
+
+  _createClass(Main, [{
+    key: 'render',
+    value: function render() {
+      var loggedIn = !!this.props.auth.user;
+      return _react2.default.createElement(
+        _reactRouterDom.BrowserRouter,
+        null,
+        _react2.default.createElement(
+          _reactBootstrap.Panel,
+          null,
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(_NavigationBar2.default, { loggedIn: loggedIn })
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              _reactRouterDom.Switch,
+              null,
+              _react2.default.createElement(_reactRouterDom.Route, { path: '/user', component: _SingleUser2.default }),
+              _react2.default.createElement(_reactRouterDom.Route, { path: '/login', component: _Login2.default }),
+              _react2.default.createElement(_reactRouterDom.Route, { path: '/logout', component: _Logout2.default }),
+              _react2.default.createElement(_reactRouterDom.Route, { path: '/cart', component: _Cart2.default }),
+              _react2.default.createElement(_reactRouterDom.Route, { path: '/checkout', component: _Checkout2.default }),
+              _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/songs', component: _Songs2.default }),
+              _react2.default.createElement(_reactRouterDom.Route, { path: '/songs/:id', component: _SingleSong2.default }),
+              _react2.default.createElement(_reactRouterDom.Route, { path: '/companyinfo', component: _CompanyInfo2.default }),
+              _react2.default.createElement(_reactRouterDom.Route, { path: '/support', component: _Support2.default }),
+              _react2.default.createElement(_reactRouterDom.Route, { path: '/signup', component: _SignUp2.default }),
+              _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _Songs2.default })
+            )
+          ),
+          _react2.default.createElement(_Footer2.default, null)
+        )
+      );
     }
+  }]);
 
-    _createClass(Main, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                _reactRouterDom.BrowserRouter,
-                null,
-                _react2.default.createElement(
-                    _reactBootstrap.Panel,
-                    null,
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(_NavigationBar2.default, null)
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        null,
-                        _react2.default.createElement(
-                            _reactRouterDom.Switch,
-                            null,
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/user', component: _SingleUser2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/login', component: _Login2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/logout', component: _Logout2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/cart', component: _Cart2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/checkout', component: _Checkout2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/songs', component: _Songs2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/songs/:id', component: _SingleSong2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/companyinfo', component: _CompanyInfo2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/support', component: _Support2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/signup', component: _SignUp2.default }),
-                            _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _Songs2.default })
-                        )
-                    ),
-                    _react2.default.createElement(_Footer2.default, null)
-                )
-            );
-        }
-    }]);
-
-    return Main;
+  return Main;
 }(_react.Component);
 
-exports.default = Main;
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+
+var mainContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Main);
+
+exports.default = mainContainer;
 
 /***/ }),
 /* 425 */
@@ -29794,6 +29824,8 @@ var Checkout = function (_Component) {
     value: function completePurchase() {
       console.log(this.props.cart);
       this.props.creatingPurchase(this.props.cart);
+      this.props.deleteCartSongs();
+      this.props.loadCart();
     }
   }, {
     key: 'render',
@@ -29846,6 +29878,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     creatingPurchase: function creatingPurchase(cart) {
       dispatch((0, _auth.creatingPurchase)(cart));
+    },
+    deleteCartSongs: function deleteCartSongs() {
+      dispatch((0, _cart.deleteCartSongs)());
     }
   };
 };
@@ -30333,7 +30368,6 @@ var NavigationBar = exports.NavigationBar = function (_Component) {
   _createClass(NavigationBar, [{
     key: 'render',
     value: function render() {
-      this.loggedIn = !!this.props.auth;
       return _react2.default.createElement(
         _reactBootstrap.Navbar,
         null,
@@ -30350,7 +30384,7 @@ var NavigationBar = exports.NavigationBar = function (_Component) {
             )
           )
         ),
-        _react2.default.createElement(
+        this.props.loggedIn ? _react2.default.createElement(
           _reactBootstrap.Nav,
           null,
           _react2.default.createElement(
@@ -30365,13 +30399,16 @@ var NavigationBar = exports.NavigationBar = function (_Component) {
           ),
           _react2.default.createElement(
             _reactBootstrap.NavItem,
-            { eventKey: 3, href: '/login' },
-            'Login'
-          ),
+            { eventKey: 3, href: '/logout' },
+            'Logout'
+          )
+        ) : _react2.default.createElement(
+          _reactBootstrap.Nav,
+          null,
           _react2.default.createElement(
             _reactBootstrap.NavItem,
-            { eventKey: 4, href: '/logout' },
-            'Logout'
+            { eventKey: 3, href: '/login' },
+            'Login'
           ),
           _react2.default.createElement(
             _reactBootstrap.NavItem,
@@ -30396,9 +30433,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {};
 };
 
-var songsListContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NavigationBar);
+var navbarContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(NavigationBar);
 
-exports.default = songsListContainer;
+exports.default = navbarContainer;
 
 /***/ }),
 /* 449 */
