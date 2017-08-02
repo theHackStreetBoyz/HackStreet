@@ -40,6 +40,7 @@ OAuth.setupStrategy({
     clientID: env.FACEBOOK_CLIENT_ID,
     clientSecret: env.FACEBOOK_CLIENT_SECRET,
     callbackURL: `${app.baseUrl}/api/auth/login/facebook`,
+    profileFields: ['email', 'name', 'displayName']
   },
   passport
 })

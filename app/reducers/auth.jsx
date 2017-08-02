@@ -93,29 +93,31 @@ export const signup = (credentials) =>
     dispatch(createUser(user))
     dispatch(login(credentials.email, credentials.password))
   })
-  .catch(error => console.log(error))
+  .catch(error => console.error(error))
 
 export const fetchUser = (id) =>
   dispatch =>
     axios.get(`/api/users/${id}`)
       .then((user) => dispatch(getUser(user.data)))
-      .catch(() => console.log('error'))
+      .catch(() => console.error('error'))
 
 export const fetchUserSongs = (id) =>
   dispatch =>
     axios.get(`/api/users/${id}/songs`)
       .then((songs) => dispatch(getUserSongs(songs.data)))
-      .catch(() => console.log('error'))
+      .catch(() => console.error('error'))
 
-export const fetchPurchases = () =>
-  dispatch =>
-    axios.get(`/api/users/purchases`)
-      .then(res => res.data)
-      .then((purchases) => {
-        // console.log('hello')
-        dispatch(getUserPurchases(purchases))
-      })
-      .catch(() => console.log('error'))
+export const fetchPurchases = () => {
+  console.log('HELLO IS IT ME YOU ARE LOOKING FOR')
+  return dispatch =>
+  axios.get(`/api/users/purchases`)
+  .then(res => res.data)
+  .then((purchases) => {
+    // console.log('hello')
+    dispatch(getUserPurchases(purchases))
+  })
+  .catch(() => console.error('error'))
+}
 
 // use this when cart is purchased, be careful of the 3 params passed in
 // we don't have a single purchase page

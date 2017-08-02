@@ -11,7 +11,7 @@ import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Provider, connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import { fetchCart } from '../reducers/cart'
+import { fetchCart, deleteCartSongs } from '../reducers/cart'
 import { creatingPurchase } from '../reducers/auth'
 import store from '../store.jsx'
 import Cart from './cart.jsx'
@@ -27,9 +27,11 @@ class Checkout extends Component {
   handleBrowse() {
     this.props.history.push('/')
   }
-  completePurchase(){
+  completePurchase() {
     console.log(this.props.cart)
     this.props.creatingPurchase(this.props.cart)
+    this.props.deleteCartSongs()
+    this.props.loadCart()
   }
 
   render() {
@@ -62,6 +64,9 @@ const mapDispatchToProps = function(dispatch) {
     },
     creatingPurchase: (cart) => {
       dispatch(creatingPurchase(cart))
+    },
+    deleteCartSongs: () => {
+      dispatch(deleteCartSongs())
     }
   }
 }

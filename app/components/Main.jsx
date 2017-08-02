@@ -30,16 +30,15 @@ import { fetchSongs } from '../reducers/songs'
 import store from '../store.jsx'
 import { Panel, PanelGroup } from 'react-bootstrap'
 
-export default class Main extends Component {
-
-
+export class Main extends Component {
   render() {
+    const loggedIn = !!(this.props.auth.user)
     return (
             <Router>
 
             <Panel>
                 <div>
-                    <NavigationBar />
+                    <NavigationBar loggedIn={loggedIn} />
                 </div>
             <div>
                 <Switch>
@@ -62,3 +61,16 @@ export default class Main extends Component {
     )
   }
 }
+const mapStateToProps = function(state) {
+  return {
+    auth: state.auth,
+  }
+}
+
+const mapDispatchToProps = function(dispatch) {
+  return {}
+}
+
+const mainContainer = connect(mapStateToProps, mapDispatchToProps)(Main)
+
+export default mainContainer

@@ -8,21 +8,21 @@ export const getUserSongs = songs => ({
   type: GET_USER_SONGS, songs
 })
 
-//thunks
+// thunks
 export const fetchUserSongs = (id) =>
   dispatch =>
     axios.get(`/api/songs/${id}`)
       .then((songs) => dispatch(getUserSongs(songs.data)))
       .catch(() => console.log('error'))
 
-//reducer
+// reducer
 const reducer = (state=[], action) => {
-  let newState = []
+  const newState = []
   switch (action.type) {
-    case GET_USER_SONGS:
+  case GET_USER_SONGS:
     newState.songs = action.songs
     break
-    default:
+  default:
     return state
   }
   return newState

@@ -9,11 +9,12 @@ export const getReviews = reviews => ({
   type: GET_REVIEWS, reviews
 })
 
+
 export const getSongReviews = reviews => ({
   type: GET_SONG_REVIEWS, reviews
 })
 
-//initialState
+
 const initialState = {
   reviews: []
 }
@@ -34,15 +35,6 @@ const reducer = (state=initialState, action) => {
   return state
 }
 
-export const fetchReviews = () => 
-  dispatch =>
-    axios.get('/reviews')
-    .then(res => res.data)
-    .then(reviews => {
-      dispatch(getReviews(reviews))
-    })
-
-
 export const fetchReviewsForSong = (songId) =>
   dispatch => 
     axios.get(`/api/songs/${songId}/reviews`)
@@ -50,5 +42,11 @@ export const fetchReviewsForSong = (songId) =>
     .then(reviews => {
       dispatch(getSongReviews(reviews))
     })
+
+export const fetchReviews = () =>
+  dispatch =>
+    axios.get('/api/songs/reviews')
+    .then(res => res.data)
+    .then(reviews => dispatch(getReviews(reviews)))
 
 export default reducer
