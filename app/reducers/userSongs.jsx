@@ -9,15 +9,22 @@ export const getUserSongs = songs => ({
 })
 
 // thunks
-export const fetchUserSongs = (id) =>
-  dispatch =>
-    axios.get(`/api/songs/${id}`)
+export const fetchUserSongs = (id) => {
+  return dispatch =>
+    axios.get(`/api/users/${id}/songs`)
       .then((songs) => dispatch(getUserSongs(songs.data)))
       .catch(() => console.log('error'))
+}
+
+// export const fetchUserSongs = (id) =>
+//   dispatch =>
+//     axios.get(`/api/users/${id}/songs`)
+//       .then((songs) => dispatch(getUserSongs(songs.data)))
+//       .catch(() => console.error('error'))
 
 // reducer
-const reducer = (state=[], action) => {
-  const newState = []
+const reducer = (state = {}, action) => {
+  const newState = {}
   switch (action.type) {
   case GET_USER_SONGS:
     newState.songs = action.songs
