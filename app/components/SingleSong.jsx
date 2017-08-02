@@ -25,7 +25,7 @@ class SingleSong extends Component {
   render() {
     const song = this.props.songs
     const reviews = this.props.reviews
-    // console.log('Props', this.props)
+    
     return (
       <div>
         <div className="container">
