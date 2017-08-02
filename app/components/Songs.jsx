@@ -89,7 +89,9 @@ class Songs extends Component {
                     <th>NAME</th>
                     <th>ARTIST</th>
                     <th>PRICE</th>
+                    <th>VIEW SONG</th>
                     <th>AVERAGE STARS</th>
+                    <th>ADD TO CART</th>
                   </tr>
                 </thead>
                 <tbody>

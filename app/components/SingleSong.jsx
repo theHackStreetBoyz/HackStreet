@@ -34,14 +34,14 @@ class SingleSong extends Component {
             <div className='col-md-12'>
               <table className="table table-responsive table-striped table-hover table-sm">
                 <thead>
-                  <tr className="row m-0">
+                  <tr>
                     <th className="d-inline-block">NAME</th>
                     <th className="d-inline-block ">ARTIST</th>
                     <th className="d-inline-block ">PRICE</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr key={song.id}>
                     <td>{song.name}</td>
                     <td>{song.artist}</td>
                     <td>{song.price}</td>
@@ -55,10 +55,9 @@ class SingleSong extends Component {
             <div className='col-md-12'>
               <table className="table table-responsive table-striped table-hover table-sm">
                 <thead>
-                  <tr className="row m-0">
+                  <tr>
                     <th className="d-inline-block">Stars</th>
-                    <th className="d-inline-block ">Text</th>
-                    <th className="d-inline-block ">User Id</th>
+                    <th className="d-inline-block ">Reviews</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -67,7 +66,6 @@ class SingleSong extends Component {
                       <tr key={review.id}>
                         <td>{review.stars}</td>
                         <td>{review.text}</td>
-                        <td>{review.id}</td>
                     </tr>
                   )))} 
                 </tbody>
