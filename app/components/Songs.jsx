@@ -30,7 +30,6 @@ class Songs extends Component {
   componentDidMount() {
     this.props.loadAllSongs()
     this.props.loadAllReviews()
-    // this.render()
   }
 
   handleBuy(evt) {
@@ -136,7 +135,6 @@ class Songs extends Component {
 }
 
 const mapStateToProps = function(state, ownProps) {
-  // console.log('STATE IN PROPS: ', state)
   const songs = ownProps.songs || state.songs
   const nested = ownProps.nested
 
