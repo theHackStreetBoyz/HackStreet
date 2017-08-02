@@ -16,12 +16,6 @@ export const fetchUserSongs = (id) => {
       .catch(() => console.log('error'))
 }
 
-// export const fetchUserSongs = (id) =>
-//   dispatch =>
-//     axios.get(`/api/users/${id}/songs`)
-//       .then((songs) => dispatch(getUserSongs(songs.data)))
-//       .catch(() => console.error('error'))
-
 // reducer
 const reducer = (state = {}, action) => {
   const newState = {}
