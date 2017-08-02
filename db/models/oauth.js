@@ -72,7 +72,8 @@ module.exports = db => {
     strategy,
     config,
     oauth=OAuth.V2,
-    passport
+    passport,
+    profileFields
   }) => {
     const undefinedKeys = Object.keys(config)
           .map(k => config[k])
