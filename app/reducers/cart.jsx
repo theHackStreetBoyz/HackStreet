@@ -4,6 +4,7 @@ import axios from 'axios'
 const GET_USER_CART = 'GET_USER_CART'
 const ADDING_TO_CART = 'ADDING_TO_CART'
 const DELETE_FROM_CART = "DELETE_FROM_CART"
+const DELETE_CART = "DELETE_CART"
 
 // action creators
 export const addingToCart = song => ({
@@ -18,7 +19,9 @@ export const deleteFromCart = song_id => ({
   type: DELETE_FROM_CART, song_id
 })
 
-
+export const deleteCart = () => ({
+  type: DELETE_FROM_CART
+})
 // initialState
 
 const initialState= {
@@ -35,9 +38,11 @@ const reducer = (state=initialState, action) => {
     state = action.cart
     break
   case DELETE_FROM_CART:
-    console.log("pt. 1", state)
     state = state.filter(song => song.id !== action.song_id)
-    console.log("pt.2", state)
+    break
+  case DELETE_CART:
+    state.cart = []
+    break
   default:
     return state
   }
@@ -69,5 +74,9 @@ export const deleteASong = (id, song_id) =>
       .then(() => dispatch(deleteFromCart(song_id)))
       .catch(err => console.error(`Removing song: ${song_id} unsuccesful`, err))
 
+export const deleteCartSongs = () =>
+  dispatch =>
+    axios.delete('/api/users/cart')
+      .then(() => dispatch(deleteCart()))
 
 export default reducer
