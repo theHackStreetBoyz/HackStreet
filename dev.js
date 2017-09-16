@@ -1,9 +1,3 @@
-/**
- * Concurrently run our various dev tasks.
- *
- * Usage: node dev
- **/
-
 const app = require('.')
     , chalk = require('chalk'), {bold} = chalk
     , {red, green, blue, cyan, yellow} = bold
@@ -61,8 +55,6 @@ function log({
   text=none,
 }, out=process.stdout) {
   return data => data.toString()
-    // Strip out screen-clearing control sequences, which really
-    // muck up the output.
     .replace('\u001b[2J', '')
     .replace('\u001b[1;3H', '')
     .split('\n')
